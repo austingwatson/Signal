@@ -1,32 +1,29 @@
 [gd_scene format=3 uid="uid://cyvw0ck5o7yyv"]
 
-[ext_resource type="PackedScene" uid="uid://bg3dqgmexche0" path="res://scenes/component/movement_component.tscn" id="1_ic5hl"]
 [ext_resource type="Resource" uid="uid://bqevn1cd7pfo0" path="res://resources/component/movement/player_movement.tres" id="2_in1sw"]
-[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="3_v1h6o"]
-[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="4_f6cxi"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_f6cxi"]
+[ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="4_owhjy"]
 [ext_resource type="Texture2D" uid="uid://bpjwg4v8t55ce" path="res://assets/textures/temp.png" id="5_f6cxi"]
-[ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="5_owhjy"]
-[ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="6_v7w8l"]
-[ext_resource type="PackedScene" uid="uid://caksklvwo6g3m" path="res://scenes/component/player_interaction_component.tscn" id="8_pfhf4"]
+[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="5_owhjy"]
+[ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="5_v7w8l"]
 
 [node name="Player" type="Node2D" unique_id=366550933]
 
-[node name="MovementComponent" parent="." unique_id=370224092 node_paths=PackedStringArray("entity") instance=ExtResource("1_ic5hl")]
-entity = NodePath("..")
-movement_resource = ExtResource("2_in1sw")
-
-[node name="StateMachine" parent="." unique_id=119539871 instance=ExtResource("3_v1h6o")]
-initial_state = "Idle"
-
-[node name="Idle" parent="StateMachine" unique_id=1886929243 node_paths=PackedStringArray("movement_component") instance=ExtResource("4_f6cxi")]
-script = ExtResource("5_owhjy")
-movement_component = NodePath("../../MovementComponent")
-
-[node name="Move" parent="StateMachine" unique_id=1920895053 node_paths=PackedStringArray("movement_component") instance=ExtResource("4_f6cxi")]
-script = ExtResource("6_v7w8l")
-movement_component = NodePath("../../MovementComponent")
+[node name="Camera2D" type="Camera2D" parent="." unique_id=776672925]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1836848407]
 texture = ExtResource("5_f6cxi")
 
-[node name="PlayerInteractionComponent" parent="." unique_id=1522986099 instance=ExtResource("8_pfhf4")]
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_f6cxi")]
+initial_State = NodePath("Idle")
+show_state = true
+
+[node name="Idle" parent="StateMachine" unique_id=394219668 instance=ExtResource("5_owhjy")]
+script = ExtResource("4_owhjy")
+movement = ExtResource("2_in1sw")
+
+[node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player") instance=ExtResource("5_owhjy")]
+visible = false
+script = ExtResource("5_v7w8l")
+player = NodePath("../..")
+movement = ExtResource("2_in1sw")

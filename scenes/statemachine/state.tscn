@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://cvgrwqpjadro7" path="res://scripts/statemachine/state.gd" id="1_b0fkr"]
 
-[node name="State" type="Node2D" unique_id=1886929243]
+[node name="State" type="Node2D" unique_id=394219668]
 script = ExtResource("1_b0fkr")

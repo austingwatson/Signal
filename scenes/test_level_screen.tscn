@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bfs8dj8glr6tv"]
 
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="1_kfx0g"]
-[ext_resource type="PackedScene" uid="uid://bn2s6l2kniy1x" path="res://scenes/entity/test_entity.tscn" id="2_drtsa"]
+[ext_resource type="Texture2D" uid="uid://bqlgf7w7nxrgo" path="res://assets/textures/laser_turret.png" id="2_drtsa"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
 
 [node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
 position = Vector2(235, 176)
 
-[node name="TestEntity" parent="." unique_id=708208041 instance=ExtResource("2_drtsa")]
-position = Vector2(553, 211)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1245501810]
+position = Vector2(385, 148)
+texture = ExtResource("2_drtsa")

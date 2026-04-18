@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dgy1y2sif2ssm"]
 
-[ext_resource type="Script" uid="uid://bbkygidxndqav" path="res://scripts/statemachine/state_machine.gd" id="1_j12m0"]
+[ext_resource type="Script" uid="uid://0tds0cwb8fhw" path="res://scripts/statemachine/state_machine.gd" id="1_j12m0"]
 
-[node name="StateMachine" type="Node2D" unique_id=119539871]
+[node name="StateMachine" type="Node2D" unique_id=560415475]
 script = ExtResource("1_j12m0")
 
-[node name="CurrentStateLabel" type="Label" parent="." unique_id=54929871]
+[node name="CurrentStateLabel" type="Label" parent="." unique_id=1122362009]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
