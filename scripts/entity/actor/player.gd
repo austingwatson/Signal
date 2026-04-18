@@ -3,6 +3,7 @@ extends Node2D
 
 var interactables: Array[InteractableComponent] = []
 @onready var build_menu := $BuildMenu
+@onready var multi_tool := $MultiTool
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -15,6 +16,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 		for interactable in interactables:
 			interactable.interact()
 		interactables.clear()
+	elif Input.is_action_just_pressed("ping"):
+		multi_tool.ping()
 
 
 func _on_interact_component_area_entered(area: Area2D) -> void:

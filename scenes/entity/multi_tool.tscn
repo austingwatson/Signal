@@ -54,6 +54,5 @@ offset = Vector2(8, 2)
 visible = false
 texture = SubResource("AtlasTexture_2uwa8")
 
-[connection signal="finished" from="PingSound" to="." method="_on_ping_sound_finished"]
 [connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
 [connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]
