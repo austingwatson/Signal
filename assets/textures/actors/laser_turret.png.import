@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs6eokmnkgqo3"
-path="res://.godot/imported/heavy_bot.png-8e947277081bf686370be02575f80e84.ctex"
+uid="uid://bqlgf7w7nxrgo"
+path="res://.godot/imported/laser_turret.png-25b73e017a8ad0d10014d5fa2e6189c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/heavy_bot.png"
-dest_files=["res://.godot/imported/heavy_bot.png-8e947277081bf686370be02575f80e84.ctex"]
+source_file="res://assets/textures/actors/laser_turret.png"
+dest_files=["res://.godot/imported/laser_turret.png-25b73e017a8ad0d10014d5fa2e6189c1.ctex"]
 
 [params]
 

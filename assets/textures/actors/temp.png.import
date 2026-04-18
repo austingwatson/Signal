@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbw680h8t7ifl"
-path="res://.godot/imported/pickup_metal.png-93c066a392f67791c8a98576b87fbbe1.ctex"
+uid="uid://bpjwg4v8t55ce"
+path="res://.godot/imported/temp.png-a98cec62f942971484bd5c1e09feae8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/pickup_metal.png"
-dest_files=["res://.godot/imported/pickup_metal.png-93c066a392f67791c8a98576b87fbbe1.ctex"]
+source_file="res://assets/textures/actors/temp.png"
+dest_files=["res://.godot/imported/temp.png-a98cec62f942971484bd5c1e09feae8a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co2dtgcwfq7y3"
-path="res://.godot/imported/pickup_powercell.png-69ba0221430cc0465141f022588e4ab5.ctex"
+uid="uid://dbw680h8t7ifl"
+path="res://.godot/imported/pickup_metal.png-4676031ede6aa90abc790b296a6f6bf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/pickup_powercell.png"
-dest_files=["res://.godot/imported/pickup_powercell.png-69ba0221430cc0465141f022588e4ab5.ctex"]
+source_file="res://assets/textures/environment/pickup_metal.png"
+dest_files=["res://.godot/imported/pickup_metal.png-4676031ede6aa90abc790b296a6f6bf9.ctex"]
 
 [params]
 

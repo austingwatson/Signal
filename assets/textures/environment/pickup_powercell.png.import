@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4myxeehdgoiv"
-path="res://.godot/imported/swarm_bot.png-9ac9f0060ea71196635e04237b8d0983.ctex"
+uid="uid://co2dtgcwfq7y3"
+path="res://.godot/imported/pickup_powercell.png-2e09891c98f8e0e6c2fc911634448721.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/swarm_bot.png"
-dest_files=["res://.godot/imported/swarm_bot.png-9ac9f0060ea71196635e04237b8d0983.ctex"]
+source_file="res://assets/textures/environment/pickup_powercell.png"
+dest_files=["res://.godot/imported/pickup_powercell.png-2e09891c98f8e0e6c2fc911634448721.ctex"]
 
 [params]
 

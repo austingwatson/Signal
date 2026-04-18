@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crcqp68hj3io2"
-path="res://.godot/imported/tile_sheet.png-cb0a9bd526ffb8e87e78e5142ecd40dc.ctex"
+uid="uid://c4myxeehdgoiv"
+path="res://.godot/imported/swarm_bot.png-84a9a4967feb9af040f6c124dd9bc434.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/tile_sheet.png"
-dest_files=["res://.godot/imported/tile_sheet.png-cb0a9bd526ffb8e87e78e5142ecd40dc.ctex"]
+source_file="res://assets/textures/actors/swarm_bot.png"
+dest_files=["res://.godot/imported/swarm_bot.png-84a9a4967feb9af040f6c124dd9bc434.ctex"]
 
 [params]
 
