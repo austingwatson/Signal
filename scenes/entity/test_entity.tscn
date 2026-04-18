@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bn2s6l2kniy1x"]
+
+[ext_resource type="PackedScene" uid="uid://b6tw44p4yiv56" path="res://scenes/component/interactable_component.tscn" id="1_byc52"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byc52"]
+radius = 100.0
+
+[node name="TestEntity" type="Node2D" unique_id=708208041]
+
+[node name="InteractableComponent" parent="." unique_id=97917200 instance=ExtResource("1_byc52")]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=986418687]
+shape = SubResource("CircleShape2D_byc52")

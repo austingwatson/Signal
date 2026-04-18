@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://caksklvwo6g3m"]
+
+[ext_resource type="Script" uid="uid://cuehw6mw6v8k5" path="res://scripts/component/player_interaction_component.gd" id="1_a0rol"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yotas"]
+radius = 16.0
+
+[node name="PlayerInteractionComponent" type="Area2D" unique_id=1522986099]
+collision_layer = 2
+collision_mask = 8
+input_pickable = false
+script = ExtResource("1_a0rol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1725179140]
+shape = SubResource("CircleShape2D_yotas")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
