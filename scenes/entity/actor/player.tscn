@@ -134,10 +134,11 @@ movement_resource = ExtResource("3_pfhf4")
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_f6cxi")]
 initial_State = NodePath("Idle")
 
-[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite") instance=ExtResource("5_owhjy")]
+[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
 script = ExtResource("4_owhjy")
 movement_component = NodePath("../../MovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
+multi_tool = NodePath("../../MultiTool")
 
 [node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player", "movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
 visible = false

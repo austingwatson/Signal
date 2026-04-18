@@ -4,8 +4,10 @@ extends Node2D
 @export var multi_tool_stats: MultiToolStats
 @export var textures: Array[Texture2D] = []
 var signal_towers: Array[InteractableComponent] = []
+var signal_strength := 0.0
 var facing_direction := 1
 @onready var sprite := $Sprite2D
+@onready var ping_sound := $PingSound
 
 
 func _ready() -> void:
@@ -37,15 +39,17 @@ func ping() -> void:
 		return
 	
 	var to_tower := signal_tower.global_position - global_position
-	var mouse_dir := (get_global_mouse_position() - global_position).normalized()
 	
 	var distance := to_tower.length()
 	var distance_factor: float = clamp(1.0 - (distance / multi_tool_stats.signal_range), 0.0, 1.0)
+	distance_factor = pow(distance_factor, 2.0)
 	
+	var tool_dir := Vector2.RIGHT.rotated(rotation)
 	var tower_dir := to_tower.normalized()
-	var angle_factor: float = clamp(mouse_dir.dot(tower_dir), 0.0, 1.0)
+	var angle_factor: float = clamp(tool_dir.dot(tower_dir), 0.0, 1.0)
 	
-	var signal_strength := distance_factor * angle_factor
+	signal_strength = (distance_factor * multi_tool_stats.distance_worth) * (angle_factor * multi_tool_stats.angle_worth)
+	#print(signal_strength)
 	
 
 func find_closest_signal_tower() -> InteractableComponent:
@@ -67,3 +71,13 @@ func _on_ping_range_area_entered(area: Area2D) -> void:
 func _on_ping_range_area_exited(area: Area2D) -> void:
 	if area is InteractableComponent:
 		signal_towers.erase(area)
+
+
+func _on_ping_sound_finished() -> void:
+	if signal_strength > 0.0:
+		ping_sound.volume_db = 0
+		ping_sound.pitch_scale = lerp(multi_tool_stats.slow_ping, multi_tool_stats.fast_ping, signal_strength)
+		ping_sound.play()
+	else:
+		ping_sound.volume_db = -80
+		ping_sound.play()

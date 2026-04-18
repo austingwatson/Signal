@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bh40vdt57j3mm" path="res://scripts/entity/multi_tool.gd" id="1_uaj3a"]
 [ext_resource type="Resource" uid="uid://8a2ju0aoqlpc" path="res://resources/multi_tool/multi_tool_stats.tres" id="2_cduic"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="3_urkem"]
+[ext_resource type="AudioStream" uid="uid://cotemo5adff5u" path="res://assets/sounds/multitool_ping.wav" id="4_pr2jc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urkem"]
 atlas = ExtResource("3_urkem")
@@ -32,6 +33,9 @@ multi_tool_stats = ExtResource("2_cduic")
 textures = Array[Texture2D]([SubResource("AtlasTexture_urkem"), SubResource("AtlasTexture_pr2jc"), SubResource("AtlasTexture_scn6n")])
 
 [node name="PingSound" type="AudioStreamPlayer" parent="." unique_id=560716390]
+stream = ExtResource("4_pr2jc")
+volume_db = -80.0
+autoplay = true
 
 [node name="PingRange" type="Area2D" parent="." unique_id=254320029]
 collision_layer = 2
@@ -50,5 +54,6 @@ offset = Vector2(8, 2)
 visible = false
 texture = SubResource("AtlasTexture_2uwa8")
 
+[connection signal="finished" from="PingSound" to="." method="_on_ping_sound_finished"]
 [connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
 [connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]
