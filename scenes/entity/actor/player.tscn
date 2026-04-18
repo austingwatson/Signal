@@ -5,22 +5,127 @@
 [ext_resource type="Resource" uid="uid://dpdasdrol8771" path="res://resources/movement/player_movement.tres" id="3_pfhf4"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_f6cxi"]
 [ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="4_owhjy"]
-[ext_resource type="Texture2D" uid="uid://bpjwg4v8t55ce" path="res://assets/textures/temp.png" id="5_f6cxi"]
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="5_owhjy"]
 [ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="5_v7w8l"]
 [ext_resource type="PackedScene" uid="uid://cscg2jn5o56fc" path="res://scenes/entity/multi_tool.tscn" id="9_18kca"]
+[ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="10_8l8co"]
 [ext_resource type="PackedScene" uid="uid://dur7fjor7jyr4" path="res://scenes/ui/build_menu.tscn" id="11_eybgf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7w8l"]
 radius = 16.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eybgf"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b81v7"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxtqe"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_726y4"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psmt1"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckmxu"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8o64"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrjrw"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfv3l"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sbqw"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwbx1"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vqjj"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ka65a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eybgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b81v7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxtqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_726y4")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psmt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckmxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8o64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrjrw")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfv3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sbqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwbx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vqjj")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}]
+
 [node name="Player" type="Node2D" unique_id=366550933]
+z_index = 1
 script = ExtResource("1_8l8co")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=776672925]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1836848407]
-texture = ExtResource("5_f6cxi")
 
 [node name="MovementComponent" parent="." unique_id=1806296702 node_paths=PackedStringArray("entity") instance=ExtResource("2_v7w8l")]
 entity = NodePath("..")
@@ -28,17 +133,19 @@ movement_resource = ExtResource("3_pfhf4")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_f6cxi")]
 initial_State = NodePath("Idle")
-show_state = true
 
-[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component") instance=ExtResource("5_owhjy")]
+[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite") instance=ExtResource("5_owhjy")]
 script = ExtResource("4_owhjy")
 movement_component = NodePath("../../MovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player", "movement_component") instance=ExtResource("5_owhjy")]
+[node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player", "movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
 visible = false
 script = ExtResource("5_v7w8l")
 player = NodePath("../..")
 movement_component = NodePath("../../MovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+multi_tool = NodePath("../../MultiTool")
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=1245282860]
 collision_layer = 2
@@ -49,7 +156,14 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1285492473]
 shape = SubResource("CircleShape2D_v7w8l")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
+sprite_frames = SubResource("SpriteFrames_ka65a")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.8662698
+
 [node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
+z_index = -1
 
 [node name="BuildMenu" parent="." unique_id=533637646 instance=ExtResource("11_eybgf")]
 line_color = Color(1, 1, 1, 0.11764706)

@@ -3,6 +3,7 @@ extends Node2D
 
 @export var entity: Node2D
 @export var movement_resource: MovementResource
+var direction := Vector2.ZERO
 var velocity := Vector2.ZERO
 
 
@@ -11,4 +12,5 @@ func _physics_process(delta: float) -> void:
 	
 
 func set_direction(direction: Vector2) -> void:
+	self.direction = direction
 	velocity = direction.normalized() * movement_resource.speed

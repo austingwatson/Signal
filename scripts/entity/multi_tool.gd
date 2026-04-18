@@ -2,16 +2,33 @@ class_name MultiTool
 extends Node2D
 
 @export var multi_tool_stats: MultiToolStats
+@export var textures: Array[Texture2D] = []
 var signal_towers: Array[InteractableComponent] = []
+var facing_direction := 1
+@onready var sprite := $Sprite2D
 
 
 func _ready() -> void:
 	var ping_range: CircleShape2D = $PingRange/CollisionShape2D.shape
 	ping_range.radius = multi_tool_stats.signal_range
+	
+	sprite.texture = textures[0]
 
 
 func _physics_process(_delta: float) -> void:
 	ping()
+	
+	look_at(get_global_mouse_position())
+	rotation = wrapf(rotation, -PI, PI)
+	if facing_direction > 0:
+		rotation = clamp(rotation, deg_to_rad(-45), deg_to_rad(45))
+		sprite.flip_v = false
+	elif facing_direction < 0:
+		if rotation < 0 and rad_to_deg(rotation) > -135:
+			rotation = deg_to_rad(-135)
+		elif rotation > 0 and rad_to_deg(rotation) < 115:
+			rotation = deg_to_rad(115)
+		sprite.flip_v = true
 	
 
 func ping() -> void:
