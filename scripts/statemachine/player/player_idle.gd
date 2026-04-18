@@ -1,10 +1,10 @@
 extends State
 
-@export var movement: Movement
+@export var movement_component: MovementComponent
 
 
 func enter(_data: Dictionary) -> void:
-	movement.set_direction(Vector2.ZERO)
+	movement_component.set_direction(Vector2.ZERO)
 	
 
 func input() -> void:

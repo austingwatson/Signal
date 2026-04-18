@@ -1,11 +1,11 @@
 extends State
 
 @export var player: Node2D
-@export var movement: Movement
+@export var movement_component: MovementComponent
 
 
 func enter(data: Dictionary) -> void:
-	movement.set_direction(data["direction"])
+	movement_component.set_direction(data["direction"])
 	
 
 func input() -> void:
@@ -13,8 +13,4 @@ func input() -> void:
 	if direction == Vector2.ZERO:
 		statemachine.enter_state("Idle")
 	else:
-		movement.set_direction(direction)
-		
-
-func update(delta: float) -> void:
-	player.global_position = movement.move(player.global_position, delta)
+		movement_component.set_direction(direction)

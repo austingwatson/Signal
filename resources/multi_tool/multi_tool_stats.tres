@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MultiToolStats" format=3 uid="uid://8a2ju0aoqlpc"]
+
+[ext_resource type="Script" uid="uid://vd01fo34gllc" path="res://resources/multi_tool/multi_tool_stats.gd" id="1_exdc1"]
+
+[resource]
+script = ExtResource("1_exdc1")
+signal_range = 1000.0
+metadata/_custom_type_script = "uid://vd01fo34gllc"

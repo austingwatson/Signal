@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cscg2jn5o56fc"]
+
+[ext_resource type="Script" uid="uid://bh40vdt57j3mm" path="res://scripts/entity/multi_tool.gd" id="1_uaj3a"]
+[ext_resource type="Resource" uid="uid://8a2ju0aoqlpc" path="res://resources/multi_tool/multi_tool_stats.tres" id="2_cduic"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cduic"]
+
+[node name="MultiTool" type="Node2D" unique_id=1102108494]
+script = ExtResource("1_uaj3a")
+multi_tool_stats = ExtResource("2_cduic")
+
+[node name="PingSound" type="AudioStreamPlayer" parent="." unique_id=560716390]
+
+[node name="PingRange" type="Area2D" parent="." unique_id=254320029]
+collision_layer = 2
+collision_mask = 16
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PingRange" unique_id=767641077]
+shape = SubResource("CircleShape2D_cduic")
+
+[connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
+[connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]

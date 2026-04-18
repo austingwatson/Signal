@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 GlobalSignals="*uid://cmu6nvqyp7bgy"
+EntityManager="*uid://bae88jti3s8nv"
 
 [debug]
 
@@ -84,6 +85,7 @@ build={
 2d_physics/layer_2="Friendly"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Neutral"
+2d_physics/layer_5="SignalTower"
 
 [physics]
 

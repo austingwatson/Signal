@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bgoyhwqib647g"]
+
+[ext_resource type="Texture2D" uid="uid://bqlgf7w7nxrgo" path="res://assets/textures/laser_turret.png" id="1_spblu"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="2_722y7"]
+[ext_resource type="Script" uid="uid://tu6yuu41c2re" path="res://scripts/statemachine/laser_turret/laser_turret_idle.gd" id="3_cjh2g"]
+[ext_resource type="Script" uid="uid://1af5p5lwsg3x" path="res://scripts/statemachine/laser_turret/laser_turret_attack.gd" id="4_w2hb1"]
+
+[node name="LaserTurret" type="Node2D" unique_id=994531285]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=773377507]
+texture = ExtResource("1_spblu")
+
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("2_722y7")]
+initial_State = NodePath("Idle")
+show_state = true
+
+[node name="Idle" type="Node2D" parent="StateMachine" unique_id=1615230275]
+script = ExtResource("3_cjh2g")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Attack" type="Node2D" parent="StateMachine" unique_id=668133676]
+script = ExtResource("4_w2hb1")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"

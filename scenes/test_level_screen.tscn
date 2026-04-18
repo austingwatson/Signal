@@ -1,21 +1,20 @@
 [gd_scene format=3 uid="uid://bfs8dj8glr6tv"]
 
+[ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_81dx7"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="1_kfx0g"]
 [ext_resource type="Texture2D" uid="uid://swqltwa43xp" path="res://assets/textures/environment/background_dark.png" id="1_p5up1"]
-[ext_resource type="Texture2D" uid="uid://bqlgf7w7nxrgo" path="res://assets/textures/actors/laser_turret.png" id="3_81dx7"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=246321625]
+visible = false
 repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1363495057]
 position = Vector2(235, 176)
 texture = ExtResource("1_p5up1")
 
-[node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
-position = Vector2(235, 176)
+[node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1245501810]
-position = Vector2(385, 148)
-texture = ExtResource("3_81dx7")
+[node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
+position = Vector2(484, 266)
