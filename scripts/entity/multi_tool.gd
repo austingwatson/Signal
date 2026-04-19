@@ -3,6 +3,7 @@ extends Node2D
 
 @export var multi_tool_stats: MultiToolStats
 @export var textures: Array[Texture2D] = []
+@export var damage: Damage
 var signal_towers: Array[InteractableComponent] = []
 var facing_direction := 1
 @onready var sprite := $Sprite2D
@@ -36,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 		elif rotation > 0 and rad_to_deg(rotation) < 115:
 			rotation = deg_to_rad(115)
 		sprite.flip_v = true
+	detection_component.rotation = rotation
 	
 
 func ping() -> void:
@@ -58,7 +60,12 @@ func ping() -> void:
 	
 
 func shoot(target: Vector2) -> void:
-	print(detection_component.get_multi_closest(3))
+	var closest = detection_component.get_multi_closest(3)
+	for enemy in closest:
+		enemy.take_damage(damage.damage)
+		var lightning := preload("res://scenes/effect/lightning_effect.tscn").instantiate()
+		lightning.set_lightning_points(global_position, enemy.global_position, 3, 6)
+		EntityManager.add_child(lightning)
 	
 
 func find_closest_signal_tower() -> InteractableComponent:

@@ -25,7 +25,7 @@ func get_closest() -> HurtBox:
 	return closest
 	
 
-func get_multi_closest(amount: int, target: Vector2) -> Array[HurtBox]:
+func get_multi_closest(amount: int) -> Array[HurtBox]:
 	var closest: Array[HurtBox] = []
 	
 	hurt_boxes.sort_custom(func(a, b):
@@ -34,7 +34,7 @@ func get_multi_closest(amount: int, target: Vector2) -> Array[HurtBox]:
 		return dis_a < dis_b)
 		
 	for hurt_box in hurt_boxes:
-		if has_line_of_sight(hurt_box) and looking_at(target):
+		if has_line_of_sight(hurt_box) and in_angle_allowed(hurt_box):
 			closest.append(hurt_box)
 		if closest.size() == amount:
 			break
@@ -54,8 +54,12 @@ func has_line_of_sight(enemy) -> bool:
 		return false
 		
 
-func looking_at(target: Vector2) -> bool:
-	return true
+func in_angle_allowed(enemy) -> bool:
+	var to_enemy = (enemy.global_position - global_position).normalized()
+	var forward = Vector2.RIGHT.rotated(rotation)
+	var dot = forward.dot(to_enemy)
+	
+	return dot >= cos(damage.attack_angle)
 
 
 func _on_area_entered(area: Area2D) -> void:
