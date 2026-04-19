@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://bgoyhwqib647g"]
 
-[ext_resource type="Texture2D" uid="uid://bqlgf7w7nxrgo" path="res://assets/textures/laser_turret.png" id="1_spblu"]
+[ext_resource type="Texture2D" uid="uid://bqlgf7w7nxrgo" path="res://assets/textures/actors/laser_turret.png" id="1_spblu"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="2_722y7"]
 [ext_resource type="Script" uid="uid://tu6yuu41c2re" path="res://scripts/statemachine/laser_turret/laser_turret_idle.gd" id="3_cjh2g"]
 [ext_resource type="Script" uid="uid://1af5p5lwsg3x" path="res://scripts/statemachine/laser_turret/laser_turret_attack.gd" id="4_w2hb1"]
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="5_cjh2g"]
+[ext_resource type="Resource" uid="uid://5bb3ipdc4sqr" path="res://resources/damage/laser_turret_damage.tres" id="6_w2hb1"]
 
 [node name="LaserTurret" type="Node2D" unique_id=994531285]
 
@@ -12,12 +14,18 @@ texture = ExtResource("1_spblu")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("2_722y7")]
 initial_State = NodePath("Idle")
-show_state = true
 
-[node name="Idle" type="Node2D" parent="StateMachine" unique_id=1615230275]
+[node name="Idle" type="Node2D" parent="StateMachine" unique_id=1615230275 node_paths=PackedStringArray("detection_component")]
 script = ExtResource("3_cjh2g")
+detection_component = NodePath("../../DetectionComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="Attack" type="Node2D" parent="StateMachine" unique_id=668133676]
 script = ExtResource("4_w2hb1")
+damage = ExtResource("6_w2hb1")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("5_cjh2g")]
+collision_layer = 2
+collision_mask = 12
+damage = ExtResource("6_w2hb1")

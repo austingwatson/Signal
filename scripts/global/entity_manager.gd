@@ -11,6 +11,9 @@ func _physics_process(_delta: float) -> void:
 	reservations.clear()
 	
 	for enemy in enemies.get_children():
+		if not enemy.get_node("PathFinderComponent").use_flowfield:
+			continue
+		
 		var desired = enemy.get_node("PathFinderComponent").request_next_tile()
 		if not reservations.has(desired):
 			reservations[desired] = [enemy]

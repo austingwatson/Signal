@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cyvw0ck5o7yyv"]
 
 [ext_resource type="Script" uid="uid://cjfgu44ffde0a" path="res://scripts/entity/actor/player.gd" id="1_8l8co"]
-[ext_resource type="PackedScene" uid="uid://8lhjdyiq6da1" path="res://scenes/component/movement_component.tscn" id="2_v7w8l"]
+[ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="2_8l8co"]
 [ext_resource type="Resource" uid="uid://dpdasdrol8771" path="res://resources/movement/player_movement.tres" id="3_pfhf4"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_f6cxi"]
 [ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="4_owhjy"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://cscg2jn5o56fc" path="res://scenes/entity/multi_tool.tscn" id="9_18kca"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="10_8l8co"]
 [ext_resource type="PackedScene" uid="uid://dur7fjor7jyr4" path="res://scenes/ui/build_menu.tscn" id="11_eybgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l8co"]
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7w8l"]
 radius = 16.0
@@ -121,14 +124,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" unique_id=366550933]
+[node name="Player" type="CharacterBody2D" unique_id=6415582]
 z_index = 1
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_8l8co")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=776672925]
 
-[node name="MovementComponent" parent="." unique_id=1806296702 node_paths=PackedStringArray("entity") instance=ExtResource("2_v7w8l")]
-entity = NodePath("..")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1362468347]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_8l8co")
+
+[node name="CharacterMovementComponent" parent="." unique_id=371240637 node_paths=PackedStringArray("character") instance=ExtResource("2_8l8co")]
+character = NodePath("..")
 movement_resource = ExtResource("3_pfhf4")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_f6cxi")]
@@ -136,7 +145,7 @@ initial_State = NodePath("Idle")
 
 [node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
 script = ExtResource("4_owhjy")
-movement_component = NodePath("../../MovementComponent")
+movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 multi_tool = NodePath("../../MultiTool")
 
@@ -144,7 +153,7 @@ multi_tool = NodePath("../../MultiTool")
 visible = false
 script = ExtResource("5_v7w8l")
 player = NodePath("../..")
-movement_component = NodePath("../../MovementComponent")
+movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 multi_tool = NodePath("../../MultiTool")
 

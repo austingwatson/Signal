@@ -1,7 +1,7 @@
 extends State
 
 @export var player: Node2D
-@export var movement_component: MovementComponent
+@export var movement_component: CharacterMovementComponent
 @export var animated_sprite: AnimatedSprite2D
 @export var multi_tool: MultiTool
 

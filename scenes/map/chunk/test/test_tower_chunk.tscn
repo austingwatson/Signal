@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dm1vqs8ahjuex"]
 
 [ext_resource type="PackedScene" uid="uid://cps30p6psntr5" path="res://scenes/map/chunk.tscn" id="1_2f2nk"]
-[ext_resource type="TileSet" uid="uid://cfcyx330dr4dt" path="res://resources/tileset/ground.tres" id="2_moac1"]
+[ext_resource type="TileSet" uid="uid://cfcyx330dr4dt" path="res://resources/tileset/tileset.tres" id="2_moac1"]
 
 [node name="TestTowerChunk" unique_id=1205568769 node_paths=PackedStringArray("ground") instance=ExtResource("1_2f2nk")]
 exits = {

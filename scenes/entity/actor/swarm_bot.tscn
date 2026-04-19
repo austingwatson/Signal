@@ -5,11 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="3_go354"]
 [ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="4_a4epf"]
 [ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="6_y3n0m"]
+[ext_resource type="Resource" uid="uid://ctmrrus0k6wnf" path="res://resources/health/swarm_bot_health.tres" id="7_dqpqo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
 size = Vector2(8, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccesr"]
+size = Vector2(16, 16)
+
 [node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442]
+collision_layer = 4
+collision_mask = 15
 script = ExtResource("1_bdp4e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=345711066]
@@ -24,3 +31,13 @@ character_movement_component = NodePath("../CharacterMovementComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=409628201]
 shape = SubResource("RectangleShape2D_go354")
+
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("6_y3n0m")]
+collision_layer = 4
+collision_mask = 2
+health_resource = ExtResource("7_dqpqo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=692475271]
+shape = SubResource("RectangleShape2D_ccesr")
+
+[connection signal="dead" from="HurtBox" to="." method="_on_hurt_box_dead"]

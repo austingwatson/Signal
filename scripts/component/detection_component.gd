@@ -1,0 +1,47 @@
+class_name DetectionComponent
+extends Area2D
+
+@export var damage: Damage
+@export_flags_2d_physics var los_collision_mask := 0
+var hurt_boxes: Array[HurtBox] = []
+var params := PhysicsRayQueryParameters2D.new()
+
+
+func _ready() -> void:
+	$CollisionShape2D.shape.radius = damage.range
+	params.collision_mask = los_collision_mask
+
+
+func get_closest() -> HurtBox:
+	var closest = null
+	var dis := INF
+	
+	for hurt_box in hurt_boxes:
+		var distance = global_position.distance_to(hurt_box.global_position)
+		if distance < dis and has_line_of_sight(hurt_box):
+			closest = hurt_box
+			dis = distance
+	
+	return closest
+	
+
+func has_line_of_sight(enemy) -> bool:
+	var space := get_world_2d().direct_space_state
+	params.from = global_position
+	params.to = enemy.global_position
+	var result := space.intersect_ray(params)
+	
+	if result.is_empty():
+		return true
+	else:
+		return false
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is HurtBox:
+		hurt_boxes.append(area)
+
+
+func _on_area_exited(area: Area2D) -> void:
+	if area is HurtBox:
+		hurt_boxes.erase(area)
