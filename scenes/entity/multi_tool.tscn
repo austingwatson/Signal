@@ -4,6 +4,8 @@
 [ext_resource type="Resource" uid="uid://8a2ju0aoqlpc" path="res://resources/multi_tool/multi_tool_stats.tres" id="2_cduic"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="3_urkem"]
 [ext_resource type="AudioStream" uid="uid://cotemo5adff5u" path="res://assets/sounds/multitool_ping.wav" id="4_pr2jc"]
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="5_rayeu"]
+[ext_resource type="Resource" uid="uid://l0hx8axhep6i" path="res://resources/damage/multi_tool_damage.tres" id="6_2uwa8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urkem"]
 atlas = ExtResource("3_urkem")
@@ -22,10 +24,6 @@ region = Rect2(32, 48, 32, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rayeu"]
 atlas = ExtResource("3_urkem")
 region = Rect2(32, 32, 32, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2uwa8"]
-atlas = ExtResource("3_urkem")
-region = Rect2(0, 0, 32, 32)
 
 [node name="MultiTool" type="Node2D" unique_id=1102108494]
 script = ExtResource("1_uaj3a")
@@ -50,9 +48,10 @@ shape = SubResource("CircleShape2D_cduic")
 texture = SubResource("AtlasTexture_rayeu")
 offset = Vector2(8, 2)
 
-[node name="temp" type="Sprite2D" parent="." unique_id=215520164]
-visible = false
-texture = SubResource("AtlasTexture_2uwa8")
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("5_rayeu")]
+collision_layer = 2
+collision_mask = 12
+damage = ExtResource("6_2uwa8")
 
 [connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
 [connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]

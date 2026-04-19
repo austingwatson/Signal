@@ -7,6 +7,7 @@ var signal_towers: Array[InteractableComponent] = []
 var facing_direction := 1
 @onready var sprite := $Sprite2D
 @onready var ping_sound := $PingSound
+@onready var detection_component := $DetectionComponent
 
 
 func _ready() -> void:
@@ -14,6 +15,11 @@ func _ready() -> void:
 	ping_range.radius = multi_tool_stats.signal_range
 	
 	sprite.texture = textures[0]
+	
+
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("shoot"):
+		shoot(Vector2.ZERO)
 
 
 func _physics_process(_delta: float) -> void:
@@ -49,6 +55,10 @@ func ping() -> void:
 	
 	var signal_strength = (distance_factor * multi_tool_stats.distance_worth) * (angle_factor * multi_tool_stats.angle_worth)
 	play_ping_sound(signal_strength)
+	
+
+func shoot(target: Vector2) -> void:
+	print(detection_component.get_multi_closest(3))
 	
 
 func find_closest_signal_tower() -> InteractableComponent:
