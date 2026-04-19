@@ -4,6 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_81dx7"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="1_kfx0g"]
 [ext_resource type="Texture2D" uid="uid://swqltwa43xp" path="res://assets/textures/environment/background_dark.png" id="1_p5up1"]
+[ext_resource type="PackedScene" uid="uid://ctcwa1necw8wl" path="res://scenes/map/chunk/test/test_chunk.tscn" id="4_l6qwg"]
+[ext_resource type="PackedScene" uid="uid://cinp5prjm00uw" path="res://scenes/map/chunk/test/test_chunk_left.tscn" id="5_8gchq"]
+[ext_resource type="PackedScene" uid="uid://yyyrkusgkqmv" path="res://scenes/map/chunk/test/test_chunk_left_right.tscn" id="6_acc34"]
+[ext_resource type="PackedScene" uid="uid://d1rt8ojs7g3ia" path="res://scenes/map/chunk/test/test_chunk_up_right.tscn" id="7_i2btp"]
+[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="8_71w4v"]
+[ext_resource type="PackedScene" uid="uid://8cslt24kwe3d" path="res://scenes/map/chunk/test/test_tower_chunk_all.tscn" id="9_wmcel"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
 script = ExtResource("1_2dks2")
@@ -17,7 +23,10 @@ position = Vector2(235, 176)
 texture = ExtResource("1_p5up1")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
-debug_flow = true
+debug_flow = false
+chunk_library = Array[PackedScene]([ExtResource("4_l6qwg"), ExtResource("5_8gchq"), ExtResource("6_acc34"), ExtResource("7_i2btp"), ExtResource("8_71w4v"), ExtResource("9_wmcel")])
+map_size = Vector2i(20, 20)
+towers_amount = 5
 
 [node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
 position = Vector2(484, 266)

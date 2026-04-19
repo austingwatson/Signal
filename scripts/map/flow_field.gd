@@ -187,6 +187,14 @@ func get_direction(world_pos: Vector2) -> Vector2:
 	if not _in_bounds(cell):
 		return Vector2.ZERO
 	return flow_field[cell.x][cell.y]
+	
+
+func get_tile_pos(world_position: Vector2) -> Vector2i:
+	return ground.local_to_map(world_position)
+	
+
+func get_map_pos(tile: Vector2i) -> Vector2:
+	return ground.map_to_local(tile)
 
 
 func _in_bounds(cell: Vector2i) -> bool:

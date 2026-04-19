@@ -13,6 +13,8 @@ const ARROW_DOWN_LEFT = Vector2i(2, 1)
 
 @export var debug_flow := true
 @export var chunk_library: Array[PackedScene] = []
+@export var map_size := Vector2i.ZERO
+@export var towers_amount := 0
 
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
@@ -27,7 +29,7 @@ var flow_field_id := -1
 
 
 func _ready():
-	var world = generator.build_world(chunk_library, 5, 5, 2)
+	var world = generator.build_world(chunk_library, map_size.x, map_size.y, towers_amount)
 	merger.merge_chunks(world, ground, wall, clutter, spawn)
 
 	var towers = spawn_towers(world)
@@ -106,7 +108,7 @@ func create_flowfield(towers: Array) -> void:
 			flow_field.created = false
 			flow_field.compute_cost_field(destinations)
 			flow_field.compute_flow_field()
-			for i in range(5):
+			for i in range(0):
 				flow_field.smooth_flow_field()
 			flow_field.created = true
 	)
@@ -132,21 +134,21 @@ func draw_flow_debug() -> void:
 # Replace TILE_* with your actual tile IDs
 # ---------------------------------------------------------
 func direction_to_tile(dir: Vector2) -> Vector2i:
-	var angle = dir.angle()
+	var angle := dir.angle()
 
-	if angle > -PI * 0.625 and angle <= -PI * 0.375:
+	if angle >= -PI * 7/8 and angle < -PI * 5/8:
 		return ARROW_UP_LEFT
-	elif angle > -PI * 0.375 and angle <= -PI * 0.125:
+	elif angle >= -PI * 5/8 and angle < -PI * 3/8:
 		return ARROW_UP
-	elif angle > -PI * 0.125 and angle <= PI * 0.125:
+	elif angle >= -PI * 3/8 and angle < -PI * 1/8:
+		return ARROW_UP_RIGHT
+	elif angle >= -PI * 1/8 and angle < PI * 1/8:
 		return ARROW_RIGHT
-	elif angle > PI * 0.125 and angle <= PI * 0.375:
+	elif angle >= PI * 1/8 and angle < PI * 3/8:
 		return ARROW_DOWN_RIGHT
-	elif angle > PI * 0.375 and angle <= PI * 0.625:
+	elif angle >= PI * 3/8 and angle < PI * 5/8:
 		return ARROW_DOWN
-	elif angle > PI * 0.625 or angle <= -PI * 0.625:
-		return ARROW_LEFT
-	elif angle > -PI * 0.875 and angle <= -PI * 0.625:
-		return ARROW_LEFT
-	else:
+	elif angle >= PI * 5/8 and angle < PI * 7/8:
 		return ARROW_DOWN_LEFT
+	else:
+		return ARROW_LEFT
