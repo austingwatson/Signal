@@ -3,10 +3,12 @@ extends Node2D
 
 @export var multi_tool_stats: MultiToolStats
 @export var textures: Array[Texture2D] = []
+@export var damage: Damage
 var signal_towers: Array[InteractableComponent] = []
 var facing_direction := 1
 @onready var sprite := $Sprite2D
 @onready var ping_sound := $PingSound
+@onready var detection_component := $DetectionComponent
 
 
 func _ready() -> void:
@@ -14,6 +16,11 @@ func _ready() -> void:
 	ping_range.radius = multi_tool_stats.signal_range
 	
 	sprite.texture = textures[0]
+	
+
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("shoot"):
+		shoot(Vector2.ZERO)
 
 
 func _physics_process(_delta: float) -> void:
@@ -30,6 +37,7 @@ func _physics_process(_delta: float) -> void:
 		elif rotation > 0 and rad_to_deg(rotation) < 115:
 			rotation = deg_to_rad(115)
 		sprite.flip_v = true
+	detection_component.rotation = rotation
 	
 
 func ping() -> void:
@@ -49,6 +57,15 @@ func ping() -> void:
 	
 	var signal_strength = (distance_factor * multi_tool_stats.distance_worth) * (angle_factor * multi_tool_stats.angle_worth)
 	play_ping_sound(signal_strength)
+	
+
+func shoot(target: Vector2) -> void:
+	var closest = detection_component.get_multi_closest(3)
+	for enemy in closest:
+		enemy.take_damage(damage.damage)
+		var lightning := preload("res://scenes/effect/lightning_effect.tscn").instantiate()
+		lightning.set_lightning_points(global_position, enemy.global_position, 3, 6)
+		EntityManager.add_child(lightning)
 	
 
 func find_closest_signal_tower() -> InteractableComponent:

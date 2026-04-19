@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://l0hx8axhep6i"]
+
+[ext_resource type="Script" uid="uid://ctw76fptybv4m" path="res://resources/damage/damage.gd" id="1_evc7q"]
+
+[resource]
+script = ExtResource("1_evc7q")
+damage = 1
+range = 100.0
+cooldown = 1.0
+attack_angle = 45.0
+metadata/_custom_type_script = "uid://ctw76fptybv4m"

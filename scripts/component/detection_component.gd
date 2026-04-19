@@ -25,6 +25,23 @@ func get_closest() -> HurtBox:
 	return closest
 	
 
+func get_multi_closest(amount: int) -> Array[HurtBox]:
+	var closest: Array[HurtBox] = []
+	
+	hurt_boxes.sort_custom(func(a, b):
+		var dis_a := global_position.distance_to(a.global_position)
+		var dis_b := global_position.distance_to(b.global_position)
+		return dis_a < dis_b)
+		
+	for hurt_box in hurt_boxes:
+		if has_line_of_sight(hurt_box) and in_angle_allowed(hurt_box):
+			closest.append(hurt_box)
+		if closest.size() == amount:
+			break
+	
+	return closest
+	
+
 func has_line_of_sight(enemy) -> bool:
 	var space := get_world_2d().direct_space_state
 	params.from = global_position
@@ -35,6 +52,14 @@ func has_line_of_sight(enemy) -> bool:
 		return true
 	else:
 		return false
+		
+
+func in_angle_allowed(enemy) -> bool:
+	var to_enemy = (enemy.global_position - global_position).normalized()
+	var forward = Vector2.RIGHT.rotated(rotation)
+	var dot = forward.dot(to_enemy)
+	
+	return dot >= cos(damage.attack_angle)
 
 
 func _on_area_entered(area: Area2D) -> void:

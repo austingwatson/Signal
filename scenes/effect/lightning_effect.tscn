@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://jgrj63byjowq"]
+
+[ext_resource type="Script" uid="uid://clchs8mapy431" path="res://scripts/effect/lightning_effect.gd" id="1_6hw1x"]
+
+[node name="LightningEffect" type="Line2D" unique_id=507079976]
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_6hw1x")
