@@ -21,6 +21,9 @@ func path_find() -> void:
 	
 
 func _flow_field() -> void:
+	var flow := flow_field.get_direction(global_position)
+	character_movement_component.set_direction(flow)
+	return
 	var flow_dir := flow_field.get_direction(global_position)
 	var separation_dir := _get_seperation_dir()
 	var avoidance_dir := _get_avoidance_dir()

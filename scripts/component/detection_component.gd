@@ -25,6 +25,14 @@ func get_closest() -> HurtBox:
 	return closest
 	
 
+func enable() -> void:
+	$CollisionShape2D.set_deferred("disabled", false)
+	
+
+func disable() -> void:
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+
 func get_multi_closest(amount: int) -> Array[HurtBox]:
 	var closest: Array[HurtBox] = []
 	

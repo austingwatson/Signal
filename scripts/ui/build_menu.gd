@@ -1,6 +1,7 @@
 class_name BuildMenu
 extends Node2D
 
+@export var player: Node2D
 @export var player_materials: PlayerMaterials
 @export var radius := 150.0
 @export var build_costs: Array[BuildCost] = []   # one icon per slice
@@ -70,6 +71,8 @@ func try_to_buy(build_cost: BuildCost) -> void:
 		player_materials.buy(build_cost)
 		var spawn := build_cost.spawn_scene.instantiate()
 		spawn.global_position = global_position
+		if spawn.has_node("FollowComponent"):
+			spawn.get_node("FollowComponent").follow(player.get_node("MultiTool"))
 		EntityManager.add_entity(spawn)
 		close()
 	

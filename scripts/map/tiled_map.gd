@@ -20,6 +20,7 @@ var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
 var flow_field := preload("res://scripts/map/flow_field.tres")
 var flow_field_id := -1
+var towers := []
 
 @onready var ground = $Ground
 @onready var wall = $Wall
@@ -38,8 +39,11 @@ func _ready():
 	spawn.queue_free()
 
 	flow_field.setup(ground, wall, clutter)
-	create_flowfield(towers)
+	#create_flowfield(towers)
 	debug_flow_layer.visible = debug_flow
+	
+	GlobalSignals.activate_tower.connect(_on_activate_tower)
+	GlobalSignals.deactivate_tower.connect(_on_deactivate_tower)
 	
 
 func _process(_delta: float) -> void:
@@ -152,3 +156,17 @@ func direction_to_tile(dir: Vector2) -> Vector2i:
 		return ARROW_DOWN_LEFT
 	else:
 		return ARROW_LEFT
+
+
+func _on_activate_tower(tower) -> void:
+	towers.append(tower)
+	while flow_field_id != -1:
+		await get_tree().create_timer(0.5).timeout
+	create_flowfield(towers)
+	
+
+func _on_deactivate_tower(tower) -> void:
+	towers.erase(tower)
+	while flow_field_id != -1:
+		await get_tree().create_timer(0.5).timeout
+	create_flowfield(towers)

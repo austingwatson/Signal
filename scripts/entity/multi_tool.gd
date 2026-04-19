@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
-		shoot(Vector2.ZERO)
+		shoot()
 
 
 func _physics_process(_delta: float) -> void:
@@ -59,7 +59,7 @@ func ping() -> void:
 	play_ping_sound(signal_strength)
 	
 
-func shoot(target: Vector2) -> void:
+func shoot() -> void:
 	var closest = detection_component.get_multi_closest(3)
 	for enemy in closest:
 		enemy.take_damage(damage.damage)

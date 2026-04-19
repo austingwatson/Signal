@@ -21,7 +21,7 @@ texture = ExtResource("1_p5up1")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
 chunk_library = Array[PackedScene]([ExtResource("4_pp5kj")])
-map_size = Vector2i(10, 10)
+map_size = Vector2i(1, 1)
 towers_amount = 1
 
 [node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]

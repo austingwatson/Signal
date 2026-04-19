@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://ct6ob2i7t3jsh"]
 
 [ext_resource type="Script" uid="uid://py5ydsushuvt" path="res://scripts/entity/signal_tower.gd" id="1_qh3gv"]
-[ext_resource type="Texture2D" uid="uid://c8fmxkxisqgfy" path="res://assets/textures/st_temp.png" id="1_u15ln"]
+[ext_resource type="Texture2D" uid="uid://b55677ta5vjgw" path="res://assets/textures/st_temp.png" id="1_u15ln"]
 [ext_resource type="PackedScene" uid="uid://b6tw44p4yiv56" path="res://scenes/component/interactable_component.tscn" id="3_beg84"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_l5bs5"]
+[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="5_gxh6q"]
+[ext_resource type="Script" uid="uid://cm2l06rrwtpvk" path="res://scripts/statemachine/signal_tower/signal_tower_deactivated.gd" id="6_76jeg"]
+[ext_resource type="Script" uid="uid://b88u3xa1h3slg" path="res://scripts/statemachine/signal_tower/signal_tower_activating.gd" id="7_7sm4a"]
+[ext_resource type="Script" uid="uid://dmwx3uw5idgyu" path="res://scripts/statemachine/signal_tower/signal_tower_activated.gd" id="8_7pjg8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vfw1"]
 radius = 64.0
@@ -14,10 +19,24 @@ script = ExtResource("1_qh3gv")
 texture = ExtResource("1_u15ln")
 
 [node name="InteractableComponent" parent="." unique_id=254912776 instance=ExtResource("3_beg84")]
-collision_layer = 24
+collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=1832900077]
 shape = SubResource("CircleShape2D_8vfw1")
 
-[connection signal="interacted" from="InteractableComponent" to="." method="_on_interactable_component_interacted"]
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_l5bs5")]
+initial_State = NodePath("Deactivated")
+show_state = true
+
+[node name="Deactivated" parent="StateMachine" unique_id=394219668 instance=ExtResource("5_gxh6q")]
+script = ExtResource("6_76jeg")
+
+[node name="Activating" parent="StateMachine" unique_id=1520479396 instance=ExtResource("5_gxh6q")]
+script = ExtResource("7_7sm4a")
+
+[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("tower") instance=ExtResource("5_gxh6q")]
+script = ExtResource("8_7pjg8")
+tower = NodePath("../..")
+
+[connection signal="interacted" from="InteractableComponent" to="StateMachine/Deactivated" method="_on_interactable_component_interacted"]

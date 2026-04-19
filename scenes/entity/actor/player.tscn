@@ -163,7 +163,7 @@ multi_tool = NodePath("../../MultiTool")
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=1245282860]
 collision_layer = 2
-collision_mask = 8
+collision_mask = 16
 input_pickable = false
 monitorable = false
 
@@ -179,7 +179,8 @@ frame_progress = 0.45200092
 [node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
 z_index = -1
 
-[node name="BuildMenu" parent="." unique_id=533637646 instance=ExtResource("11_eybgf")]
+[node name="BuildMenu" parent="." unique_id=533637646 node_paths=PackedStringArray("player") instance=ExtResource("11_eybgf")]
+player = NodePath("..")
 line_color = Color(1, 1, 1, 0.11764706)
 
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("11_b81v7")]
