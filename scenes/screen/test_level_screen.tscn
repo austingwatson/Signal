@@ -20,7 +20,6 @@ position = Vector2(235, 176)
 texture = ExtResource("1_p5up1")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
-debug_flow = false
 chunk_library = Array[PackedScene]([ExtResource("9_wmcel")])
 map_size = Vector2i(1, 1)
 towers_amount = 1
