@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="5_v7w8l"]
 [ext_resource type="PackedScene" uid="uid://cscg2jn5o56fc" path="res://scenes/entity/multi_tool.tscn" id="9_18kca"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="10_8l8co"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="11_b81v7"]
 [ext_resource type="PackedScene" uid="uid://dur7fjor7jyr4" path="res://scenes/ui/build_menu.tscn" id="11_eybgf"]
+[ext_resource type="Resource" uid="uid://dqturs3rs27p7" path="res://resources/health/player_heatlh.tres" id="12_b81v7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l8co"]
 size = Vector2(16, 16)
@@ -124,10 +126,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxtqe"]
+size = Vector2(16, 28)
+
 [node name="Player" type="CharacterBody2D" unique_id=6415582]
 z_index = 1
 collision_layer = 2
-collision_mask = 15
 script = ExtResource("1_8l8co")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=776672925]
@@ -168,15 +172,23 @@ shape = SubResource("CircleShape2D_v7w8l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
 sprite_frames = SubResource("SpriteFrames_ka65a")
-animation = &"idle"
+animation = &"move"
 autoplay = "idle"
-frame_progress = 0.8662698
+frame_progress = 0.45200092
 
 [node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
 z_index = -1
 
 [node name="BuildMenu" parent="." unique_id=533637646 instance=ExtResource("11_eybgf")]
 line_color = Color(1, 1, 1, 0.11764706)
+
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("11_b81v7")]
+collision_layer = 2
+collision_mask = 12
+health_resource = ExtResource("12_b81v7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1293593765]
+shape = SubResource("RectangleShape2D_qxtqe")
 
 [connection signal="area_entered" from="InteractComponent" to="." method="_on_interact_component_area_entered"]
 [connection signal="area_exited" from="InteractComponent" to="." method="_on_interact_component_area_exited"]

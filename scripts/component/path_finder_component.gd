@@ -15,7 +15,7 @@ var current_tile := Vector2i.ZERO
 var final_tile := Vector2i.ZERO
 
 
-func _physics_process(_delta: float) -> void:
+func path_find() -> void:
 	if use_flowfield:
 		_flow_field()
 	

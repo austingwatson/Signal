@@ -7,6 +7,12 @@
 [ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="6_y3n0m"]
 [ext_resource type="Resource" uid="uid://ctmrrus0k6wnf" path="res://resources/health/swarm_bot_health.tres" id="7_dqpqo"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="8_xnh8f"]
+[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_qsfr4"]
+[ext_resource type="Script" uid="uid://ccpjc5jk1unpp" path="res://scripts/statemachine/swarm_bot/swarm_bot_move.gd" id="10_ftxwb"]
+[ext_resource type="Script" uid="uid://c5xosswu48022" path="res://scripts/statemachine/swarm_bot/swarm_bot_attack.gd" id="11_fjskr"]
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="12_qsfr4"]
+[ext_resource type="Resource" uid="uid://dljffugaqqlic" path="res://resources/damage/swarm_bot_damage.tres" id="13_ftxwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
 size = Vector2(8, 8)
@@ -16,7 +22,7 @@ size = Vector2(16, 16)
 
 [node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442 groups=["enemy"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 13
 script = ExtResource("1_bdp4e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=345711066]
@@ -39,5 +45,25 @@ health_resource = ExtResource("7_dqpqo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=692475271]
 shape = SubResource("RectangleShape2D_ccesr")
+
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_xnh8f")]
+initial_State = NodePath("Move")
+show_state = true
+
+[node name="Move" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component") instance=ExtResource("9_qsfr4")]
+script = ExtResource("10_ftxwb")
+path_finder_component = NodePath("../../PathFinderComponent")
+detection_component = NodePath("../../DetectionComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+
+[node name="Attack" type="Node2D" parent="StateMachine" unique_id=791013401]
+script = ExtResource("11_fjskr")
+damage = ExtResource("13_ftxwb")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("12_qsfr4")]
+collision_layer = 4
+collision_mask = 2
+damage = ExtResource("13_ftxwb")
 
 [connection signal="dead" from="HurtBox" to="." method="_on_hurt_box_dead"]

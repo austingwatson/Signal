@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cr1bmc3bm3o6q" path="res://scripts/component/detection_component.gd" id="1_xi35p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xi35p"]
+resource_local_to_scene = true
 
 [node name="DetectionComponent" type="Area2D" unique_id=765032835]
 collision_layer = 0
