@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://2n5i024q8yrb"]
+
+[ext_resource type="Script" uid="uid://bweo61unng8n6" path="res://scripts/entity/actor/swarm_bot.gd" id="1_bdp4e"]
+[ext_resource type="Texture2D" uid="uid://c4myxeehdgoiv" path="res://assets/textures/actors/swarm_bot.png" id="1_g12pr"]
+[ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="3_go354"]
+[ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="4_a4epf"]
+[ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
+size = Vector2(16, 16)
+
+[node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442]
+script = ExtResource("1_bdp4e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=345711066]
+texture = ExtResource("1_g12pr")
+
+[node name="CharacterMovementComponent" parent="." unique_id=371240637 node_paths=PackedStringArray("character") instance=ExtResource("3_go354")]
+character = NodePath("..")
+movement_resource = ExtResource("4_v22q0")
+
+[node name="PathFinderComponent" parent="." unique_id=1643619407 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("4_a4epf")]
+character_movement_component = NodePath("../CharacterMovementComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=409628201]
+shape = SubResource("RectangleShape2D_go354")

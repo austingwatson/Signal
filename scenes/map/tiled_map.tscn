@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://bcacxo1qi3h2n"]
 
 [ext_resource type="Script" uid="uid://b7cf08d6bq5wp" path="res://scripts/map/tiled_map.gd" id="1_vn1t8"]
-[ext_resource type="PackedScene" uid="uid://ctcwa1necw8wl" path="res://scenes/map/chunk/test_chunk.tscn" id="2_qmp00"]
-[ext_resource type="PackedScene" uid="uid://cinp5prjm00uw" path="res://scenes/map/chunk/test_chunk_left.tscn" id="3_ca0p4"]
-[ext_resource type="PackedScene" uid="uid://d1rt8ojs7g3ia" path="res://scenes/map/chunk/test_chunk_up_right.tscn" id="4_qj5qv"]
-[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test_tower_chunk.tscn" id="5_dh3ur"]
-[ext_resource type="PackedScene" uid="uid://8cslt24kwe3d" path="res://scenes/map/chunk/test_tower_chunk_all.tscn" id="6_c3v3p"]
+[ext_resource type="PackedScene" uid="uid://ctcwa1necw8wl" path="res://scenes/map/chunk/test/test_chunk.tscn" id="2_qmp00"]
+[ext_resource type="PackedScene" uid="uid://cinp5prjm00uw" path="res://scenes/map/chunk/test/test_chunk_left.tscn" id="3_ca0p4"]
+[ext_resource type="PackedScene" uid="uid://yyyrkusgkqmv" path="res://scenes/map/chunk/test/test_chunk_left_right.tscn" id="4_dh3ur"]
+[ext_resource type="PackedScene" uid="uid://d1rt8ojs7g3ia" path="res://scenes/map/chunk/test/test_chunk_up_right.tscn" id="5_c3v3p"]
+[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="6_3ie0r"]
 [ext_resource type="Texture2D" uid="uid://crcqp68hj3io2" path="res://assets/textures/environment/tile_sheet.png" id="7_3ie0r"]
-[ext_resource type="PackedScene" uid="uid://yyyrkusgkqmv" path="res://scenes/map/chunk/test_chunk_left_right.tscn" id="7_qj5qv"]
+[ext_resource type="PackedScene" uid="uid://8cslt24kwe3d" path="res://scenes/map/chunk/test/test_tower_chunk_all.tscn" id="7_d8yfu"]
+[ext_resource type="TileSet" uid="uid://cfcyx330dr4dt" path="res://resources/tileset/ground.tres" id="9_dh3ur"]
+[ext_resource type="Texture2D" uid="uid://bo3ongusftb3m" path="res://assets/textures/environment/flow_arrow_debug.png" id="10_c3v3p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccnr4"]
 texture = ExtResource("7_3ie0r")
@@ -28,14 +30,37 @@ texture = ExtResource("7_3ie0r")
 [sub_resource type="TileSet" id="TileSet_bw0pg"]
 sources/0 = SubResource("TileSetAtlasSource_ccnr4")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ie0r"]
+texture = ExtResource("10_c3v3p")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_d8yfu"]
+sources/0 = SubResource("TileSetAtlasSource_3ie0r")
+
 [node name="TiledMap" type="Node2D" unique_id=859205898]
 z_index = -1
 script = ExtResource("1_vn1t8")
-chunk_library = Array[PackedScene]([ExtResource("2_qmp00"), ExtResource("3_ca0p4"), ExtResource("4_qj5qv"), ExtResource("5_dh3ur"), ExtResource("6_c3v3p"), ExtResource("7_qj5qv")])
+debug_flow = null
+chunk_library = Array[PackedScene]([ExtResource("2_qmp00"), ExtResource("3_ca0p4"), ExtResource("4_dh3ur"), ExtResource("5_c3v3p"), ExtResource("6_3ie0r"), ExtResource("7_d8yfu")])
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=968830625]
 tile_set = SubResource("TileSet_bw0pg")
 
 [node name="Wall" type="TileMapLayer" parent="." unique_id=2002368285]
+tile_set = ExtResource("9_dh3ur")
 
 [node name="Clutter" type="TileMapLayer" parent="." unique_id=244953142]
+tile_set = ExtResource("9_dh3ur")
+
+[node name="Spawn" type="TileMapLayer" parent="." unique_id=1690328490]
+tile_set = ExtResource("9_dh3ur")
+
+[node name="FlowFieldDebug" type="TileMapLayer" parent="." unique_id=1896791046]
+tile_set = SubResource("TileSet_d8yfu")

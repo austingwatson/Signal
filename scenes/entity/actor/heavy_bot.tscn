@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dgkp1no7x80rb"]
+
+[ext_resource type="Texture2D" uid="uid://bs6eokmnkgqo3" path="res://assets/textures/actors/heavy_bot.png" id="1_w3qi0"]
+
+[node name="HeavyBot" type="Node2D" unique_id=406873536]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749056383]
+texture = ExtResource("1_w3qi0")

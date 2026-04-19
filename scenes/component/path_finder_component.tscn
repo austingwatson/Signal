@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dguj2fvkupnb2"]
+
+[ext_resource type="Script" uid="uid://5uih67dkdiug" path="res://scripts/component/path_finder_component.gd" id="1_3voa5"]
+
+[node name="PathFinderComponent" type="Node2D" unique_id=1643619407]
+script = ExtResource("1_3voa5")

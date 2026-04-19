@@ -1,43 +1,152 @@
 extends Node2D
 
+const ARROW_UP = Vector2i(3, 0)
+const ARROW_RIGHT = Vector2i(0, 0)
+const ARROW_DOWN = Vector2i(1, 0)
+const ARROW_LEFT = Vector2i(2, 0)
+
+const ARROW_UP_LEFT = Vector2i(0, 1)
+const ARROW_UP_RIGHT = Vector2i(1, 1)
+const ARROW_DOWN_RIGHT = Vector2i(3, 1)
+const ARROW_DOWN_LEFT = Vector2i(2, 1)
+
+
+@export var debug_flow := true
 @export var chunk_library: Array[PackedScene] = []
+
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
+var flow_field := preload("res://scripts/map/flow_field.tres")
+var flow_field_id := -1
+
 @onready var ground = $Ground
 @onready var wall = $Wall
 @onready var clutter = $Clutter
+@onready var spawn := $Spawn
+@onready var debug_flow_layer := $FlowFieldDebug
+
 
 func _ready():
 	var world = generator.build_world(chunk_library, 5, 5, 2)
-	merger.merge_chunks(world, ground, wall, clutter)
-	spawn_towers(world)
+	merger.merge_chunks(world, ground, wall, clutter, spawn)
+
+	var towers = spawn_towers(world)
+	spawn_materials()
 	free_world(world)
+	spawn.queue_free()
+
+	flow_field.setup(ground, wall, clutter)
+	create_flowfield(towers)
+	debug_flow_layer.visible = debug_flow
 	
 
-func spawn_towers(world: Array) -> void:
+func _process(_delta: float) -> void:
+	if flow_field_id != -1 and WorkerThreadPool.is_task_completed(flow_field_id):
+		WorkerThreadPool.wait_for_task_completion(flow_field_id)
+		flow_field_id = -1
+		
+		if debug_flow:
+			draw_flow_debug()
+
+
+func spawn_towers(world: Array) -> Array:
 	var tower_scene := preload("res://scenes/entity/signal_tower.tscn")
-	
+	var towers = []
+
 	for y in range(world.size()):
 		for x in range(world[y].size()):
 			var chunk: Chunk = world[y][x]
-			
+
 			if chunk.is_goal_chunk:
 				var tower = tower_scene.instantiate()
 				var chunk_size = chunk.get_chunk_pixel_size()
+
 				tower.global_position = Vector2(
-					x * chunk_size.x + chunk_size.x * 0.5, 
+					x * chunk_size.x + chunk_size.x * 0.5,
 					y * chunk_size.y + chunk_size.y * 0.5
-					)
+				)
+
+				towers.append(tower)
 				EntityManager.add_child(tower)
+
+	return towers
+
+
+func spawn_materials() -> void:
+	var metal_scene := preload("res://scenes/entity/material/metal_pickup.tscn")
+
+	var spawn_cells = spawn.get_used_cells()
+	for cell in spawn_cells:
+		var world_pos = spawn.map_to_local(cell)
+		var metal := metal_scene.instantiate()
+		metal.global_position = world_pos
+		EntityManager.add_entity(metal)
 
 
 func free_world(world: Array) -> void:
 	for y in range(world.size()):
 		for x in range(world[y].size()):
 			var chunk = world[y][x]
+
 			if chunk.ground: chunk.ground.free()
 			if chunk.wall: chunk.wall.free()
 			if chunk.clutter: chunk.clutter.free()
+
 			chunk.free()
-			
 			world[y][x] = null
+
+
+func create_flowfield(towers: Array) -> void:
+	var destinations: Array[Vector2] = []
+	for tower in towers:
+		destinations.append(tower.global_position)
+
+	flow_field_id = WorkerThreadPool.add_task(
+		func():
+			flow_field.created = false
+			flow_field.compute_cost_field(destinations)
+			flow_field.compute_flow_field()
+			for i in range(5):
+				flow_field.smooth_flow_field()
+			flow_field.created = true
+	)
+
+
+func draw_flow_debug() -> void:
+	debug_flow_layer.clear()
+
+	for x in flow_field.size.x:
+		for y in flow_field.size.y:
+			var dir: Vector2 = flow_field.flow_field[x][y]
+			if dir == Vector2.ZERO:
+				continue
+
+			var cell := Vector2i(x, y)
+			var atlas_coord := direction_to_tile(dir)
+
+			debug_flow_layer.set_cell(cell, 0, atlas_coord)
+
+
+# ---------------------------------------------------------
+# Convert direction vector → tile ID
+# Replace TILE_* with your actual tile IDs
+# ---------------------------------------------------------
+func direction_to_tile(dir: Vector2) -> Vector2i:
+	var angle = dir.angle()
+
+	if angle > -PI * 0.625 and angle <= -PI * 0.375:
+		return ARROW_UP_LEFT
+	elif angle > -PI * 0.375 and angle <= -PI * 0.125:
+		return ARROW_UP
+	elif angle > -PI * 0.125 and angle <= PI * 0.125:
+		return ARROW_RIGHT
+	elif angle > PI * 0.125 and angle <= PI * 0.375:
+		return ARROW_DOWN_RIGHT
+	elif angle > PI * 0.375 and angle <= PI * 0.625:
+		return ARROW_DOWN
+	elif angle > PI * 0.625 or angle <= -PI * 0.625:
+		return ARROW_LEFT
+	elif angle > -PI * 0.875 and angle <= -PI * 0.625:
+		return ARROW_LEFT
+	else:
+		return ARROW_DOWN_LEFT

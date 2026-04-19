@@ -1,6 +1,6 @@
 extends Node
 
-func merge_chunks(world: Array, final_ground: TileMapLayer, final_wall: TileMapLayer, final_clutter: TileMapLayer):
+func merge_chunks(world: Array, final_ground: TileMapLayer, final_wall: TileMapLayer, final_clutter: TileMapLayer, final_spawn: TileMapLayer):
 	for y in range(world.size()):
 		for x in range(world[y].size()):
 			var chunk = world[y][x]
@@ -11,6 +11,7 @@ func merge_chunks(world: Array, final_ground: TileMapLayer, final_wall: TileMapL
 			merge_layer(chunk.ground, final_ground, offset)
 			merge_layer(chunk.wall, final_wall, offset)
 			merge_layer(chunk.clutter, final_clutter, offset)
+			merge_spawn_layer(chunk.spawn, final_spawn, offset, chunk.spawn_chance)
 
 
 func merge_layer(src: TileMapLayer, dst: TileMapLayer, offset: Vector2i):
@@ -18,6 +19,21 @@ func merge_layer(src: TileMapLayer, dst: TileMapLayer, offset: Vector2i):
 		return
 
 	for cell in src.get_used_cells():
+		var id = src.get_cell_source_id(cell)
+		var atlas = src.get_cell_atlas_coords(cell)
+		var alt = src.get_cell_alternative_tile(cell)
+
+		dst.set_cell(cell + offset, id, atlas, alt)
+		
+
+func merge_spawn_layer(src: TileMapLayer, dst: TileMapLayer, offset: Vector2i, spawn_chance: float):
+	if src == null:
+		return
+	
+	for cell in src.get_used_cells():
+		if randf() >= spawn_chance:
+			continue
+		
 		var id = src.get_cell_source_id(cell)
 		var atlas = src.get_cell_atlas_coords(cell)
 		var alt = src.get_cell_alternative_tile(cell)

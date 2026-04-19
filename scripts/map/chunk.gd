@@ -10,7 +10,9 @@ extends Node2D
 @export var ground: TileMapLayer = null
 @export var wall: TileMapLayer = null
 @export var clutter: TileMapLayer = null
+@export var spawn: TileMapLayer = null
 @export var is_goal_chunk := false
+@export_range(0.0, 1.0, 0.01) var spawn_chance := 1.0
 
 
 func get_chunk_pixel_size() -> Vector2i:
