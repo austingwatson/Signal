@@ -30,9 +30,9 @@ text = "Test Level
 "
 
 [node name="OwenTestButton" type="Button" parent="." unique_id=1364709899]
-offset_left = 667.0
+offset_left = 664.0
 offset_top = 93.0
-offset_right = 801.0
+offset_right = 798.0
 offset_bottom = 124.0
 text = "Owen Test Level"
 
