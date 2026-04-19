@@ -17,6 +17,8 @@ offset_right = 20.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
+button_mask = 3
 text = "Play"
 
 [node name="TestLevelButton" type="Button" parent="." unique_id=1251379221]

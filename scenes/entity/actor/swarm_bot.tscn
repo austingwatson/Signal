@@ -14,7 +14,7 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccesr"]
 size = Vector2(16, 16)
 
-[node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442]
+[node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442 groups=["enemy"]]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_bdp4e")

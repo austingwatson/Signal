@@ -5,6 +5,8 @@ var reservations := {}
 
 func _ready() -> void:
 	add_child(enemies)
+	
+	set_physics_process(false)
 
 
 func _physics_process(_delta: float) -> void:
