@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442]
 script = ExtResource("1_bdp4e")

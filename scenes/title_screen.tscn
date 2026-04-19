@@ -27,5 +27,13 @@ offset_bottom = 185.0
 text = "Test Level
 "
 
+[node name="OwenTestButton" type="Button" parent="." unique_id=1364709899]
+offset_left = 667.0
+offset_top = 93.0
+offset_right = 801.0
+offset_bottom = 124.0
+text = "Owen Test Level"
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TestLevelButton" to="." method="_on_test_level_button_pressed"]
+[connection signal="pressed" from="OwenTestButton" to="." method="_on_owen_test_button_pressed"]
