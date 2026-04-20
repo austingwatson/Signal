@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_ff006")
-metal = 10
 power_cell = 10
 metadata/_custom_type_script = "uid://b00dj335v2dok"

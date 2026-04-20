@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://d0l3eseq8ofav"]
 
 [ext_resource type="Texture2D" uid="uid://co2dtgcwfq7y3" path="res://assets/textures/environment/pickup_powercell.png" id="1_52u7p"]
+[ext_resource type="PackedScene" uid="uid://c0inr8haicd4a" path="res://scenes/component/pickup_component.tscn" id="2_ufki6"]
+[ext_resource type="Resource" uid="uid://ob7xhpkpfa58" path="res://resources/material_amount/power_cell_amount.tres" id="3_0h1a3"]
 
 [node name="PowerCellPickup" type="Node2D" unique_id=511326249]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=296352757]
 texture = ExtResource("1_52u7p")
+
+[node name="PickupComponent" parent="." unique_id=594924536 node_paths=PackedStringArray("parent") instance=ExtResource("2_ufki6")]
+parent = NodePath("..")
+material_amount = ExtResource("3_0h1a3")

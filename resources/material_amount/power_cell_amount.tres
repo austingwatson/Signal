@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MaterialAmount" format=3 uid="uid://ob7xhpkpfa58"]
+
+[ext_resource type="Script" uid="uid://dfkqthbppx5is" path="res://resources/material_amount/material_amount.gd" id="1_vvbcp"]
+
+[resource]
+script = ExtResource("1_vvbcp")
+power_cell_amount = 1
+metadata/_custom_type_script = "uid://dfkqthbppx5is"
