@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://dmuo640pu1y64" path="res://resources/wave/wave.gd" id="7_fvgpv"]
 [ext_resource type="Resource" uid="uid://jsd0jokdfw08" path="res://resources/wave/wave1.tres" id="8_1cwq4"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0d65i"]
+load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
+
 [node name="GameScreen" type="Node2D" unique_id=571726642]
 y_sort_enabled = true
 script = ExtResource("1_kas1x")
@@ -33,3 +36,14 @@ position = Vector2(285, 542)
 waves = Array[ExtResource("7_fvgpv")]([ExtResource("8_1cwq4")])
 min_dist = 600.0
 max_dist = 1000.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=301058016]
+follow_viewport_scale = 0.001
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1100451748]
+modulate = Color(1, 1, 1, 0.78431374)
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.2500165, 0.2500261)
+texture = SubResource("CompressedTexture2D_0d65i")
+metadata/_edit_use_anchors_ = true

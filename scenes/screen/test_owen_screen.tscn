@@ -4,7 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_qpjqw"]
 [ext_resource type="PackedScene" uid="uid://c1wgphpucjeip" path="res://scenes/map/chunk/rocky_1.tscn" id="2_4bj0y"]
 [ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="4_0fqic"]
+[ext_resource type="PackedScene" uid="uid://b4q7p5g5i5ks7" path="res://scenes/map/chunk/rocky_road_br.tscn" id="4_bts32"]
+[ext_resource type="PackedScene" uid="uid://q7pfsgnjcdf0" path="res://scenes/map/chunk/rocky_road_horiz.tscn" id="5_exxfx"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="5_wlejl"]
+[ext_resource type="PackedScene" uid="uid://dnvvo0lq6rqh2" path="res://scenes/map/chunk/rocky_road_lb.tscn" id="6_vknq3"]
+[ext_resource type="PackedScene" uid="uid://b4g6j6la0uffu" path="res://scenes/map/chunk/rocky_road_lt.tscn" id="7_hg5uk"]
+[ext_resource type="PackedScene" uid="uid://cdo7p57114pbn" path="res://scenes/map/chunk/rocky_road_tr.tscn" id="8_fpp5b"]
+[ext_resource type="PackedScene" uid="uid://bm723tkf27csm" path="res://scenes/map/chunk/rocky_road_vert.tscn" id="9_euvjb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wlejl"]
+load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
 
 [node name="TestOwenScreen" type="Node2D" unique_id=1606319731]
 y_sort_enabled = true
@@ -13,7 +22,7 @@ script = ExtResource("1_4bj0y")
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_qpjqw")]
 debug_flow = false
 debug_cableflow = false
-chunk_library = Array[PackedScene]([ExtResource("2_4bj0y")])
+chunk_library = Array[PackedScene]([ExtResource("2_4bj0y"), ExtResource("4_bts32"), ExtResource("5_exxfx"), ExtResource("6_vknq3"), ExtResource("7_hg5uk"), ExtResource("8_fpp5b"), ExtResource("9_euvjb")])
 map_size = Vector2i(5, 5)
 towers_amount = 2
 starting_chunk = ExtResource("4_0fqic")
@@ -23,3 +32,14 @@ y_sort_enabled = true
 
 [node name="Player" parent="Entities" unique_id=6415582 instance=ExtResource("5_wlejl")]
 position = Vector2(285, 542)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189856238]
+follow_viewport_scale = 0.001
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1166926025]
+modulate = Color(1, 1, 1, 0.78431374)
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.2500165, 0.2500261)
+texture = SubResource("CompressedTexture2D_wlejl")
+metadata/_edit_use_anchors_ = true
