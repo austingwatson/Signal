@@ -1,6 +1,11 @@
 extends State
 
 @export var detection_component: DetectionComponent
+@export var turret_animation_component: TurretAnimationComponent
+
+
+func enter(_data: Dictionary) -> void:
+	turret_animation_component.not_attacking()
 
 
 func update(_delta: float) -> void:

@@ -20,16 +20,18 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_3ie0r")
 
 [node name="TiledMap" type="Node2D" unique_id=859205898]
-z_index = -1
+y_sort_enabled = true
 script = ExtResource("1_vn1t8")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=968830625]
 tile_set = ExtResource("9_dh3ur")
 
 [node name="Wall" type="TileMapLayer" parent="." unique_id=2002368285]
+y_sort_enabled = true
 tile_set = ExtResource("9_dh3ur")
 
 [node name="Clutter" type="TileMapLayer" parent="." unique_id=244953142]
+y_sort_enabled = true
 tile_set = ExtResource("9_dh3ur")
 
 [node name="Spawn" type="TileMapLayer" parent="." unique_id=1690328490]

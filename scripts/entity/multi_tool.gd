@@ -72,7 +72,7 @@ func shoot() -> void:
 		enemy.take_damage(damage.damage)
 		var lightning := preload("res://scenes/effect/lightning_effect.tscn").instantiate()
 		lightning.set_lightning_points(global_position, enemy.global_position, 3, 6)
-		EntityManager.add_child(lightning)
+		EntityManager.add_entity(lightning)
 	
 
 func find_closest_signal_tower() -> InteractableComponent:

@@ -4,8 +4,9 @@
 [ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="2_qecuw"]
 [ext_resource type="Script" uid="uid://b1mv6uia32n0y" path="res://resources/build_cost/build_cost.gd" id="2_xaliy"]
 [ext_resource type="Resource" uid="uid://ck7vw417s5gmp" path="res://resources/build_cost/laser_turret_build_cost.tres" id="3_qecuw"]
+[ext_resource type="Resource" uid="uid://c4we0udbicjhy" path="res://resources/build_cost/heavy_laser_turret_build_cost.tres" id="5_ndvqu"]
 
 [node name="BuildMenu" type="Node2D" unique_id=533637646]
 script = ExtResource("1_3xaa5")
 player_materials = ExtResource("2_qecuw")
-build_costs = Array[ExtResource("2_xaliy")]([ExtResource("3_qecuw"), ExtResource("3_qecuw"), ExtResource("3_qecuw"), ExtResource("3_qecuw")])
+build_costs = Array[ExtResource("2_xaliy")]([ExtResource("3_qecuw"), ExtResource("5_ndvqu")])

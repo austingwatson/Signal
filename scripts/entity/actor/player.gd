@@ -14,8 +14,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 			build_menu.open()
 	elif Input.is_action_just_pressed("interact"):
 		for interactable in interactables:
-			interactable.interact()
-		interactables.clear()
+			if is_instance_valid(interactable):
+				interactable.interact()
 	elif Input.is_action_just_pressed("ping"):
 		multi_tool.ping()
 

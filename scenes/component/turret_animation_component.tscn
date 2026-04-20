@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://belpdqvrcm8si"]
+
+[ext_resource type="Script" uid="uid://3rkrdbehksgb" path="res://scripts/component/turret_animation_component.gd" id="1_4iws5"]
+[ext_resource type="Texture2D" uid="uid://cfa361ataac48" path="res://assets/textures/actors/turret_sheet.png" id="2_gikyb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gikyb"]
+load_path = "res://.godot/imported/turret_sheet.png-1036b5243081200d2919a6a74a8c6287.ctex"
+
+[node name="TurretAnimationComponent" type="Node2D" unique_id=1294433927]
+script = ExtResource("1_4iws5")
+
+[node name="Base" type="Sprite2D" parent="." unique_id=1954531469]
+texture = SubResource("CompressedTexture2D_gikyb")
+hframes = 30
+vframes = 16
+frame = 30
+
+[node name="Gun" type="Sprite2D" parent="." unique_id=1250316447]
+texture = ExtResource("2_gikyb")
+hframes = 30
+vframes = 16
+frame = 32

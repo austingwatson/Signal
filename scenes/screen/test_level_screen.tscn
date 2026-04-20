@@ -2,34 +2,16 @@
 
 [ext_resource type="Script" uid="uid://c6acfus2mow4h" path="res://scripts/screen/test_level_screen.gd" id="1_2dks2"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_81dx7"]
-[ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="1_kfx0g"]
-[ext_resource type="Texture2D" uid="uid://swqltwa43xp" path="res://assets/textures/environment/background_dark.png" id="1_p5up1"]
-[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="4_pp5kj"]
-[ext_resource type="PackedScene" uid="uid://bgoyhwqib647g" path="res://scenes/entity/actor/laser_turret.tscn" id="6_k1swi"]
-[ext_resource type="PackedScene" uid="uid://2n5i024q8yrb" path="res://scenes/entity/actor/swarm_bot.tscn" id="7_pp5kj"]
+[ext_resource type="PackedScene" uid="uid://cuvgnfqqixxje" path="res://scenes/map/chunk/temp_chunk.tscn" id="4_howki"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
+y_sort_enabled = true
 script = ExtResource("1_2dks2")
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=246321625]
-visible = false
-repeat_times = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1363495057]
-position = Vector2(235, 176)
-texture = ExtResource("1_p5up1")
-
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
-debug_flow = false
-chunk_library = Array[PackedScene]([ExtResource("4_pp5kj")])
-map_size = Vector2i(20, 20)
-towers_amount = 5
+chunk_library = Array[PackedScene]([ExtResource("4_howki")])
+map_size = Vector2i(1, 1)
+towers_amount = 1
 
-[node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
-position = Vector2(501, 284)
-
-[node name="LaserTurret" parent="." unique_id=994531285 instance=ExtResource("6_k1swi")]
-position = Vector2(575, 269)
-
-[node name="SwarmBot" parent="." unique_id=2130898442 instance=ExtResource("7_pp5kj")]
-position = Vector2(625, 289)
+[node name="Entities" type="Node2D" parent="." unique_id=1635913234]
+y_sort_enabled = true

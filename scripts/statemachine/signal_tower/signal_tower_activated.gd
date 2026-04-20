@@ -1,7 +1,15 @@
 extends State
 
-@export var tower: SignalTower
+@export var sprite: Sprite2D
+var next := 1
 
 
 func enter(_data: Dictionary) -> void:
-	GlobalSignals.call_activate_tower(tower)	
+	sprite.frame = 3
+	$Timer.start()
+	
+
+
+func _on_timer_timeout() -> void:
+	sprite.frame += next
+	next *= -1

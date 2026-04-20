@@ -1,10 +1,11 @@
 extends Node
 
+var entities: Node2D
 var enemies := Node2D.new()
 var reservations := {}
 
 func _ready() -> void:
-	add_child(enemies)
+	#add_child(enemies)
 	
 	set_physics_process(false)
 
@@ -40,8 +41,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func add_entity(entity: Node) -> void:
-	add_child(entity)
+	entities.add_child(entity)
 	
 
 func add_enemy(enemy: Node) -> void:
-	enemies.add_child(enemy)
+	entities.add_child(enemy)

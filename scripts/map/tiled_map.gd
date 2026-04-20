@@ -105,7 +105,7 @@ func spawn_towers(world: Array) -> Array:
 				)
 
 				towers.append(tower)
-				EntityManager.call_deferred("add_child", tower)
+				EntityManager.call_deferred("add_entity", tower)
 				#EntityManager.add_child(tower)
 
 	return towers

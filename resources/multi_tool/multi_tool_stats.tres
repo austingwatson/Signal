@@ -9,4 +9,5 @@ angle_worth = 0.3
 distance_worth = 1.0
 slow_ping = 0.5
 fast_ping = 3.0
+placement_range = 500.0
 metadata/_custom_type_script = "uid://vd01fo34gllc"

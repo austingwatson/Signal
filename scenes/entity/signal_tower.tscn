@@ -1,22 +1,34 @@
 [gd_scene format=3 uid="uid://ct6ob2i7t3jsh"]
 
 [ext_resource type="Script" uid="uid://py5ydsushuvt" path="res://scripts/entity/signal_tower.gd" id="1_qh3gv"]
-[ext_resource type="Texture2D" uid="uid://b55677ta5vjgw" path="res://assets/textures/st_temp.png" id="1_u15ln"]
+[ext_resource type="Resource" uid="uid://8a2ju0aoqlpc" path="res://resources/multi_tool/multi_tool_stats.tres" id="2_1xhvv"]
+[ext_resource type="Texture2D" uid="uid://rlwb85chjdl5" path="res://assets/textures/environment/signal_tower.png" id="2_gxh6q"]
 [ext_resource type="PackedScene" uid="uid://b6tw44p4yiv56" path="res://scenes/component/interactable_component.tscn" id="3_beg84"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_l5bs5"]
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="5_gxh6q"]
 [ext_resource type="Script" uid="uid://cm2l06rrwtpvk" path="res://scripts/statemachine/signal_tower/signal_tower_deactivated.gd" id="6_76jeg"]
+[ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="7_7pjg8"]
 [ext_resource type="Script" uid="uid://b88u3xa1h3slg" path="res://scripts/statemachine/signal_tower/signal_tower_activating.gd" id="7_7sm4a"]
 [ext_resource type="Script" uid="uid://dmwx3uw5idgyu" path="res://scripts/statemachine/signal_tower/signal_tower_activated.gd" id="8_7pjg8"]
+[ext_resource type="Resource" uid="uid://b4cf2uvi61l38" path="res://resources/build_cost/tower_build_cost.tres" id="8_ttv65"]
+[ext_resource type="Script" uid="uid://cvvjmd111w8gg" path="res://scripts/statemachine/signal_tower/signal_tower_built.gd" id="9_7pjg8"]
+[ext_resource type="Script" uid="uid://bsygloyl2g4dg" path="res://scripts/statemachine/signal_tower/signal_tower_destroyed.gd" id="12_7pjg8"]
+[ext_resource type="AudioStream" uid="uid://ch350sjdjwf43" path="res://assets/sounds/interact_positive.wav" id="13_rbpc3"]
+[ext_resource type="AudioStream" uid="uid://bi353olrhwhtq" path="res://assets/sounds/interact_negative.wav" id="14_1xhvv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vfw1"]
 radius = 64.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbpc3"]
+
 [node name="SignalTower" type="Node2D" unique_id=1173751079]
 script = ExtResource("1_qh3gv")
+multi_tool_stats = ExtResource("2_1xhvv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=472686034]
-texture = ExtResource("1_u15ln")
+texture = ExtResource("2_gxh6q")
+hframes = 5
+vframes = 2
 
 [node name="InteractableComponent" parent="." unique_id=254912776 instance=ExtResource("3_beg84")]
 collision_layer = 16
@@ -29,14 +41,54 @@ shape = SubResource("CircleShape2D_8vfw1")
 initial_State = NodePath("Deactivated")
 show_state = true
 
-[node name="Deactivated" parent="StateMachine" unique_id=394219668 instance=ExtResource("5_gxh6q")]
+[node name="Deactivated" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("interactable_component", "sprite", "interact_positive_sound", "interact_negative_sound") instance=ExtResource("5_gxh6q")]
 script = ExtResource("6_76jeg")
+interactable_component = NodePath("../../InteractableComponent")
+sprite = NodePath("../../Sprite2D")
+player_materials = ExtResource("7_7pjg8")
+build_cost = ExtResource("8_ttv65")
+interact_positive_sound = NodePath("../../InteractPositiveSound")
+interact_negative_sound = NodePath("../../InteractNegativeSound")
 
-[node name="Activating" parent="StateMachine" unique_id=1520479396 instance=ExtResource("5_gxh6q")]
+[node name="Built" type="Node2D" parent="StateMachine" unique_id=1470737266 node_paths=PackedStringArray("interactable_component", "sprite", "interact_positive_sound")]
+script = ExtResource("9_7pjg8")
+interactable_component = NodePath("../../InteractableComponent")
+sprite = NodePath("../../Sprite2D")
+interact_positive_sound = NodePath("../../InteractPositiveSound")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Activating" parent="StateMachine" unique_id=1520479396 node_paths=PackedStringArray("tower", "sprite") instance=ExtResource("5_gxh6q")]
 script = ExtResource("7_7sm4a")
-
-[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("tower") instance=ExtResource("5_gxh6q")]
-script = ExtResource("8_7pjg8")
 tower = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+timer = 5.0
+
+[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("sprite") instance=ExtResource("5_gxh6q")]
+script = ExtResource("8_7pjg8")
+sprite = NodePath("../../Sprite2D")
+
+[node name="Timer" type="Timer" parent="StateMachine/Activated" unique_id=1366479681]
+
+[node name="Destroyed" type="Node2D" parent="StateMachine" unique_id=1914031296]
+script = ExtResource("12_7pjg8")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="InteractPositiveSound" type="AudioStreamPlayer" parent="." unique_id=850220205]
+stream = ExtResource("13_rbpc3")
+
+[node name="InteractNegativeSound" type="AudioStreamPlayer" parent="." unique_id=142639550]
+stream = ExtResource("14_1xhvv")
+
+[node name="PlaceableZone" type="Area2D" parent="." unique_id=1069832887]
+collision_layer = 16
+collision_mask = 2
+input_pickable = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceableZone" unique_id=8843304]
+shape = SubResource("CircleShape2D_rbpc3")
+disabled = true
 
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Deactivated" method="_on_interactable_component_interacted"]
+[connection signal="interacted" from="InteractableComponent" to="StateMachine/Built" method="_on_interactable_component_interacted"]
+[connection signal="timeout" from="StateMachine/Activated/Timer" to="StateMachine/Activated" method="_on_timer_timeout"]

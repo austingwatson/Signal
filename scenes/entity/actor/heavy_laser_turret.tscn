@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://df4x4sqprdj4i"]
+
+[ext_resource type="PackedScene" uid="uid://belpdqvrcm8si" path="res://scenes/component/turret_animation_component.tscn" id="1_eegg2"]
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="1_ejtpq"]
+[ext_resource type="Resource" uid="uid://bbsc72mytntv6" path="res://resources/damage/heavy_laser_turret_damage.tres" id="2_dg0qe"]
+[ext_resource type="PackedScene" uid="uid://bk1micxiubh34" path="res://scenes/component/follow_component.tscn" id="3_dg0qe"]
+
+[node name="HeavyLaserTurret" type="Node2D" unique_id=594507847]
+
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("1_ejtpq")]
+damage = ExtResource("2_dg0qe")
+
+[node name="TurretAnimationComponent" parent="." unique_id=1294433927 instance=ExtResource("1_eegg2")]
+base_frame = 30
+gun_frame = 32
+
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent") instance=ExtResource("3_dg0qe")]
+parent = NodePath("..")
+offset = Vector2(32, 0)

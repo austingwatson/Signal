@@ -7,3 +7,4 @@ extends Resource
 @export var distance_worth := 0.0
 @export var slow_ping := 0.0
 @export var fast_ping := 0.0
+@export var placement_range := 0.0

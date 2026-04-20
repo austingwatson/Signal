@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildCost" format=3 uid="uid://c4we0udbicjhy"]
+
+[ext_resource type="Script" uid="uid://b1mv6uia32n0y" path="res://resources/build_cost/build_cost.gd" id="1_hfwnn"]
+[ext_resource type="Texture2D" uid="uid://bpjwg4v8t55ce" path="res://assets/textures/actors/temp.png" id="1_ymsu5"]
+[ext_resource type="PackedScene" uid="uid://df4x4sqprdj4i" path="res://scenes/entity/actor/heavy_laser_turret.tscn" id="3_ap7qc"]
+
+[resource]
+script = ExtResource("1_hfwnn")
+spawn_scene = ExtResource("3_ap7qc")
+icon = ExtResource("1_ymsu5")
+metal_cost = 1
+power_cell_cost = 1
+metadata/_custom_type_script = "uid://b1mv6uia32n0y"

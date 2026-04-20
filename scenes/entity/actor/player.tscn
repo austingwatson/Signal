@@ -130,7 +130,7 @@ animations = [{
 size = Vector2(16, 28)
 
 [node name="Player" type="CharacterBody2D" unique_id=6415582]
-z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_8l8co")
 
@@ -163,7 +163,7 @@ multi_tool = NodePath("../../MultiTool")
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=1245282860]
 collision_layer = 2
-collision_mask = 16
+collision_mask = 24
 input_pickable = false
 monitorable = false
 
@@ -177,7 +177,6 @@ autoplay = "idle"
 frame_progress = 0.45200092
 
 [node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
-z_index = -1
 
 [node name="BuildMenu" parent="." unique_id=533637646 node_paths=PackedStringArray("player") instance=ExtResource("11_eybgf")]
 player = NodePath("..")
