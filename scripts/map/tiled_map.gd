@@ -21,6 +21,7 @@ const HEAVY_ATLAS := Vector2i(21, 11)
 @export var chunk_library: Array[PackedScene] = []
 @export var map_size := Vector2i.ZERO
 @export var towers_amount := 0
+@export var starting_chunk: PackedScene
 
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
@@ -73,7 +74,7 @@ func _process(_delta: float) -> void:
 func build_world() -> void:
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
-			world = generator.build_world(chunk_library, map_size.x, map_size.y, towers_amount)
+			world = generator.build_world(starting_chunk, chunk_library, map_size.x, map_size.y, towers_amount)
 	)
 	
 func merge_chunks() -> void:

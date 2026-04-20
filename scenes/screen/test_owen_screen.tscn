@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b4xhqwiqij3um" path="res://scripts/screen/test_owen_screen.gd" id="1_4bj0y"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_qpjqw"]
 [ext_resource type="PackedScene" uid="uid://c1wgphpucjeip" path="res://scenes/map/chunk/rocky_1.tscn" id="2_4bj0y"]
+[ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="4_0fqic"]
+[ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="5_wlejl"]
 
 [node name="TestOwenScreen" type="Node2D" unique_id=1606319731]
 y_sort_enabled = true
@@ -10,9 +12,14 @@ script = ExtResource("1_4bj0y")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_qpjqw")]
 debug_flow = false
+debug_cableflow = false
 chunk_library = Array[PackedScene]([ExtResource("2_4bj0y")])
 map_size = Vector2i(5, 5)
 towers_amount = 2
+starting_chunk = ExtResource("4_0fqic")
 
 [node name="Entities" type="Node2D" parent="." unique_id=251786479]
 y_sort_enabled = true
+
+[node name="Player" parent="Entities" unique_id=6415582 instance=ExtResource("5_wlejl")]
+position = Vector2(285, 542)

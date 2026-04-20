@@ -12,10 +12,12 @@ var chunk_library: Array[PackedScene] = []
 # ---------------------------------------------------------
 # PUBLIC: Build a fully connected world with goals
 # ---------------------------------------------------------
-func build_world(chunk_library: Array[PackedScene], chunk_w: int, chunk_h: int, goal_count: int) -> Array:
+func build_world(starting_chunk: PackedScene, chunk_library: Array[PackedScene], chunk_w: int, chunk_h: int, goal_count: int) -> Array:
 	self.chunk_library = chunk_library
 	
-	var world := generate_base_world(chunk_w, chunk_h)
+	var world := create_world_array(chunk_w, chunk_h)
+	world[0][0] = starting_chunk.instantiate()
+	generate_base_world(world, chunk_w, chunk_h)
 	ensure_world_connectivity(world)
 	place_goals(world, goal_count)
 
@@ -25,16 +27,16 @@ func build_world(chunk_library: Array[PackedScene], chunk_w: int, chunk_h: int, 
 # ---------------------------------------------------------
 # BASE WORLD GENERATION
 # ---------------------------------------------------------
-func generate_base_world(chunk_w: int, chunk_h: int) -> Array:
+func create_world_array(chunk_w: int, chunk_h: int) -> Array:
 	var world := []
 	for y in range(chunk_h):
 		world.append([])
 		for x in range(chunk_w):
 			world[y].append(null)
+	return world
 
-	# Starting chunk must be valid for (0,0)
-	world[0][0] = get_valid_starting_chunk()
 
+func generate_base_world(world: Array, chunk_w: int, chunk_h: int) -> Array:
 	for y in range(chunk_h):
 		for x in range(chunk_w):
 			if world[y][x] == null:
