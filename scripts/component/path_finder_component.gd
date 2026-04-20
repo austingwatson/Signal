@@ -9,7 +9,7 @@ extends Node2D
 @export var character_movement_component: CharacterMovementComponent
 
 var flow_field: FlowField = preload("res://scripts/map/flow_field.tres")
-var use_flowfield := true
+var use_flowfield := false
 
 var current_tile := Vector2i.ZERO
 var final_tile := Vector2i.ZERO

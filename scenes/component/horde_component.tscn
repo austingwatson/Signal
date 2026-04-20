@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cpqpr8ump3drn"]
+
+[ext_resource type="Script" uid="uid://dpeld6j7kf3h2" path="res://scripts/component/horde_component.gd" id="1_5wmyu"]
+
+[node name="HordeComponent" type="Node2D" unique_id=423054986]
+script = ExtResource("1_5wmyu")
+
+[node name="Timer" type="Timer" parent="." unique_id=109015247]
+wait_time = 60.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

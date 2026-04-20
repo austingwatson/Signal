@@ -5,6 +5,7 @@ signal added_power_cell(amount: int)
 signal activate_tower(tower)
 signal deactivate_tower(tower)
 signal flow_field_done
+signal ping_changed(distance: float, angle: float)
 
 
 func call_added_metal(amount: int) -> void:
@@ -25,3 +26,7 @@ func call_deactivate_tower(tower) -> void:
 
 func call_flow_field_done() -> void:
 	flow_field_done.emit()
+	
+
+func call_ping_changed(distance: float, angle: float) -> void:
+	ping_changed.emit(distance, angle)

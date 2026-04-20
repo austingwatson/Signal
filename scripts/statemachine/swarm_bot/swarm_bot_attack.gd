@@ -9,7 +9,8 @@ func enter(data: Dictionary) -> void:
 	var target = data["target"]
 	set_animation(target.global_position)
 	await get_tree().create_timer(damage.cooldown).timeout
-	statemachine.enter_state("Move")
+	if statemachine.current_state.name == "Attack":
+		statemachine.enter_state("Move")
 	
 
 func set_animation(target: Vector2) -> void:

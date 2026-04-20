@@ -90,49 +90,54 @@ func finish_loading() -> void:
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
 			var towers = spawn_towers(world)
+			print(towers)
 			spawn_materials()
 			free_world(world)
 			spawn.queue_free()
 			flow_field.setup(ground, wall, clutter)
 			cable_flowfield.setup(ground, wall, clutter)
-			create_cableflowfield(towers)
+			#create_cableflowfield(towers)
 	)
 	
 
 func spawn_towers(world: Array) -> Array:
+	var candidates: Array[Vector2] = []
+	for cell in spawn.get_used_cells():
+		var atlas_coords: Vector2i = spawn.get_cell_atlas_coords(cell)
+		if atlas_coords == null:
+			continue
+		
+		if atlas_coords == TOWER_ATLAS:
+			var world_pos: Vector2 = spawn.map_to_local(cell)
+			candidates.append(world_pos)
+	
+	var chosen: Array[Vector2] = []
+	chosen.append(candidates.pick_random())
+	
+	while chosen.size() < towers_amount and candidates.size() > 0:
+		var best_pos: Vector2 = Vector2.ZERO
+		var best_dist := -1.0
+		
+		for pos in candidates:
+			var min_dist := INF
+			for c in chosen:
+				var d := pos.distance_to(c)
+				if d < min_dist:
+					min_dist = d
+			if min_dist > best_dist:
+				best_dist = min_dist
+				best_pos = pos
+		chosen.append(best_pos)
+		candidates.erase(best_pos)
+	
 	var tower_scene := preload("res://scenes/entity/signal_tower.tscn")
 	var towers = []
-
-	for y in range(world.size()):
-		for x in range(world[y].size()):
-			var chunk: Chunk = world[y][x]
-
-			if chunk.is_goal_chunk:
-				var tower = tower_scene.instantiate()
-				var placed_tower = false
-				
-				if chunk.spawn != null:
-					var cells := chunk.spawn.get_used_cells()
-					for cell in cells:
-						var atlas_coords := chunk.spawn.get_cell_atlas_coords(cell)
-						if atlas_coords == null:
-							continue
-						
-						if atlas_coords == TOWER_ATLAS:
-							var pos := chunk.spawn.map_to_local(cell)
-							tower.global_position = pos
-							placed_tower = true
-							break
-				
-				if not placed_tower:
-					var chunk_size = chunk.get_chunk_pixel_size()
-					tower.global_position = Vector2(
-						x * chunk_size.x + chunk_size.x * 0.5,
-						y * chunk_size.y + chunk_size.y * 0.5
-					)
-
-				towers.append(tower)
-				EntityManager.call_deferred("add_entity", tower)
+	
+	for c in chosen:
+		var tower: Node = tower_scene.instantiate()
+		tower.global_position = c
+		towers.append(tower)
+		EntityManager.add_entity(tower)
 
 	return towers
 
@@ -174,6 +179,7 @@ func free_world(world: Array) -> void:
 			if chunk.ground: chunk.ground.free()
 			if chunk.wall: chunk.wall.free()
 			if chunk.clutter: chunk.clutter.free()
+			if chunk.spawn: chunk.spawn.free()
 
 			chunk.free()
 			world[y][x] = null
@@ -198,7 +204,7 @@ func create_flowfield(towers: Array) -> void:
 func create_cableflowfield(towers: Array) -> void:
 	var destinations: Array[Vector2] = []
 	for tower in towers:
-		destinations.append(tower.get_node("TowerBase").global_position)
+		destinations.append(tower.global_position)
 	
 	cable_flowfield.created = false
 	cable_flowfield.compute_cost_field(destinations)

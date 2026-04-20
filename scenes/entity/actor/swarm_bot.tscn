@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://2n5i024q8yrb"]
 
+[ext_resource type="PackedScene" uid="uid://cpqpr8ump3drn" path="res://scenes/component/horde_component.tscn" id="1_jw7cw"]
 [ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="3_go354"]
 [ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="4_a4epf"]
 [ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
@@ -179,6 +180,10 @@ movement_resource = ExtResource("4_v22q0")
 [node name="PathFinderComponent" parent="." unique_id=1643619407 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("4_a4epf")]
 character_movement_component = NodePath("../CharacterMovementComponent")
 
+[node name="HordeComponent" parent="." unique_id=423054986 node_paths=PackedStringArray("entity", "path_finder_component") instance=ExtResource("1_jw7cw")]
+entity = NodePath("..")
+path_finder_component = NodePath("../PathFinderComponent")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=409628201]
 shape = SubResource("RectangleShape2D_go354")
 
@@ -192,7 +197,6 @@ shape = SubResource("RectangleShape2D_ccesr")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_xnh8f")]
 initial_State = NodePath("Move")
-show_state = true
 
 [node name="Move" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
 script = ExtResource("10_ftxwb")

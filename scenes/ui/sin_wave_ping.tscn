@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://2q81idsohmc1"]
+
+[ext_resource type="Script" uid="uid://dm8i3mgrvwyxu" path="res://scripts/ui/sin_wave_ping.gd" id="1_vchuu"]
+
+[node name="SinWavePing" type="Node2D" unique_id=217556263]
+z_index = 100
+script = ExtResource("1_vchuu")
+thickness = 2.0
+width = 150.0
+height = 50.0

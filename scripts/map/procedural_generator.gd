@@ -19,7 +19,7 @@ func build_world(starting_chunk: PackedScene, chunk_library: Array[PackedScene],
 	world[0][0] = starting_chunk.instantiate()
 	generate_base_world(world, chunk_w, chunk_h)
 	ensure_world_connectivity(world)
-	place_goals(world, goal_count)
+	#place_goals(world, goal_count)
 
 	return world
 

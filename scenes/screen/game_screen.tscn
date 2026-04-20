@@ -1,3 +1,34 @@
 [gd_scene format=3 uid="uid://pqfxow04cy7"]
 
-[node name="GameScreen" type="Node" unique_id=1985111388]
+[ext_resource type="Script" uid="uid://c6acfus2mow4h" path="res://scripts/screen/test_level_screen.gd" id="1_kas1x"]
+[ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_u3war"]
+[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="3_tgnp3"]
+[ext_resource type="PackedScene" uid="uid://2q81idsohmc1" path="res://scenes/ui/sin_wave_ping.tscn" id="3_wt73b"]
+[ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="4_tgnp3"]
+[ext_resource type="PackedScene" uid="uid://dfwq5q3l8coag" path="res://scenes/wave/wave_manager.tscn" id="6_0d65i"]
+[ext_resource type="Script" uid="uid://dmuo640pu1y64" path="res://resources/wave/wave.gd" id="7_fvgpv"]
+[ext_resource type="Resource" uid="uid://jsd0jokdfw08" path="res://resources/wave/wave1.tres" id="8_1cwq4"]
+
+[node name="GameScreen" type="Node2D" unique_id=571726642]
+y_sort_enabled = true
+script = ExtResource("1_kas1x")
+
+[node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_u3war")]
+debug_flow = false
+debug_cableflow = false
+chunk_library = Array[PackedScene]([ExtResource("3_tgnp3")])
+map_size = Vector2i(1, 1)
+towers_amount = 1
+starting_chunk = ExtResource("3_tgnp3")
+
+[node name="Entities" type="Node2D" parent="." unique_id=2006379947]
+
+[node name="Player" parent="Entities" unique_id=6415582 instance=ExtResource("4_tgnp3")]
+position = Vector2(285, 542)
+
+[node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
+
+[node name="WaveManager" parent="." unique_id=990001788 instance=ExtResource("6_0d65i")]
+waves = Array[ExtResource("7_fvgpv")]([ExtResource("8_1cwq4")])
+min_dist = 600.0
+max_dist = 1000.0

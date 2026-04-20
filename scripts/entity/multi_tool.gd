@@ -63,6 +63,7 @@ func ping() -> void:
 	var angle_factor: float = clamp(tool_dir.dot(tower_dir), 0.0, 1.0)
 	
 	var signal_strength = (distance_factor * multi_tool_stats.distance_worth) * (angle_factor * multi_tool_stats.angle_worth)
+	GlobalSignals.call_ping_changed(distance_factor, angle_factor)
 	play_ping_sound(signal_strength)
 	
 
