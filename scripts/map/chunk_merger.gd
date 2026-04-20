@@ -1,5 +1,31 @@
 extends Node
 
+var world: Array
+var final_ground: TileMapLayer
+var final_wall: TileMapLayer
+var final_clutter: TileMapLayer
+var final_spawn: TileMapLayer
+
+
+func setup(world: Array, final_ground: TileMapLayer, final_wall: TileMapLayer, final_clutter: TileMapLayer, final_spawn: TileMapLayer) -> void:
+	self.world = world
+	self.final_ground = final_ground
+	self.final_wall = final_wall
+	self.final_clutter = final_clutter
+	self.final_spawn = final_spawn
+
+
+func merge_single_chunk(x: int, y: int) -> void:
+	var chunk = world[y][x]
+	if chunk == null:
+		return
+		
+	var offset = compute_chunk_offset(world, x, y)
+	merge_layer(chunk.ground, final_ground, offset)
+	merge_layer(chunk.wall, final_wall, offset)
+	merge_layer(chunk.clutter, final_clutter, offset)
+	merge_spawn_layer(chunk.spawn, final_spawn, offset, chunk.spawn_chance)
+	
 
 func merge_chunks(world: Array, final_ground: TileMapLayer, final_wall: TileMapLayer, final_clutter: TileMapLayer, final_spawn: TileMapLayer):
 	for y in range(world.size()):

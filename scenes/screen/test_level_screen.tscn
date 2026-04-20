@@ -20,9 +20,10 @@ position = Vector2(235, 176)
 texture = ExtResource("1_p5up1")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_81dx7")]
+debug_flow = false
 chunk_library = Array[PackedScene]([ExtResource("4_pp5kj")])
-map_size = Vector2i(10, 10)
-towers_amount = 1
+map_size = Vector2i(20, 20)
+towers_amount = 5
 
 [node name="Player" parent="." unique_id=366550933 instance=ExtResource("1_kfx0g")]
 position = Vector2(501, 284)

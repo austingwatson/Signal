@@ -1,14 +1,5 @@
 extends Node2D
 
-enum LoadingStep {
-	BUILD_WORLD,
-	MERGE_CHUNKS,
-	SPAWN_OBJECTS,
-	CLEANUP,
-	SETUP_FLOWFIELD,
-	DONE,
-}
-
 const ARROW_UP = Vector2i(3, 0)
 const ARROW_RIGHT = Vector2i(0, 0)
 const ARROW_DOWN = Vector2i(1, 0)
@@ -32,8 +23,8 @@ var world_generator_id := -1
 var flow_field_id := -1
 var towers := []
 
-var loading_step := LoadingStep.BUILD_WORLD
 var world: Array
+var merged_chunks := false
 
 @onready var ground = $Ground
 @onready var wall = $Wall
@@ -55,18 +46,10 @@ func _process(_delta: float) -> void:
 	if world_generator_id != -1 and WorkerThreadPool.is_task_completed(world_generator_id):
 		WorkerThreadPool.wait_for_task_completion(world_generator_id)
 		
-		match loading_step:
-			LoadingStep.BUILD_WORLD:
-				merge_chunks()
-			LoadingStep.MERGE_CHUNKS:
-				spawn_objects()
-			LoadingStep.SPAWN_OBJECTS:
-				cleanup()
-			LoadingStep.CLEANUP:
-				setup_flowfield()
-			LoadingStep.SETUP_FLOWFIELD:
-				world_generator_id = -1
-				loading_step = LoadingStep.DONE
+		world_generator_id = -1
+		if not merged_chunks:
+			merged_chunks = true
+			merge_chunks()
 		
 		
 	if flow_field_id != -1 and WorkerThreadPool.is_task_completed(flow_field_id):
@@ -78,50 +61,28 @@ func _process(_delta: float) -> void:
 			
 
 func build_world() -> void:
-	loading_step = LoadingStep.BUILD_WORLD
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
 			world = generator.build_world(chunk_library, map_size.x, map_size.y, towers_amount)
 	)
 	
 func merge_chunks() -> void:
-	loading_step = LoadingStep.MERGE_CHUNKS
-	
-	merger.merge_chunks(world, ground, wall, clutter, spawn)
-	spawn_objects()
-	return
-	
-	# changing tilemaplayers is not thread safe
-	world_generator_id = WorkerThreadPool.add_task(
-		func():
-			merger.merge_chunks(world, ground, wall, clutter, spawn)
-	)
+	merger.setup(world, ground, wall, clutter, spawn)
+	for y in range(world.size()):
+		for x in range(world[y].size()):
+			merger.merge_single_chunk(x, y)
+			await get_tree().process_frame
+	finish_loading()
 	
 
-func spawn_objects() -> void:
-	loading_step = LoadingStep.SPAWN_OBJECTS
+func finish_loading() -> void:
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
 			var towers = spawn_towers(world)
 			spawn_materials()
-	)
-
-
-func cleanup() -> void:
-	loading_step = LoadingStep.CLEANUP
-	world_generator_id = WorkerThreadPool.add_task(
-		func():
 			free_world(world)
 			spawn.queue_free()
-	)
-	
-
-func setup_flowfield() -> void:
-	loading_step = LoadingStep.SETUP_FLOWFIELD
-	world_generator_id = WorkerThreadPool.add_task(
-		func():
 			flow_field.setup(ground, wall, clutter)
-			#create_flowfield(towers)
 	)
 
 
