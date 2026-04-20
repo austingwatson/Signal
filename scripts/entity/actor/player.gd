@@ -16,8 +16,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 		for interactable in interactables:
 			if is_instance_valid(interactable):
 				interactable.interact()
-	elif Input.is_action_just_pressed("ping"):
+	if Input.is_action_pressed("ping"):
 		multi_tool.ping()
+	else:
+		multi_tool.stop_ping()
 
 
 func _on_interact_component_area_entered(area: Area2D) -> void:

@@ -65,6 +65,13 @@ func ping() -> void:
 	var signal_strength = (distance_factor * multi_tool_stats.distance_worth) * (angle_factor * multi_tool_stats.angle_worth)
 	GlobalSignals.call_ping_changed(distance_factor, angle_factor)
 	play_ping_sound(signal_strength)
+	if not ping_sound.playing:
+		ping_sound.playing = true
+	
+
+func stop_ping() -> void:
+	GlobalSignals.call_ping_changed(0.0, 0.0)
+	ping_sound.playing = false
 	
 
 func shoot() -> void:
@@ -89,12 +96,10 @@ func find_closest_signal_tower() -> InteractableComponent:
 
 func play_ping_sound(signal_strength) -> void:
 	if signal_strength > 0.0:
-		ping_sound.volume_db = 0
 		ping_sound.pitch_scale = lerp(multi_tool_stats.slow_ping, multi_tool_stats.fast_ping, signal_strength)
-		ping_sound.play()
+		#ping_sound.play()
 	else:
-		ping_sound.volume_db = -80
-		ping_sound.play()
+		ping_sound.pitch_scale = 1.0
 
 
 func _on_ping_range_area_entered(area: Area2D) -> void:

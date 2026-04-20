@@ -33,8 +33,6 @@ damage = ExtResource("6_2uwa8")
 
 [node name="PingSound" type="AudioStreamPlayer" parent="." unique_id=560716390]
 stream = ExtResource("4_pr2jc")
-volume_db = -80.0
-autoplay = true
 
 [node name="PingRange" type="Area2D" parent="." unique_id=254320029]
 collision_layer = 2
