@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://c5j71fm2muei6"]
 
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_qpjqw"]
-[ext_resource type="PackedScene" uid="uid://8cslt24kwe3d" path="res://scenes/map/chunk/test/test_tower_chunk_all.tscn" id="2_30kwr"]
+[ext_resource type="PackedScene" uid="uid://c1wgphpucjeip" path="res://scenes/map/chunk/rocky_1.tscn" id="2_4bj0y"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="2_asqvj"]
 
 [node name="TestOwenScreen" type="Node2D" unique_id=1606319731]
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_qpjqw")]
 debug_flow = false
-chunk_library = Array[PackedScene]([ExtResource("2_30kwr")])
+chunk_library = Array[PackedScene]([ExtResource("2_4bj0y")])
 map_size = Vector2i(5, 5)
 towers_amount = 2
 

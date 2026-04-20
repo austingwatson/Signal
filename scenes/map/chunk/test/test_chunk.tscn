@@ -161,6 +161,7 @@ sources/0 = SubResource("TileSetAtlasSource_evu85")
 sources/1 = SubResource("TileSetAtlasSource_6d8ck")
 
 [node name="TestChunk" unique_id=1205568769 node_paths=PackedStringArray("ground", "wall", "spawn") instance=ExtResource("1_ty058")]
+y_sort_enabled = true
 exits = {
 "down": true,
 "left": true,
@@ -177,6 +178,8 @@ tile_map_data = PackedByteArray("AAD5//z/AQAIAAAAAAD5//3/AQAIAAAAAAD5//7/AQAIAAA
 tile_set = SubResource("TileSet_smt2d")
 
 [node name="Wall" type="TileMapLayer" parent="." index="1" unique_id=1201904116]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAAYAAQAIAAMAAAAHAAIAAQAIAAMAAAAQAAYAAQAIAAMAAAALAAgAAQAIAAMAAAADAAoAAQAAAAMAAAAEAAoAAQACAAQAAAAFAAoAAQADAAQAAAAGAAkAAQAAAAEAAAAGAAgAAQAAAAEAAAAGAAcAAQAAAAAAAAAHAAcAAQACAAAAAAAHAAgAAQAEAAMAAAAIAAgAAQACAAAAAAAIAAkAAQACAAEAAAAIAAoAAQAGAAQAAAAIAAsAAQAAAAIAAAAJAAsAAQADAAUAAAAKAAsAAQABAAMAAAALAAoAAQADAAAAAAALAAsAAQAFAAEAAAAJAAoAAQACAAAAAAAHAAoAAQABAAIAAAAGAAoAAQACAAUAAAAHAAkAAQABAAEAAAAFAAsAAQACAAIAAAAEAAsAAQAAAAIAAAABAAkAAQADAAMAAAA=")
 tile_set = ExtResource("3_evu85")
 
 [node name="Spawn" type="TileMapLayer" parent="." index="2" unique_id=1250416085]
