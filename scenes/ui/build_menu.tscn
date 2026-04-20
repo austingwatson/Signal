@@ -4,9 +4,18 @@
 [ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="2_qecuw"]
 [ext_resource type="Script" uid="uid://b1mv6uia32n0y" path="res://resources/build_cost/build_cost.gd" id="2_xaliy"]
 [ext_resource type="Resource" uid="uid://ck7vw417s5gmp" path="res://resources/build_cost/laser_turret_build_cost.tres" id="3_qecuw"]
-[ext_resource type="Resource" uid="uid://c4we0udbicjhy" path="res://resources/build_cost/heavy_laser_turret_build_cost.tres" id="5_ndvqu"]
+[ext_resource type="Resource" uid="uid://b4cf2uvi61l38" path="res://resources/build_cost/tower_build_cost.tres" id="5_ndvqu"]
+[ext_resource type="Resource" uid="uid://b7pu7c4cami34" path="res://resources/build_cost/slow_turret_build_cost.tres" id="6_glshs"]
+[ext_resource type="Resource" uid="uid://cp7koriqvwk76" path="res://resources/build_cost/repair_turret_build_cost.tres" id="7_y4a0p"]
+[ext_resource type="Script" uid="uid://b2013ibmlhhji" path="res://scripts/ui/icon.gd" id="8_ki8b7"]
+[ext_resource type="Resource" uid="uid://dwbkpu68m5obx" path="res://scripts/ui/laser_turret_icon.tres" id="9_rsfk2"]
+[ext_resource type="Resource" uid="uid://c8el3v0wyaiyp" path="res://scripts/ui/heavy_laser_turret_icon.tres" id="10_xeivn"]
+[ext_resource type="Resource" uid="uid://ocsfsiitjc2p" path="res://scripts/ui/slow_turret_icon.tres" id="11_nsuv0"]
+[ext_resource type="Resource" uid="uid://drqq2cnsgpqtn" path="res://scripts/ui/repair_turret_icon.tres" id="12_1esf6"]
 
 [node name="BuildMenu" type="Node2D" unique_id=533637646]
+z_index = 100
 script = ExtResource("1_3xaa5")
 player_materials = ExtResource("2_qecuw")
-build_costs = Array[ExtResource("2_xaliy")]([ExtResource("3_qecuw"), ExtResource("5_ndvqu")])
+build_costs = Array[ExtResource("2_xaliy")]([ExtResource("3_qecuw"), ExtResource("5_ndvqu"), ExtResource("6_glshs"), ExtResource("7_y4a0p")])
+icons = Array[ExtResource("8_ki8b7")]([ExtResource("9_rsfk2"), ExtResource("10_xeivn"), ExtResource("11_nsuv0"), ExtResource("12_1esf6")])

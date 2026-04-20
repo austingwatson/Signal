@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://554jumrwdtml"]
+
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="1_p61g7"]
+[ext_resource type="Resource" uid="uid://i3jthuy50g1x" path="res://resources/damage/slow_turret_damage.tres" id="2_0f705"]
+[ext_resource type="PackedScene" uid="uid://bk1micxiubh34" path="res://scenes/component/follow_component.tscn" id="3_lmbs8"]
+[ext_resource type="PackedScene" uid="uid://belpdqvrcm8si" path="res://scenes/component/turret_animation_component.tscn" id="4_61qi3"]
+[ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="4_f3hk6"]
+
+[node name="SlowTurret" type="Node2D" unique_id=273806838]
+modulate = Color(1, 1, 1, 0.49803922)
+
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("1_p61g7")]
+collision_layer = 2
+collision_mask = 4
+damage = ExtResource("2_0f705")
+
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component") instance=ExtResource("3_lmbs8")]
+parent = NodePath("..")
+offset = Vector2(32, 0)
+detection_component = NodePath("../DetectionComponent")
+player_materials = ExtResource("4_f3hk6")
+build_cost_path = "uid://b7pu7c4cami34"
+
+[node name="TurretAnimationComponent" parent="." unique_id=1294433927 instance=ExtResource("4_61qi3")]
+base_frame = 60
+gun_frame = 62

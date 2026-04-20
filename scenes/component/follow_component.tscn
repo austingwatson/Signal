@@ -2,5 +2,21 @@
 
 [ext_resource type="Script" uid="uid://cvu2okdpokrkp" path="res://scripts/component/follow_component.gd" id="1_nlav3"]
 
-[node name="FollowComponent" type="Node2D" unique_id=1204676905]
+[sub_resource type="CircleShape2D" id="CircleShape2D_nlav3"]
+radius = 1.0
+
+[node name="FollowComponent" type="Node2D" unique_id=1204676905 groups=["follow"]]
 script = ExtResource("1_nlav3")
+offset = null
+
+[node name="PossiblePlacement" type="Area2D" parent="." unique_id=1068587610]
+collision_layer = 2
+collision_mask = 32
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PossiblePlacement" unique_id=1093758016]
+shape = SubResource("CircleShape2D_nlav3")
+
+[connection signal="area_entered" from="PossiblePlacement" to="." method="_on_possible_placement_area_entered"]
+[connection signal="area_exited" from="PossiblePlacement" to="." method="_on_possible_placement_area_exited"]

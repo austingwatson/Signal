@@ -63,9 +63,10 @@ tower = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 timer = 5.0
 
-[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("sprite") instance=ExtResource("5_gxh6q")]
+[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("sprite", "collision_shape") instance=ExtResource("5_gxh6q")]
 script = ExtResource("8_7pjg8")
 sprite = NodePath("../../Sprite2D")
+collision_shape = NodePath("../../PlaceableZone/CollisionShape2D")
 
 [node name="Timer" type="Timer" parent="StateMachine/Activated" unique_id=1366479681]
 
@@ -80,7 +81,7 @@ stream = ExtResource("13_rbpc3")
 stream = ExtResource("14_1xhvv")
 
 [node name="PlaceableZone" type="Area2D" parent="." unique_id=1069832887]
-collision_layer = 16
+collision_layer = 32
 collision_mask = 2
 input_pickable = false
 monitoring = false

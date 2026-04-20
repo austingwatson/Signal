@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildCost" format=3 uid="uid://cp7koriqvwk76"]
+
+[ext_resource type="Texture2D" uid="uid://dbw680h8t7ifl" path="res://assets/textures/environment/pickup_metal.png" id="1_avn6y"]
+[ext_resource type="Script" uid="uid://b1mv6uia32n0y" path="res://resources/build_cost/build_cost.gd" id="1_vlfj1"]
+[ext_resource type="PackedScene" uid="uid://bbkuyvav3urmg" path="res://scenes/entity/actor/repair_turret.tscn" id="3_x2nwh"]
+
+[resource]
+script = ExtResource("1_vlfj1")
+spawn_scene = ExtResource("3_x2nwh")
+icon = ExtResource("1_avn6y")
+metal_cost = 1
+power_cell_cost = 1
+metadata/_custom_type_script = "uid://b1mv6uia32n0y"

@@ -170,13 +170,13 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1285492473]
 shape = SubResource("CircleShape2D_v7w8l")
 
+[node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
 sprite_frames = SubResource("SpriteFrames_ka65a")
 animation = &"move"
 autoplay = "idle"
 frame_progress = 0.45200092
-
-[node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
 
 [node name="BuildMenu" parent="." unique_id=533637646 node_paths=PackedStringArray("player") instance=ExtResource("11_eybgf")]
 player = NodePath("..")

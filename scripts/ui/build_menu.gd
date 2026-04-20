@@ -5,6 +5,7 @@ extends Node2D
 @export var player_materials: PlayerMaterials
 @export var radius := 150.0
 @export var build_costs: Array[BuildCost] = []   # one icon per slice
+@export var icons: Array[Icon] = []
 @export var line_color := Color.WHITE
 @export var line_width := 3.0
 
@@ -24,10 +25,10 @@ func _unhandled_input(event):
 		hovered_slice = get_slice_from_pos(to_local(get_global_mouse_position()))
 		queue_redraw()
 
-	if event is InputEventMouseButton and event.pressed:
+	if Input.is_action_just_pressed("shoot"):
 		var i = get_slice_from_pos(to_local(get_global_mouse_position()))
 		if i != -1:
-			try_to_buy(build_costs[i])
+			try_to_buy(i, build_costs[i])
 			
 
 func _draw():
@@ -44,7 +45,7 @@ func _draw():
 		# Icon
 		var mid_angle = start_angle + angle_step * 0.5
 		var pos = Vector2(cos(mid_angle), sin(mid_angle)) * (radius * 0.55)
-		var tex = build_costs[i].icon
+		var tex = icons[i].icon
 		var tex_size = tex.get_size() * 0.5
 		draw_texture(tex, pos - tex_size)
 		
@@ -59,6 +60,10 @@ func open() -> void:
 	visible = true
 	set_process_unhandled_input(true)
 	
+	var follows := get_tree().get_nodes_in_group("follow")
+	for follow in follows:
+		follow.refund()
+	
 
 func close() -> void:
 	visible = false
@@ -66,10 +71,10 @@ func close() -> void:
 	
 
 # TODO Need to make it to where the turret you buy follows until you press interact to place it
-func try_to_buy(build_cost: BuildCost) -> void:
+func try_to_buy(i: int, build_cost: BuildCost) -> void:
 	if player_materials.can_afford(build_cost):
 		player_materials.buy(build_cost)
-		var spawn := build_cost.spawn_scene.instantiate()
+		var spawn := icons[i].spawn_scene.instantiate()
 		spawn.global_position = global_position
 		if spawn.has_node("FollowComponent"):
 			spawn.get_node("FollowComponent").follow(player.get_node("MultiTool"))

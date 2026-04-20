@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="Health" format=3 uid="uid://ctmrrus0k6wnf"]
+[gd_resource type="Resource" script_class="HealthResource" format=3 uid="uid://ctmrrus0k6wnf"]
 
 [ext_resource type="Script" uid="uid://dal3cka5x8gbu" path="res://resources/health/health_resource.gd" id="1_am7iq"]
 
 [resource]
 script = ExtResource("1_am7iq")
 max_health = 1
-health = 1
+dead_body_timer = 5.0
 metadata/_custom_type_script = "uid://dal3cka5x8gbu"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Icon" format=3 uid="uid://ocsfsiitjc2p"]
+
+[ext_resource type="Script" uid="uid://b2013ibmlhhji" path="res://scripts/ui/icon.gd" id="1_1w2r3"]
+[ext_resource type="Texture2D" uid="uid://bxwdskywuufvj" path="res://assets/textures/icon_temp.png" id="1_bv0p0"]
+[ext_resource type="PackedScene" uid="uid://554jumrwdtml" path="res://scenes/entity/actor/slow_turret.tscn" id="3_rrlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kifuf"]
+atlas = ExtResource("1_bv0p0")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+script = ExtResource("1_1w2r3")
+spawn_scene = ExtResource("3_rrlas")
+icon = SubResource("AtlasTexture_kifuf")
+metadata/_custom_type_script = "uid://b2013ibmlhhji"

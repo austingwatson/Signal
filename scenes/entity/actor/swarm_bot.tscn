@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://2n5i024q8yrb"]
 
-[ext_resource type="Script" uid="uid://bweo61unng8n6" path="res://scripts/entity/actor/swarm_bot.gd" id="1_bdp4e"]
-[ext_resource type="Texture2D" uid="uid://c4myxeehdgoiv" path="res://assets/textures/actors/swarm_bot.png" id="1_g12pr"]
 [ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="3_go354"]
 [ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="4_a4epf"]
 [ext_resource type="Resource" uid="uid://cwxqo13w1wgln" path="res://resources/movement/swarm_bot_movement.tres" id="4_v22q0"]
@@ -11,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_qsfr4"]
 [ext_resource type="Script" uid="uid://ccpjc5jk1unpp" path="res://scripts/statemachine/swarm_bot/swarm_bot_move.gd" id="10_ftxwb"]
 [ext_resource type="Script" uid="uid://c5xosswu48022" path="res://scripts/statemachine/swarm_bot/swarm_bot_attack.gd" id="11_fjskr"]
+[ext_resource type="Script" uid="uid://cvgrwqpjadro7" path="res://scripts/statemachine/state.gd" id="12_fjskr"]
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="12_qsfr4"]
+[ext_resource type="Texture2D" uid="uid://wnwil5ylhkrj" path="res://assets/textures/actors/swarm_bot_sheet.png" id="13_fjskr"]
 [ext_resource type="Resource" uid="uid://dljffugaqqlic" path="res://resources/damage/swarm_bot_damage.tres" id="13_ftxwb"]
+[ext_resource type="PackedScene" uid="uid://6vghp7vjlut" path="res://scenes/component/dead_component.tscn" id="15_jw7cw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
 size = Vector2(8, 8)
@@ -20,13 +21,156 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccesr"]
 size = Vector2(16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw7cw"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb6w1"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8sly"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftxwb"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xam73"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84ynr"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg4e1"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjskr"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrjxc"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kujks"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chgfy"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0b6j"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfa8w"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trw6q"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtri3"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwwj4"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wchbn"]
+atlas = ExtResource("13_fjskr")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oensx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw7cw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb6w1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8sly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftxwb")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xam73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84ynr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg4e1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjskr")
+}],
+"loop": false,
+"name": &"attack_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrjxc")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kujks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chgfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0b6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfa8w")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trw6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtri3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwwj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wchbn")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 10.0
+}]
+
 [node name="SwarmBot" type="CharacterBody2D" unique_id=2130898442 groups=["enemy"]]
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_bdp4e")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=345711066]
-texture = ExtResource("1_g12pr")
 
 [node name="CharacterMovementComponent" parent="." unique_id=371240637 node_paths=PackedStringArray("character") instance=ExtResource("3_go354")]
 character = NodePath("..")
@@ -50,15 +194,22 @@ shape = SubResource("RectangleShape2D_ccesr")
 initial_State = NodePath("Move")
 show_state = true
 
-[node name="Move" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component") instance=ExtResource("9_qsfr4")]
+[node name="Move" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
 script = ExtResource("10_ftxwb")
 path_finder_component = NodePath("../../PathFinderComponent")
 detection_component = NodePath("../../DetectionComponent")
 character_movement_component = NodePath("../../CharacterMovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Attack" type="Node2D" parent="StateMachine" unique_id=791013401]
+[node name="Attack" type="Node2D" parent="StateMachine" unique_id=791013401 node_paths=PackedStringArray("swarm_bot", "animated_sprite")]
 script = ExtResource("11_fjskr")
+swarm_bot = NodePath("../..")
 damage = ExtResource("13_ftxwb")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Dead" type="Node2D" parent="StateMachine" unique_id=462982809]
+script = ExtResource("12_fjskr")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("12_qsfr4")]
@@ -66,4 +217,15 @@ collision_layer = 4
 collision_mask = 2
 damage = ExtResource("13_ftxwb")
 
-[connection signal="dead" from="HurtBox" to="." method="_on_hurt_box_dead"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2073027454]
+sprite_frames = SubResource("SpriteFrames_oensx")
+animation = &"dead"
+autoplay = "move"
+
+[node name="DeadComponent" parent="." unique_id=1742267470 node_paths=PackedStringArray("node_to_remove", "hurt_box", "state_machine", "animated_sprite", "collisions") instance=ExtResource("15_jw7cw")]
+node_to_remove = NodePath("..")
+hurt_box = NodePath("../HurtBox")
+health_resource = ExtResource("7_dqpqo")
+state_machine = NodePath("../StateMachine")
+animated_sprite = NodePath("../AnimatedSprite2D")
+collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComponent")]

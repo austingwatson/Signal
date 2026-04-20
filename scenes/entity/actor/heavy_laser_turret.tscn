@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="1_ejtpq"]
 [ext_resource type="Resource" uid="uid://bbsc72mytntv6" path="res://resources/damage/heavy_laser_turret_damage.tres" id="2_dg0qe"]
 [ext_resource type="PackedScene" uid="uid://bk1micxiubh34" path="res://scenes/component/follow_component.tscn" id="3_dg0qe"]
+[ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="5_56x4p"]
 
 [node name="HeavyLaserTurret" type="Node2D" unique_id=594507847]
+modulate = Color(1, 1, 1, 0.49803922)
 
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("1_ejtpq")]
 damage = ExtResource("2_dg0qe")
@@ -14,6 +16,9 @@ damage = ExtResource("2_dg0qe")
 base_frame = 30
 gun_frame = 32
 
-[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent") instance=ExtResource("3_dg0qe")]
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component") instance=ExtResource("3_dg0qe")]
 parent = NodePath("..")
 offset = Vector2(32, 0)
+detection_component = NodePath("../DetectionComponent")
+player_materials = ExtResource("5_56x4p")
+build_cost_path = "uid://c4we0udbicjhy"

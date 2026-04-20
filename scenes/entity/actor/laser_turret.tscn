@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bgoyhwqib647g"]
 
-[ext_resource type="Script" uid="uid://c4ndchr1i0stw" path="res://scripts/entity/actor/laser_turret.gd" id="1_luihb"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="2_722y7"]
 [ext_resource type="Script" uid="uid://tu6yuu41c2re" path="res://scripts/statemachine/laser_turret/laser_turret_idle.gd" id="3_cjh2g"]
+[ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="4_j4fhh"]
 [ext_resource type="Script" uid="uid://1af5p5lwsg3x" path="res://scripts/statemachine/laser_turret/laser_turret_attack.gd" id="4_w2hb1"]
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="5_cjh2g"]
 [ext_resource type="Resource" uid="uid://5bb3ipdc4sqr" path="res://resources/damage/laser_turret_damage.tres" id="6_w2hb1"]
@@ -19,16 +19,18 @@ metadata/_custom_type_script = "uid://ctw76fptybv4m"
 
 [node name="LaserTurret" type="Node2D" unique_id=994531285]
 modulate = Color(1, 1, 1, 0.49803922)
-script = ExtResource("1_luihb")
 
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("5_cjh2g")]
 collision_layer = 2
 collision_mask = 12
 damage = SubResource("Resource_j3r1m")
 
-[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent") instance=ExtResource("7_65xdw")]
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component") groups=["follow"] instance=ExtResource("7_65xdw")]
 parent = NodePath("..")
 offset = Vector2(32, 0)
+detection_component = NodePath("../DetectionComponent")
+player_materials = ExtResource("4_j4fhh")
+build_cost_path = "uid://ck7vw417s5gmp"
 
 [node name="TurretAnimationComponent" parent="." unique_id=1294433927 instance=ExtResource("9_j4fhh")]
 gun_frame = 2
@@ -48,5 +50,3 @@ turret = NodePath("../..")
 damage = ExtResource("6_w2hb1")
 turret_animation_component = NodePath("../../TurretAnimationComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
-
-[connection signal="stop_following" from="FollowComponent" to="." method="_on_follow_component_stop_following"]

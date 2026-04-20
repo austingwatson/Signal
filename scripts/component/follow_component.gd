@@ -1,16 +1,31 @@
 class_name FollowComponent
 extends Node2D
 
-signal stop_following
-
 @export var parent: Node2D
 @export var offset := Vector2.ZERO
+@export var detection_component: DetectionComponent
+@export var player_materials: PlayerMaterials
+@export_file("*.tres") var build_cost_path: String
+var build_cost: BuildCost
 var entity: Node2D = null
+var in_tower_range := false
+
+
+func _ready() -> void:
+	build_cost = load(build_cost_path)
+	detection_component.disable()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ping"):
+		refund()
+	
+	if not in_tower_range:
+		return
+	
 	if Input.is_action_just_pressed("shoot"):
-		stop_following.emit()
+		parent.modulate = Color.WHITE
+		detection_component.enable()
 		queue_free()
 
 
@@ -21,5 +36,18 @@ func _physics_process(delta: float) -> void:
 	parent.global_position = entity.global_position + offset.rotated(entity.global_rotation)
 
 
+func refund() -> void:
+	player_materials.refund(build_cost)
+	parent.queue_free()
+
+
 func follow(entity: Node2D) -> void:
 	self.entity = entity
+
+
+func _on_possible_placement_area_entered(_area: Area2D) -> void:
+	in_tower_range = true
+
+
+func _on_possible_placement_area_exited(_area: Area2D) -> void:
+	in_tower_range = false

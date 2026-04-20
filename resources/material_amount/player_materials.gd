@@ -23,3 +23,8 @@ func can_afford(build_cost: BuildCost) -> bool:
 func buy(build_cost: BuildCost) -> void:
 	metal -= build_cost.metal_cost
 	power_cell -= build_cost.power_cell_cost
+
+
+func refund(build_cost: BuildCost) -> void:
+	metal += build_cost.metal_cost
+	power_cell += build_cost.power_cell_cost
