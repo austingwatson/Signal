@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="FlowField" format=3 uid="uid://1nlqmmxidth6"]
+
+[ext_resource type="Script" uid="uid://dqrm4v1tsqqnc" path="res://scripts/map/flow_field.gd" id="1_0suxk"]
+
+[resource]
+script = ExtResource("1_0suxk")
+metadata/_custom_type_script = "uid://dqrm4v1tsqqnc"

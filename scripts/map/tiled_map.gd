@@ -17,6 +17,7 @@ const SWARM_ATLAS := Vector2i(20, 11)
 const HEAVY_ATLAS := Vector2i(21, 11)
 
 @export var debug_flow := true
+@export var debug_cableflow := true
 @export var chunk_library: Array[PackedScene] = []
 @export var map_size := Vector2i.ZERO
 @export var towers_amount := 0
@@ -24,6 +25,7 @@ const HEAVY_ATLAS := Vector2i(21, 11)
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
 var flow_field := preload("res://scripts/map/flow_field.tres")
+var cable_flowfield := preload("res://scripts/map/cable_flowfield.tres")
 var world_generator_id := -1
 var flow_field_id := -1
 var towers := []
@@ -36,10 +38,12 @@ var merged_chunks := false
 @onready var clutter = $Clutter
 @onready var spawn := $Spawn
 @onready var debug_flow_layer := $FlowFieldDebug
+@onready var cable_flow_layer := $CableFlowFieldDebug
 
 
 func _ready():
 	debug_flow_layer.visible = debug_flow
+	cable_flow_layer.visible = debug_cableflow
 	GlobalSignals.activate_tower.connect(_on_activate_tower)
 	GlobalSignals.deactivate_tower.connect(_on_deactivate_tower)
 	
@@ -89,6 +93,8 @@ func finish_loading() -> void:
 			free_world(world)
 			spawn.queue_free()
 			flow_field.setup(ground, wall, clutter)
+			cable_flowfield.setup(ground, wall, clutter)
+			create_cableflowfield(towers)
 	)
 	
 
@@ -186,6 +192,20 @@ func create_flowfield(towers: Array) -> void:
 				flow_field.smooth_flow_field()
 			flow_field.created = true
 	)
+	
+
+func create_cableflowfield(towers: Array) -> void:
+	var destinations: Array[Vector2] = []
+	for tower in towers:
+		destinations.append(tower.get_node("TowerBase").global_position)
+	
+	cable_flowfield.created = false
+	cable_flowfield.compute_cost_field(destinations)
+	cable_flowfield.compute_flow_field()
+	cable_flowfield.created = true
+	
+	if debug_cableflow:
+		draw_cableflow_debug()
 
 
 func draw_flow_debug() -> void:
@@ -201,6 +221,21 @@ func draw_flow_debug() -> void:
 			var atlas_coord := direction_to_tile(dir)
 
 			debug_flow_layer.set_cell(cell, 0, atlas_coord)
+
+
+func draw_cableflow_debug() -> void:
+	cable_flow_layer.clear()
+
+	for x in cable_flowfield.size.x:
+		for y in cable_flowfield.size.y:
+			var dir: Vector2 = cable_flowfield.flow_field[x][y]
+			if dir == Vector2.ZERO:
+				continue
+
+			var cell := Vector2i(x, y)
+			var atlas_coord := direction_to_tile(dir)
+
+			cable_flow_layer.set_cell(cell, 0, atlas_coord)
 
 
 # ---------------------------------------------------------

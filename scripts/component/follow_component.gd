@@ -29,7 +29,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		detection_component.enable()
 		
 		var cable := preload("res://scenes/effect/power_cable.tscn").instantiate()
-		cable.set_cable_points(global_position, tower.global_position)
+		cable.set_cable_points(global_position, tower.get_parent().get_node("TowerBase").global_position)
 		EntityManager.add_entity(cable)
 		
 		queue_free()

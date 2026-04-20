@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://bph1re3fy00ge"]
 
 [ext_resource type="Script" uid="uid://3tnwb7bp0cs1" path="res://scripts/effect/power_cable.gd" id="1_a22ew"]
-[ext_resource type="Resource" uid="uid://b1vys0mkbh1us" path="res://scripts/map/flow_field.tres" id="2_078s0"]
+[ext_resource type="Resource" uid="uid://1nlqmmxidth6" path="res://scripts/map/cable_flowfield.tres" id="2_078s0"]
 
 [node name="PowerCable" type="Line2D" unique_id=1803522008]
+width = 1.0
+default_color = Color(1, 1, 1, 0.49803922)
 script = ExtResource("1_a22ew")
 flowfield = ExtResource("2_078s0")
+stop_distance = 8.0
+step_size = 16.0

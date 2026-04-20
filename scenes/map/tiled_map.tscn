@@ -39,3 +39,6 @@ tile_set = ExtResource("9_dh3ur")
 
 [node name="FlowFieldDebug" type="TileMapLayer" parent="." unique_id=1896791046]
 tile_set = SubResource("TileSet_d8yfu")
+
+[node name="CableFlowFieldDebug" type="TileMapLayer" parent="." unique_id=224806534]
+tile_set = SubResource("TileSet_d8yfu")

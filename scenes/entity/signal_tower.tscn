@@ -29,6 +29,7 @@ multi_tool_stats = ExtResource("2_1xhvv")
 texture = ExtResource("2_gxh6q")
 hframes = 5
 vframes = 2
+frame = 3
 
 [node name="InteractableComponent" parent="." unique_id=254912776 instance=ExtResource("3_beg84")]
 collision_layer = 16
@@ -90,6 +91,9 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceableZone" unique_id=8843304]
 shape = SubResource("CircleShape2D_rbpc3")
 disabled = true
+
+[node name="TowerBase" type="Node2D" parent="." unique_id=499517844]
+position = Vector2(0, 37)
 
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Deactivated" method="_on_interactable_component_interacted"]
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Built" method="_on_interactable_component_interacted"]
