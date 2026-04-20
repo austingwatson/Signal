@@ -58,6 +58,7 @@ func _process(_delta: float) -> void:
 		
 		if debug_flow:
 			draw_flow_debug()
+		GlobalSignals.call_flow_field_done()
 			
 
 func build_world() -> void:
