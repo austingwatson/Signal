@@ -1,5 +1,6 @@
 extends Node
 
+
 func merge_chunks(world: Array, final_ground: TileMapLayer, final_wall: TileMapLayer, final_clutter: TileMapLayer, final_spawn: TileMapLayer):
 	for y in range(world.size()):
 		for x in range(world[y].size()):

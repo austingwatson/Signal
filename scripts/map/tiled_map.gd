@@ -1,5 +1,14 @@
 extends Node2D
 
+enum LoadingStep {
+	BUILD_WORLD,
+	MERGE_CHUNKS,
+	SPAWN_OBJECTS,
+	CLEANUP,
+	SETUP_FLOWFIELD,
+	DONE,
+}
+
 const ARROW_UP = Vector2i(3, 0)
 const ARROW_RIGHT = Vector2i(0, 0)
 const ARROW_DOWN = Vector2i(1, 0)
@@ -19,8 +28,12 @@ const ARROW_DOWN_LEFT = Vector2i(2, 1)
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
 var flow_field := preload("res://scripts/map/flow_field.tres")
+var world_generator_id := -1
 var flow_field_id := -1
 var towers := []
+
+var loading_step := LoadingStep.BUILD_WORLD
+var world: Array
 
 @onready var ground = $Ground
 @onready var wall = $Wall
@@ -30,29 +43,86 @@ var towers := []
 
 
 func _ready():
-	var world = generator.build_world(chunk_library, map_size.x, map_size.y, towers_amount)
-	merger.merge_chunks(world, ground, wall, clutter, spawn)
-
-	var towers = spawn_towers(world)
-	spawn_materials()
-	free_world(world)
-	spawn.queue_free()
-
-	flow_field.setup(ground, wall, clutter)
-	#create_flowfield(towers)
 	debug_flow_layer.visible = debug_flow
-	
 	GlobalSignals.activate_tower.connect(_on_activate_tower)
 	GlobalSignals.deactivate_tower.connect(_on_deactivate_tower)
 	
+	await get_tree().create_timer(0.5).timeout
+	build_world()
+	
 
 func _process(_delta: float) -> void:
+	if world_generator_id != -1 and WorkerThreadPool.is_task_completed(world_generator_id):
+		WorkerThreadPool.wait_for_task_completion(world_generator_id)
+		
+		match loading_step:
+			LoadingStep.BUILD_WORLD:
+				merge_chunks()
+			LoadingStep.MERGE_CHUNKS:
+				spawn_objects()
+			LoadingStep.SPAWN_OBJECTS:
+				cleanup()
+			LoadingStep.CLEANUP:
+				setup_flowfield()
+			LoadingStep.SETUP_FLOWFIELD:
+				world_generator_id = -1
+				loading_step = LoadingStep.DONE
+		
+		
 	if flow_field_id != -1 and WorkerThreadPool.is_task_completed(flow_field_id):
 		WorkerThreadPool.wait_for_task_completion(flow_field_id)
 		flow_field_id = -1
 		
 		if debug_flow:
 			draw_flow_debug()
+			
+
+func build_world() -> void:
+	loading_step = LoadingStep.BUILD_WORLD
+	world_generator_id = WorkerThreadPool.add_task(
+		func():
+			world = generator.build_world(chunk_library, map_size.x, map_size.y, towers_amount)
+	)
+	
+func merge_chunks() -> void:
+	loading_step = LoadingStep.MERGE_CHUNKS
+	
+	merger.merge_chunks(world, ground, wall, clutter, spawn)
+	spawn_objects()
+	return
+	
+	# changing tilemaplayers is not thread safe
+	world_generator_id = WorkerThreadPool.add_task(
+		func():
+			merger.merge_chunks(world, ground, wall, clutter, spawn)
+	)
+	
+
+func spawn_objects() -> void:
+	loading_step = LoadingStep.SPAWN_OBJECTS
+	world_generator_id = WorkerThreadPool.add_task(
+		func():
+			var towers = spawn_towers(world)
+			spawn_materials()
+	)
+
+
+func cleanup() -> void:
+	loading_step = LoadingStep.CLEANUP
+	world_generator_id = WorkerThreadPool.add_task(
+		func():
+			free_world(world)
+			spawn.queue_free()
+	)
+	
+
+func setup_flowfield() -> void:
+	loading_step = LoadingStep.SETUP_FLOWFIELD
+	world_generator_id = WorkerThreadPool.add_task(
+		func():
+			flow_field.setup(ground, wall, clutter)
+			#create_flowfield(towers)
+	)
 
 
 func spawn_towers(world: Array) -> Array:
@@ -73,7 +143,8 @@ func spawn_towers(world: Array) -> Array:
 				)
 
 				towers.append(tower)
-				EntityManager.add_child(tower)
+				EntityManager.call_deferred("add_child", tower)
+				#EntityManager.add_child(tower)
 
 	return towers
 
