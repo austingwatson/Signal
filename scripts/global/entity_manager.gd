@@ -41,8 +41,9 @@ func _physics_process(_delta: float) -> void:
 
 
 func add_entity(entity: Node) -> void:
-	entities.add_child(entity)
+	entities.call_deferred("add_child", entity)
+	#entities.add_child(entity)
 	
 
 func add_enemy(enemy: Node) -> void:
-	entities.add_child(enemy)
+	add_entity(enemy)

@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://c5j71fm2muei6"]
 
+[ext_resource type="Script" uid="uid://b4xhqwiqij3um" path="res://scripts/screen/test_owen_screen.gd" id="1_4bj0y"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_qpjqw"]
 [ext_resource type="PackedScene" uid="uid://c1wgphpucjeip" path="res://scenes/map/chunk/rocky_1.tscn" id="2_4bj0y"]
-[ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="2_asqvj"]
 
 [node name="TestOwenScreen" type="Node2D" unique_id=1606319731]
+y_sort_enabled = true
+script = ExtResource("1_4bj0y")
 
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_qpjqw")]
 debug_flow = false
@@ -12,5 +14,5 @@ chunk_library = Array[PackedScene]([ExtResource("2_4bj0y")])
 map_size = Vector2i(5, 5)
 towers_amount = 2
 
-[node name="Player" parent="." unique_id=366550933 instance=ExtResource("2_asqvj")]
-position = Vector2(479, 286)
+[node name="Entities" type="Node2D" parent="." unique_id=251786479]
+y_sort_enabled = true

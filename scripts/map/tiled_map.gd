@@ -10,6 +10,11 @@ const ARROW_UP_RIGHT = Vector2i(1, 1)
 const ARROW_DOWN_RIGHT = Vector2i(3, 1)
 const ARROW_DOWN_LEFT = Vector2i(2, 1)
 
+const TOWER_ATLAS := Vector2i(19, 11)
+const METAL_ATLAS := Vector2i(17, 11)
+const POWERCELL_ATLAS := Vector2i(18, 11)
+const SWARM_ATLAS := Vector2i(20, 11)
+const HEAVY_ATLAS := Vector2i(21, 11)
 
 @export var debug_flow := true
 @export var chunk_library: Array[PackedScene] = []
@@ -97,29 +102,61 @@ func spawn_towers(world: Array) -> Array:
 
 			if chunk.is_goal_chunk:
 				var tower = tower_scene.instantiate()
-				var chunk_size = chunk.get_chunk_pixel_size()
-
-				tower.global_position = Vector2(
-					x * chunk_size.x + chunk_size.x * 0.5,
-					y * chunk_size.y + chunk_size.y * 0.5
-				)
+				var placed_tower = false
+				
+				if chunk.spawn != null:
+					var cells := chunk.spawn.get_used_cells()
+					for cell in cells:
+						var atlas_coords := chunk.spawn.get_cell_atlas_coords(cell)
+						if atlas_coords == null:
+							continue
+						
+						if atlas_coords == TOWER_ATLAS:
+							var pos := chunk.spawn.map_to_local(cell)
+							tower.global_position = pos
+							placed_tower = true
+							break
+				
+				if not placed_tower:
+					var chunk_size = chunk.get_chunk_pixel_size()
+					tower.global_position = Vector2(
+						x * chunk_size.x + chunk_size.x * 0.5,
+						y * chunk_size.y + chunk_size.y * 0.5
+					)
 
 				towers.append(tower)
 				EntityManager.call_deferred("add_entity", tower)
-				#EntityManager.add_child(tower)
 
 	return towers
 
 
 func spawn_materials() -> void:
 	var metal_scene := preload("res://scenes/entity/material/metal_pickup.tscn")
+	var power_cell_scene := preload("res://scenes/entity/material/power_cell_pickup.tscn")
+	var swarm_bot_scene := preload("res://scenes/entity/actor/swarm_bot.tscn")
+	var heavy_bot_scene := preload("res://scenes/entity/actor/heavy_bot.tscn")
 
 	var spawn_cells = spawn.get_used_cells()
 	for cell in spawn_cells:
-		var world_pos = spawn.map_to_local(cell)
-		var metal := metal_scene.instantiate()
-		metal.global_position = world_pos
-		EntityManager.add_entity(metal)
+		var atlas_coords: Vector2i = spawn.get_cell_atlas_coords(cell)
+		if atlas_coords == null:
+			continue
+			
+		var entity = null
+		match atlas_coords:
+			METAL_ATLAS:
+				entity = metal_scene.instantiate()
+			POWERCELL_ATLAS:
+				entity = power_cell_scene.instantiate()
+			SWARM_ATLAS:
+				entity = swarm_bot_scene.instantiate()
+			HEAVY_ATLAS:
+				entity = heavy_bot_scene.instantiate()
+		
+		if entity != null:
+			var world_pos = spawn.map_to_local(cell)
+			entity.global_position = world_pos
+			EntityManager.add_entity(entity)
 
 
 func free_world(world: Array) -> void:

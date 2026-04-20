@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d0l3eseq8ofav"]
+
+[ext_resource type="Texture2D" uid="uid://co2dtgcwfq7y3" path="res://assets/textures/environment/pickup_powercell.png" id="1_52u7p"]
+
+[node name="PowerCellPickup" type="Node2D" unique_id=511326249]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=296352757]
+texture = ExtResource("1_52u7p")

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c6acfus2mow4h" path="res://scripts/screen/test_level_screen.gd" id="1_2dks2"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_81dx7"]
 [ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="4_pp5kj"]
-[ext_resource type="PackedScene" uid="uid://2n5i024q8yrb" path="res://scenes/entity/actor/swarm_bot.tscn" id="7_pp5kj"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
 y_sort_enabled = true
@@ -16,6 +15,3 @@ towers_amount = 1
 
 [node name="Entities" type="Node2D" parent="." unique_id=1635913234]
 y_sort_enabled = true
-
-[node name="SwarmBot" parent="Entities" unique_id=2130898442 instance=ExtResource("7_pp5kj")]
-position = Vector2(264, 62)

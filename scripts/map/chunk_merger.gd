@@ -1,5 +1,7 @@
 extends Node
 
+const TOWER_ATLAS := Vector2i(19, 11)
+
 var world: Array
 var final_ground: TileMapLayer
 var final_wall: TileMapLayer
@@ -57,12 +59,15 @@ func merge_spawn_layer(src: TileMapLayer, dst: TileMapLayer, offset: Vector2i, s
 	if src == null:
 		return
 	
-	for cell in src.get_used_cells():
-		if randf() >= spawn_chance:
+	for cell in src.get_used_cells():	
+		var atlas = src.get_cell_atlas_coords(cell)
+		
+		if atlas == TOWER_ATLAS:
+			pass
+		elif randf() >= spawn_chance:
 			continue
 		
 		var id = src.get_cell_source_id(cell)
-		var atlas = src.get_cell_atlas_coords(cell)
 		var alt = src.get_cell_alternative_tile(cell)
 
 		dst.set_cell(cell + offset, id, atlas, alt)

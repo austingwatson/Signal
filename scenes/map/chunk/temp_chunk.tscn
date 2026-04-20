@@ -23,3 +23,4 @@ tile_map_data = PackedByteArray("AAAGABMAAQAIAAUAAAAHABIAAQALAAYAAAAIABsAAQAHAAU
 tile_set = ExtResource("2_qc5ci")
 
 [node name="Spawn" type="TileMapLayer" parent="." index="3" unique_id=1230944928]
+tile_set = ExtResource("2_qc5ci")
