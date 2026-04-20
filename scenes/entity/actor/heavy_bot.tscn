@@ -1,8 +1,293 @@
 [gd_scene format=3 uid="uid://dgkp1no7x80rb"]
 
-[ext_resource type="Texture2D" uid="uid://bs6eokmnkgqo3" path="res://assets/textures/actors/heavy_bot.png" id="1_w3qi0"]
+[ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="1_nn8vd"]
+[ext_resource type="Resource" uid="uid://br2jx3sn6y272" path="res://resources/movement/heavy_bot_movement.tres" id="2_k40if"]
+[ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="3_k40if"]
+[ext_resource type="PackedScene" uid="uid://cpqpr8ump3drn" path="res://scenes/component/horde_component.tscn" id="4_fkwfw"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="5_vom2v"]
+[ext_resource type="Script" uid="uid://dal3cka5x8gbu" path="res://resources/health/health_resource.gd" id="6_2h6v1"]
+[ext_resource type="Texture2D" uid="uid://4yoiii0s8x5g" path="res://assets/textures/actors/heavy_bot_sheet.png" id="6_4gcjn"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="8_f1gqk"]
+[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_i2lvh"]
+[ext_resource type="Script" uid="uid://b24cx6pchquqx" path="res://scripts/statemachine/heavy_bot/heavy_bot_sleep.gd" id="10_8spug"]
+[ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="10_riipp"]
+[ext_resource type="Resource" uid="uid://brppiijkxy2a6" path="res://resources/damage/heavy_bot_damage.tres" id="11_f1gqk"]
+[ext_resource type="Script" uid="uid://pgvbiv2jw6x" path="res://scripts/statemachine/heavy_bot/heavy_bot_alerted.gd" id="11_vawy7"]
+[ext_resource type="PackedScene" uid="uid://6vghp7vjlut" path="res://scenes/component/dead_component.tscn" id="12_riipp"]
+[ext_resource type="Resource" uid="uid://2xh2q3qj3wb0" path="res://resources/health/heavy_bot_health.tres" id="13_8spug"]
+[ext_resource type="Script" uid="uid://duxemxa5i3gmk" path="res://scripts/statemachine/heavy_bot/heavy_bot_idle.gd" id="13_t7mm3"]
+[ext_resource type="Script" uid="uid://ccpjc5jk1unpp" path="res://scripts/statemachine/swarm_bot/swarm_bot_move.gd" id="14_bkq88"]
+[ext_resource type="Script" uid="uid://bfk2d5xbb8h5" path="res://scripts/statemachine/swarm_bot/swarm_bot_move_to.gd" id="15_2vfci"]
+[ext_resource type="Script" uid="uid://bjrw5se0tyj3r" path="res://scripts/statemachine/heavy_bot/heavy_bot_attack.gd" id="16_2ke8v"]
+[ext_resource type="Script" uid="uid://dkg3o6kabxkfj" path="res://scripts/statemachine/swarm_bot/swarm_bot_dead.gd" id="16_2vfci"]
 
-[node name="HeavyBot" type="Node2D" unique_id=406873536]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkwfw"]
+size = Vector2(16, 16)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749056383]
-texture = ExtResource("1_w3qi0")
+[sub_resource type="Resource" id="Resource_8spug"]
+script = ExtResource("6_2h6v1")
+metadata/_custom_type_script = "uid://dal3cka5x8gbu"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vawy7"]
+size = Vector2(28, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj5ku"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev21b"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h6v1"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1gqk"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2lvh"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riipp"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8spug"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vawy7"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7mm3"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ym7k"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkq88"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vfci"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ke8v"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31qy0"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1a7m"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25rm6"]
+atlas = ExtResource("6_4gcjn")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8f6d4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj5ku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev21b")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2h6v1")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1gqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2lvh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riipp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8spug")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vawy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7mm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ym7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkq88")
+}],
+"loop": true,
+"name": &"move",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vfci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ke8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31qy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1a7m")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25rm6")
+}],
+"loop": true,
+"name": &"sleep",
+"speed": 5.0
+}]
+
+[node name="HeavyBot" type="CharacterBody2D" unique_id=679202148]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CharacterMovementComponent" parent="." unique_id=371240637 node_paths=PackedStringArray("character") instance=ExtResource("1_nn8vd")]
+character = NodePath("..")
+movement_resource = ExtResource("2_k40if")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1260529873]
+position = Vector2(0.5, 5)
+shape = SubResource("RectangleShape2D_fkwfw")
+
+[node name="PathFinderComponent" parent="." unique_id=1643619407 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("3_k40if")]
+character_movement_component = NodePath("../CharacterMovementComponent")
+
+[node name="HordeComponent" parent="." unique_id=423054986 node_paths=PackedStringArray("entity", "path_finder_component") instance=ExtResource("4_fkwfw")]
+entity = NodePath("..")
+path_finder_component = NodePath("../PathFinderComponent")
+
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("5_vom2v")]
+collision_layer = 4
+collision_mask = 2
+health_resource = SubResource("Resource_8spug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1123524034]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_vawy7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1367702145]
+sprite_frames = SubResource("SpriteFrames_8f6d4")
+animation = &"alert"
+
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_f1gqk")]
+initial_State = NodePath("Sleep")
+show_state = true
+
+[node name="Sleep" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("animated_sprite", "alert_detection") instance=ExtResource("9_i2lvh")]
+script = ExtResource("10_8spug")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+alert_detection = NodePath("../../AlertDetectionComponent")
+
+[node name="Alerted" parent="StateMachine" unique_id=2128346207 node_paths=PackedStringArray("animated_sprite", "detection_component") instance=ExtResource("9_i2lvh")]
+script = ExtResource("11_vawy7")
+damage = ExtResource("11_f1gqk")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+detection_component = NodePath("../../DetectionComponent")
+
+[node name="Timer" type="Timer" parent="StateMachine/Alerted" unique_id=689836861]
+
+[node name="Idle" parent="StateMachine" unique_id=603643037 node_paths=PackedStringArray("animated_sprite", "alert_detection", "character_movement_component", "path_finder_component") instance=ExtResource("9_i2lvh")]
+script = ExtResource("13_t7mm3")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+alert_detection = NodePath("../../AlertDetectionComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+path_finder_component = NodePath("../../PathFinderComponent")
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle" unique_id=1755218925]
+wait_time = 10.0
+
+[node name="Move" parent="StateMachine" unique_id=42733715 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_i2lvh")]
+script = ExtResource("14_bkq88")
+path_finder_component = NodePath("../../PathFinderComponent")
+detection_component = NodePath("../../AlertDetectionComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="MoveTo" parent="StateMachine" unique_id=213588863 node_paths=PackedStringArray("detection_component", "a_detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_i2lvh")]
+script = ExtResource("15_2vfci")
+detection_component = NodePath("../../AlertDetectionComponent")
+a_detection_component = NodePath("../../ADetectionComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Attack" parent="StateMachine" unique_id=976291104 node_paths=PackedStringArray("turret") instance=ExtResource("9_i2lvh")]
+script = ExtResource("16_2ke8v")
+turret = NodePath("../..")
+damage = ExtResource("11_f1gqk")
+possible_hits = 18
+
+[node name="Dead" parent="StateMachine" unique_id=1359355811 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("9_i2lvh")]
+script = ExtResource("16_2vfci")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+
+[node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("10_riipp")]
+collision_layer = 4
+collision_mask = 18
+damage = ExtResource("11_f1gqk")
+
+[node name="AlertDetectionComponent" parent="." unique_id=98952623 instance=ExtResource("10_riipp")]
+collision_layer = 4
+collision_mask = 18
+damage = ExtResource("11_f1gqk")
+use_alert_range = true
+
+[node name="ADetectionComponent" parent="." unique_id=617714318 instance=ExtResource("10_riipp")]
+collision_layer = 4
+collision_mask = 18
+damage = ExtResource("11_f1gqk")
+use_attack_range = true
+
+[node name="DeadComponent" parent="." unique_id=1742267470 node_paths=PackedStringArray("node_to_remove", "hurt_box", "state_machine", "animated_sprite", "collisions") instance=ExtResource("12_riipp")]
+node_to_remove = NodePath("..")
+hurt_box = NodePath("../HurtBox")
+health_resource = ExtResource("13_8spug")
+state_machine = NodePath("../StateMachine")
+animated_sprite = NodePath("../AnimatedSprite2D")
+collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComponent"), NodePath("../AlertDetectionComponent"), NodePath("../ADetectionComponent")]
+
+[connection signal="timeout" from="StateMachine/Alerted/Timer" to="StateMachine/Alerted" method="_on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

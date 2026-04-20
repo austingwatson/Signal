@@ -256,4 +256,4 @@ hurt_box = NodePath("../HurtBox")
 health_resource = ExtResource("7_dqpqo")
 state_machine = NodePath("../StateMachine")
 animated_sprite = NodePath("../AnimatedSprite2D")
-collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComponent")]
+collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComponent"), NodePath("../ADetectionComponent")]
