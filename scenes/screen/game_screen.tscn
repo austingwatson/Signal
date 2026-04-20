@@ -2,12 +2,21 @@
 
 [ext_resource type="Script" uid="uid://c6acfus2mow4h" path="res://scripts/screen/test_level_screen.gd" id="1_kas1x"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_u3war"]
-[ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="3_tgnp3"]
+[ext_resource type="PackedScene" uid="uid://c1wgphpucjeip" path="res://scenes/map/chunk/rocky_1.tscn" id="3_i7pw6"]
 [ext_resource type="PackedScene" uid="uid://2q81idsohmc1" path="res://scenes/ui/sin_wave_ping.tscn" id="3_wt73b"]
+[ext_resource type="PackedScene" uid="uid://b4q7p5g5i5ks7" path="res://scenes/map/chunk/rocky_road_br.tscn" id="4_fbl3k"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="4_tgnp3"]
+[ext_resource type="PackedScene" uid="uid://q7pfsgnjcdf0" path="res://scenes/map/chunk/rocky_road_horiz.tscn" id="5_m3y22"]
 [ext_resource type="PackedScene" uid="uid://dfwq5q3l8coag" path="res://scenes/wave/wave_manager.tscn" id="6_0d65i"]
+[ext_resource type="PackedScene" uid="uid://dnvvo0lq6rqh2" path="res://scenes/map/chunk/rocky_road_lb.tscn" id="6_m3lhs"]
 [ext_resource type="Script" uid="uid://dmuo640pu1y64" path="res://resources/wave/wave.gd" id="7_fvgpv"]
+[ext_resource type="PackedScene" uid="uid://b4g6j6la0uffu" path="res://scenes/map/chunk/rocky_road_lt.tscn" id="7_tm3if"]
 [ext_resource type="Resource" uid="uid://jsd0jokdfw08" path="res://resources/wave/wave1.tres" id="8_1cwq4"]
+[ext_resource type="PackedScene" uid="uid://cdo7p57114pbn" path="res://scenes/map/chunk/rocky_road_tr.tscn" id="8_27fob"]
+[ext_resource type="PackedScene" uid="uid://bm723tkf27csm" path="res://scenes/map/chunk/rocky_road_vert.tscn" id="9_xutjy"]
+[ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="10_4ax22"]
+[ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="11_fbl3k"]
+[ext_resource type="PackedScene" uid="uid://b4xqff7evfc77" path="res://scenes/cutscene/start_cutscene.tscn" id="17_m3y22"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0d65i"]
 load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
@@ -19,16 +28,16 @@ script = ExtResource("1_kas1x")
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_u3war")]
 debug_flow = false
 debug_cableflow = false
-chunk_library = Array[PackedScene]([ExtResource("3_tgnp3")])
-map_size = Vector2i(1, 1)
-towers_amount = 1
-starting_chunk = ExtResource("3_tgnp3")
+chunk_library = Array[PackedScene]([ExtResource("3_i7pw6"), ExtResource("4_fbl3k"), ExtResource("5_m3y22"), ExtResource("6_m3lhs"), ExtResource("7_tm3if"), ExtResource("8_27fob"), ExtResource("9_xutjy")])
+map_size = Vector2i(5, 5)
+towers_amount = 5
+starting_chunk = ExtResource("10_4ax22")
+map_edge_chunk = ExtResource("11_fbl3k")
 
 [node name="Entities" type="Node2D" parent="." unique_id=2006379947]
 y_sort_enabled = true
 
 [node name="Player" parent="Entities" unique_id=6415582 instance=ExtResource("4_tgnp3")]
-position = Vector2(285, 542)
 
 [node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
 
@@ -37,13 +46,15 @@ waves = Array[ExtResource("7_fvgpv")]([ExtResource("8_1cwq4")])
 min_dist = 600.0
 max_dist = 1000.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=301058016]
+[node name="ScreenEffect" type="CanvasLayer" parent="." unique_id=301058016]
 follow_viewport_scale = 0.001
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1100451748]
+[node name="TextureRect" type="TextureRect" parent="ScreenEffect" unique_id=1100451748]
 modulate = Color(1, 1, 1, 0.78431374)
 offset_right = 3840.0
 offset_bottom = 2160.0
 scale = Vector2(0.2500165, 0.2500261)
 texture = SubResource("CompressedTexture2D_0d65i")
 metadata/_edit_use_anchors_ = true
+
+[node name="StartCutscene" parent="." unique_id=1068356633 instance=ExtResource("17_m3y22")]

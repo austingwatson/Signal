@@ -12,7 +12,7 @@ var chunk_library: Array[PackedScene] = []
 # ---------------------------------------------------------
 # PUBLIC: Build a fully connected world with goals
 # ---------------------------------------------------------
-func build_world(starting_chunk: PackedScene, chunk_library: Array[PackedScene], chunk_w: int, chunk_h: int, goal_count: int) -> Array:
+func build_world(starting_chunk: PackedScene, edge_chunk: PackedScene, chunk_library: Array[PackedScene], chunk_w: int, chunk_h: int, goal_count: int) -> Array:
 	self.chunk_library = chunk_library
 	
 	var world := create_world_array(chunk_w, chunk_h)
@@ -20,8 +20,31 @@ func build_world(starting_chunk: PackedScene, chunk_library: Array[PackedScene],
 	generate_base_world(world, chunk_w, chunk_h)
 	ensure_world_connectivity(world)
 	#place_goals(world, goal_count)
+	world = add_chunk_edges(world, edge_chunk)
 
 	return world
+
+
+func add_chunk_edges(world: Array, edge_chunk_scene: PackedScene) -> Array:
+	var w = world.size()
+	var h = world[0].size()
+	
+	var padded := []
+	for x in range(w + 2):
+		padded.append([])
+		for y in range(h + 2):
+			padded[x].append(null)
+			
+	for x in range(w):
+		for y in range(h):
+			padded[x + 1][y + 1] = world[x][y]
+			
+	for x in range(w + 2):
+		for y in range(h + 2):
+			if padded[x][y] == null:
+				padded[x][y] = edge_chunk_scene.instantiate()
+	
+	return padded
 
 
 # ---------------------------------------------------------

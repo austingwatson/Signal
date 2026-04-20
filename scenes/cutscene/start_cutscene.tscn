@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b4xqff7evfc77"]
+
+[ext_resource type="Script" uid="uid://dkm1u0726lg1p" path="res://scripts/cutscene/start_cutscene.gd" id="1_cogqj"]
+[ext_resource type="Texture2D" uid="uid://ct63k1uh2j5vg" path="res://assets/textures/ui/starry_night.png" id="2_otkua"]
+[ext_resource type="Texture2D" uid="uid://dstcfvbp0s8vh" path="res://assets/textures/ui/flying_saucer.png" id="3_7tl7l"]
+
+[sub_resource type="Animation" id="Animation_cogqj"]
+resource_name = "crash"
+
+[sub_resource type="Animation" id="Animation_otkua"]
+resource_name = "loading"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tl7l"]
+_data = {
+&"crash": SubResource("Animation_cogqj"),
+&"loading": SubResource("Animation_otkua")
+}
+
+[node name="StartCutscene" type="CanvasLayer" unique_id=1533221063]
+script = ExtResource("1_cogqj")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=926724591]
+repeat_size = Vector2(960, 0)
+autoscroll = Vector2(50, 0)
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Background" type="Sprite2D" parent="Parallax2D" unique_id=909484506]
+texture = ExtResource("2_otkua")
+centered = false
+region_rect = Rect2(0, 0, 940, 540)
+
+[node name="SpaceShip" type="Sprite2D" parent="Parallax2D" unique_id=709776867]
+texture = ExtResource("3_7tl7l")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1757588757]
+libraries/ = SubResource("AnimationLibrary_7tl7l")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
