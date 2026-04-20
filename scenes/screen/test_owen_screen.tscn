@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b4g6j6la0uffu" path="res://scenes/map/chunk/rocky_road_lt.tscn" id="7_hg5uk"]
 [ext_resource type="PackedScene" uid="uid://cdo7p57114pbn" path="res://scenes/map/chunk/rocky_road_tr.tscn" id="8_fpp5b"]
 [ext_resource type="PackedScene" uid="uid://bm723tkf27csm" path="res://scenes/map/chunk/rocky_road_vert.tscn" id="9_euvjb"]
+[ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="11_exxfx"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wlejl"]
 load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
@@ -26,6 +27,7 @@ chunk_library = Array[PackedScene]([ExtResource("2_4bj0y"), ExtResource("4_bts32
 map_size = Vector2i(5, 5)
 towers_amount = 2
 starting_chunk = ExtResource("4_0fqic")
+map_edge_chunk = ExtResource("11_exxfx")
 
 [node name="Entities" type="Node2D" parent="." unique_id=251786479]
 y_sort_enabled = true

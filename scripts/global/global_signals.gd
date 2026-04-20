@@ -6,6 +6,7 @@ signal activate_tower(tower)
 signal deactivate_tower(tower)
 signal flow_field_done
 signal ping_changed(distance: float, angle: float)
+signal loading_done
 
 
 func call_added_metal(amount: int) -> void:
@@ -30,3 +31,7 @@ func call_flow_field_done() -> void:
 
 func call_ping_changed(distance: float, angle: float) -> void:
 	ping_changed.emit(distance, angle)
+	
+
+func call_loading_done() -> void:
+	loading_done.emit()

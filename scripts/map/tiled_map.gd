@@ -15,6 +15,7 @@ const METAL_ATLAS := Vector2i(17, 11)
 const POWERCELL_ATLAS := Vector2i(18, 11)
 const SWARM_ATLAS := Vector2i(20, 11)
 const HEAVY_ATLAS := Vector2i(21, 11)
+const SHIP_SPAWN := Vector2i(11, 7)
 
 @export var debug_flow := true
 @export var debug_cableflow := true
@@ -22,6 +23,7 @@ const HEAVY_ATLAS := Vector2i(21, 11)
 @export var map_size := Vector2i.ZERO
 @export var towers_amount := 0
 @export var starting_chunk: PackedScene
+@export var map_edge_chunk: PackedScene
 
 var generator := preload("res://scripts/map/procedural_generator.gd").new()
 var merger := preload("res://scripts/map/chunk_merger.gd").new()
@@ -60,6 +62,8 @@ func _process(_delta: float) -> void:
 		if not merged_chunks:
 			merged_chunks = true
 			merge_chunks()
+		else:
+			GlobalSignals.call_loading_done()
 		
 		
 	if flow_field_id != -1 and WorkerThreadPool.is_task_completed(flow_field_id):
@@ -74,7 +78,7 @@ func _process(_delta: float) -> void:
 func build_world() -> void:
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
-			world = generator.build_world(starting_chunk, chunk_library, map_size.x, map_size.y, towers_amount)
+			world = generator.build_world(starting_chunk, map_edge_chunk, chunk_library, map_size.x, map_size.y, towers_amount)
 	)
 	
 func merge_chunks() -> void:
@@ -90,7 +94,6 @@ func finish_loading() -> void:
 	world_generator_id = WorkerThreadPool.add_task(
 		func():
 			var towers = spawn_towers(world)
-			print(towers)
 			spawn_materials()
 			free_world(world)
 			spawn.queue_free()
@@ -164,6 +167,9 @@ func spawn_materials() -> void:
 				entity = swarm_bot_scene.instantiate()
 			HEAVY_ATLAS:
 				entity = heavy_bot_scene.instantiate()
+			SHIP_SPAWN:
+				entity = preload("res://scenes/map/player_spawn_point.tscn").instantiate()
+				entity.add_to_group("spawn_point")
 		
 		if entity != null:
 			var world_pos = spawn.map_to_local(cell)
