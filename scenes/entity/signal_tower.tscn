@@ -50,11 +50,12 @@ build_cost = ExtResource("8_ttv65")
 interact_positive_sound = NodePath("../../InteractPositiveSound")
 interact_negative_sound = NodePath("../../InteractNegativeSound")
 
-[node name="Built" type="Node2D" parent="StateMachine" unique_id=1470737266 node_paths=PackedStringArray("interactable_component", "sprite", "interact_positive_sound")]
+[node name="Built" type="Node2D" parent="StateMachine" unique_id=1470737266 node_paths=PackedStringArray("interactable_component", "sprite", "interact_positive_sound", "collision_shape")]
 script = ExtResource("9_7pjg8")
 interactable_component = NodePath("../../InteractableComponent")
 sprite = NodePath("../../Sprite2D")
 interact_positive_sound = NodePath("../../InteractPositiveSound")
+collision_shape = NodePath("../../PlaceableZone/CollisionShape2D")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="Activating" parent="StateMachine" unique_id=1520479396 node_paths=PackedStringArray("tower", "sprite") instance=ExtResource("5_gxh6q")]

@@ -9,6 +9,7 @@ extends Node2D
 var build_cost: BuildCost
 var entity: Node2D = null
 var in_tower_range := false
+var tower = null
 
 
 func _ready() -> void:
@@ -26,6 +27,11 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		parent.modulate = Color.WHITE
 		detection_component.enable()
+		
+		var cable := preload("res://scenes/effect/power_cable.tscn").instantiate()
+		cable.set_cable_points(global_position, tower.global_position)
+		EntityManager.add_entity(cable)
+		
 		queue_free()
 
 
@@ -45,7 +51,8 @@ func follow(entity: Node2D) -> void:
 	self.entity = entity
 
 
-func _on_possible_placement_area_entered(_area: Area2D) -> void:
+func _on_possible_placement_area_entered(area: Area2D) -> void:
+	tower = area
 	in_tower_range = true
 
 

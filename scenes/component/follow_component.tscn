@@ -7,7 +7,6 @@ radius = 1.0
 
 [node name="FollowComponent" type="Node2D" unique_id=1204676905 groups=["follow"]]
 script = ExtResource("1_nlav3")
-offset = null
 
 [node name="PossiblePlacement" type="Area2D" parent="." unique_id=1068587610]
 collision_layer = 2

@@ -90,7 +90,7 @@ func finish_loading() -> void:
 			spawn.queue_free()
 			flow_field.setup(ground, wall, clutter)
 	)
-
+	
 
 func spawn_towers(world: Array) -> Array:
 	var tower_scene := preload("res://scenes/entity/signal_tower.tscn")
