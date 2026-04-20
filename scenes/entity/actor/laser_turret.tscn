@@ -7,15 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="5_cjh2g"]
 [ext_resource type="Resource" uid="uid://5bb3ipdc4sqr" path="res://resources/damage/laser_turret_damage.tres" id="6_w2hb1"]
 [ext_resource type="PackedScene" uid="uid://bk1micxiubh34" path="res://scenes/component/follow_component.tscn" id="7_65xdw"]
-[ext_resource type="Script" uid="uid://ctw76fptybv4m" path="res://resources/damage/damage.gd" id="7_m2qei"]
+[ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_ctx33"]
 [ext_resource type="PackedScene" uid="uid://belpdqvrcm8si" path="res://scenes/component/turret_animation_component.tscn" id="9_j4fhh"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="9_m2qei"]
+[ext_resource type="Script" uid="uid://clbbxjosqq2o" path="res://scripts/statemachine/laser_turret/laser_turret_dead.gd" id="10_7spae"]
+[ext_resource type="Resource" uid="uid://dxyoavati07o0" path="res://resources/health/laser_turret_health.tres" id="10_j4fhh"]
+[ext_resource type="PackedScene" uid="uid://bsftc16fbc4ol" path="res://scenes/component/turret_dead_component.tscn" id="12_7spae"]
 
-[sub_resource type="Resource" id="Resource_j3r1m"]
-script = ExtResource("7_m2qei")
-damage = 1
-range = 100.0
-cooldown = 1.0
-metadata/_custom_type_script = "uid://ctw76fptybv4m"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4fhh"]
+size = Vector2(20, 13.5)
 
 [node name="LaserTurret" type="Node2D" unique_id=994531285]
 modulate = Color(1, 1, 1, 0.49803922)
@@ -23,20 +23,23 @@ modulate = Color(1, 1, 1, 0.49803922)
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("5_cjh2g")]
 collision_layer = 2
 collision_mask = 12
-damage = SubResource("Resource_j3r1m")
+damage = ExtResource("6_w2hb1")
 
-[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component") groups=["follow"] instance=ExtResource("7_65xdw")]
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component", "hurt_box_shape") instance=ExtResource("7_65xdw")]
 parent = NodePath("..")
 offset = Vector2(32, 0)
 detection_component = NodePath("../DetectionComponent")
+hurt_box_shape = NodePath("../HurtBox/CollisionShape2D")
 player_materials = ExtResource("4_j4fhh")
 build_cost_path = "uid://ck7vw417s5gmp"
 
 [node name="TurretAnimationComponent" parent="." unique_id=1294433927 instance=ExtResource("9_j4fhh")]
 gun_frame = 2
+dead_frame = 10
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("2_722y7")]
 initial_State = NodePath("Idle")
+show_state = true
 
 [node name="Idle" type="Node2D" parent="StateMachine" unique_id=1615230275 node_paths=PackedStringArray("detection_component", "turret_animation_component")]
 script = ExtResource("3_cjh2g")
@@ -50,3 +53,22 @@ turret = NodePath("../..")
 damage = ExtResource("6_w2hb1")
 turret_animation_component = NodePath("../../TurretAnimationComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Dead" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("turret_animation_component") instance=ExtResource("9_ctx33")]
+script = ExtResource("10_7spae")
+turret_animation_component = NodePath("../../TurretAnimationComponent")
+
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("9_m2qei")]
+collision_layer = 66
+collision_mask = 4
+health_resource = ExtResource("10_j4fhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=547725628]
+position = Vector2(0, 8.75)
+shape = SubResource("RectangleShape2D_j4fhh")
+disabled = true
+
+[node name="TurretDeadComponent" parent="." unique_id=2052270749 node_paths=PackedStringArray("hurt_box", "state_machine", "collisions") instance=ExtResource("12_7spae")]
+hurt_box = NodePath("../HurtBox")
+state_machine = NodePath("../StateMachine")
+collisions = [NodePath("../DetectionComponent"), NodePath("../HurtBox")]

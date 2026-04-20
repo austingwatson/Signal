@@ -7,13 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="6_y3n0m"]
 [ext_resource type="Resource" uid="uid://ctmrrus0k6wnf" path="res://resources/health/swarm_bot_health.tres" id="7_dqpqo"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="8_xnh8f"]
+[ext_resource type="Script" uid="uid://sg5qdk0ciwr" path="res://scripts/statemachine/swarm_bot/swarm_bot_idle.gd" id="9_pb6w1"]
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_qsfr4"]
 [ext_resource type="Script" uid="uid://ccpjc5jk1unpp" path="res://scripts/statemachine/swarm_bot/swarm_bot_move.gd" id="10_ftxwb"]
 [ext_resource type="Script" uid="uid://c5xosswu48022" path="res://scripts/statemachine/swarm_bot/swarm_bot_attack.gd" id="11_fjskr"]
-[ext_resource type="Script" uid="uid://cvgrwqpjadro7" path="res://scripts/statemachine/state.gd" id="12_fjskr"]
+[ext_resource type="Script" uid="uid://bfk2d5xbb8h5" path="res://scripts/statemachine/swarm_bot/swarm_bot_move_to.gd" id="11_k8sly"]
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="12_qsfr4"]
 [ext_resource type="Texture2D" uid="uid://wnwil5ylhkrj" path="res://assets/textures/actors/swarm_bot_sheet.png" id="13_fjskr"]
 [ext_resource type="Resource" uid="uid://dljffugaqqlic" path="res://resources/damage/swarm_bot_damage.tres" id="13_ftxwb"]
+[ext_resource type="Script" uid="uid://dkg3o6kabxkfj" path="res://scripts/statemachine/swarm_bot/swarm_bot_dead.gd" id="14_k8sly"]
 [ext_resource type="PackedScene" uid="uid://6vghp7vjlut" path="res://scenes/component/dead_component.tscn" id="15_jw7cw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
@@ -196,14 +198,30 @@ health_resource = ExtResource("7_dqpqo")
 shape = SubResource("RectangleShape2D_ccesr")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_xnh8f")]
-initial_State = NodePath("Move")
+initial_State = NodePath("Idle")
+show_state = true
 
-[node name="Move" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
+[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("detection_component", "path_finder_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
+script = ExtResource("9_pb6w1")
+detection_component = NodePath("../../DetectionComponent")
+path_finder_component = NodePath("../../PathFinderComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Move" parent="StateMachine" unique_id=274727245 node_paths=PackedStringArray("path_finder_component", "detection_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
 script = ExtResource("10_ftxwb")
 path_finder_component = NodePath("../../PathFinderComponent")
 detection_component = NodePath("../../DetectionComponent")
 character_movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="MoveTo" type="Node2D" parent="StateMachine" unique_id=1801519285 node_paths=PackedStringArray("detection_component", "a_detection_component", "character_movement_component", "animated_sprite")]
+script = ExtResource("11_k8sly")
+detection_component = NodePath("../../DetectionComponent")
+a_detection_component = NodePath("../../ADetectionComponent")
+character_movement_component = NodePath("../../CharacterMovementComponent")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="Attack" type="Node2D" parent="StateMachine" unique_id=791013401 node_paths=PackedStringArray("swarm_bot", "animated_sprite")]
 script = ExtResource("11_fjskr")
@@ -212,19 +230,25 @@ damage = ExtResource("13_ftxwb")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
-[node name="Dead" type="Node2D" parent="StateMachine" unique_id=462982809]
-script = ExtResource("12_fjskr")
+[node name="Dead" type="Node2D" parent="StateMachine" unique_id=462982809 node_paths=PackedStringArray("character_movement_component")]
+script = ExtResource("14_k8sly")
+character_movement_component = NodePath("../../CharacterMovementComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("12_qsfr4")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 damage = ExtResource("13_ftxwb")
+
+[node name="ADetectionComponent" parent="." unique_id=1760797716 instance=ExtResource("12_qsfr4")]
+collision_layer = 4
+collision_mask = 18
+damage = ExtResource("13_ftxwb")
+use_attack_range = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2073027454]
 sprite_frames = SubResource("SpriteFrames_oensx")
-animation = &"dead"
-autoplay = "move"
+animation = &"move"
 
 [node name="DeadComponent" parent="." unique_id=1742267470 node_paths=PackedStringArray("node_to_remove", "hurt_box", "state_machine", "animated_sprite", "collisions") instance=ExtResource("15_jw7cw")]
 node_to_remove = NodePath("..")

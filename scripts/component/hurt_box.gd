@@ -14,3 +14,13 @@ func take_damage(amount: int) -> void:
 		dead.emit()
 	else:
 		hurt.emit(health)
+		
+	
+func at_max_health() -> bool:
+	return health == health_resource.max_health
+	
+
+func heal(amount: int) -> void:
+	health += amount
+	if health > health_resource.max_health:
+		health = health_resource.max_health

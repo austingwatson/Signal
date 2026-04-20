@@ -92,6 +92,7 @@ add_swarm={
 2d_physics/layer_4="Neutral"
 2d_physics/layer_5="SignalTower"
 2d_physics/layer_6="PlaceableZone"
+2d_physics/layer_7="TurretHurtBox"
 
 [physics]
 

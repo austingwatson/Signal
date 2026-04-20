@@ -5,20 +5,67 @@
 [ext_resource type="Resource" uid="uid://bbsc72mytntv6" path="res://resources/damage/heavy_laser_turret_damage.tres" id="2_dg0qe"]
 [ext_resource type="PackedScene" uid="uid://bk1micxiubh34" path="res://scenes/component/follow_component.tscn" id="3_dg0qe"]
 [ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="5_56x4p"]
+[ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="6_hv0hd"]
+[ext_resource type="Script" uid="uid://tu6yuu41c2re" path="res://scripts/statemachine/laser_turret/laser_turret_idle.gd" id="7_xcyk1"]
+[ext_resource type="Script" uid="uid://bbkdne6vlywr3" path="res://scripts/statemachine/heavy_turret/heavy_turret_attack.gd" id="8_4nj1s"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="8_84hm4"]
+[ext_resource type="Script" uid="uid://clbbxjosqq2o" path="res://scripts/statemachine/laser_turret/laser_turret_dead.gd" id="9_grfdu"]
+[ext_resource type="Resource" uid="uid://csi7yuf4hy5h" path="res://resources/health/heavy_turret_health.tres" id="9_psapn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcyk1"]
+size = Vector2(20, 14)
 
 [node name="HeavyLaserTurret" type="Node2D" unique_id=594507847]
 modulate = Color(1, 1, 1, 0.49803922)
 
 [node name="DetectionComponent" parent="." unique_id=765032835 instance=ExtResource("1_ejtpq")]
+visible = false
+collision_layer = 2
+collision_mask = 4
 damage = ExtResource("2_dg0qe")
 
 [node name="TurretAnimationComponent" parent="." unique_id=1294433927 instance=ExtResource("1_eegg2")]
 base_frame = 30
 gun_frame = 32
+dead_frame = 40
 
-[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component") instance=ExtResource("3_dg0qe")]
+[node name="FollowComponent" parent="." unique_id=1204676905 node_paths=PackedStringArray("parent", "detection_component", "hurt_box_shape") instance=ExtResource("3_dg0qe")]
 parent = NodePath("..")
 offset = Vector2(32, 0)
 detection_component = NodePath("../DetectionComponent")
+hurt_box_shape = NodePath("../HurtBox/CollisionShape2D")
 player_materials = ExtResource("5_56x4p")
 build_cost_path = "uid://c4we0udbicjhy"
+
+[node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("6_hv0hd")]
+initial_State = NodePath("Idle")
+show_state = true
+
+[node name="Idle" type="Node2D" parent="StateMachine" unique_id=121886053 node_paths=PackedStringArray("detection_component", "turret_animation_component")]
+script = ExtResource("7_xcyk1")
+detection_component = NodePath("../../DetectionComponent")
+turret_animation_component = NodePath("../../TurretAnimationComponent")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Attack" type="Node2D" parent="StateMachine" unique_id=664888140 node_paths=PackedStringArray("turret", "turret_animation_component")]
+script = ExtResource("8_4nj1s")
+turret = NodePath("../..")
+damage = ExtResource("2_dg0qe")
+turret_animation_component = NodePath("../../TurretAnimationComponent")
+possible_hits = 4
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="Dead" type="Node2D" parent="StateMachine" unique_id=1828262897 node_paths=PackedStringArray("turret_animation_component")]
+script = ExtResource("9_grfdu")
+turret_animation_component = NodePath("../../TurretAnimationComponent")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("8_84hm4")]
+collision_layer = 2
+collision_mask = 68
+health_resource = ExtResource("9_psapn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1800172408]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_xcyk1")
+disabled = true

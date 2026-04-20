@@ -6,16 +6,16 @@ extends State
 
 
 func enter(data: Dictionary) -> void:
-	var target = data["target"]
+	var target: HurtBox = data["target"]
+	target.take_damage(damage.damage)
 	set_animation(target.global_position)
 	await get_tree().create_timer(damage.cooldown).timeout
 	if statemachine.current_state.name == "Attack":
-		statemachine.enter_state("Move")
+		statemachine.enter_state("Idle")
 	
 
 func set_animation(target: Vector2) -> void:
 	var dir := (target - swarm_bot.global_position).normalized()
-	print(dir)
 	if dir.y < -0.2:
 		animated_sprite.play("attack_up")
 	else:
