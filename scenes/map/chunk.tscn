@@ -1,13 +1,6 @@
 [gd_scene format=3 uid="uid://cps30p6psntr5"]
 
-[ext_resource type="PackedScene" uid="uid://cps30p6psntr5" path="res://scenes/map/chunk.tscn" id="1_svy1o"]
+[ext_resource type="Script" uid="uid://f5m6ot2gdnoo" path="res://scripts/map/chunk.gd" id="1_svy1o"]
 
-[node name="Chunk" unique_id=1205568769 instance=ExtResource("1_svy1o")]
-
-[node name="Ground" type="TileMapLayer" parent="." index="0" unique_id=536595109]
-
-[node name="Walls" type="TileMapLayer" parent="." index="1" unique_id=556484271]
-
-[node name="Clutter" type="TileMapLayer" parent="." index="2" unique_id=959027304]
-
-[node name="Spawns" type="TileMapLayer" parent="." index="3" unique_id=2145931317]
+[node name="Chunk" type="Node2D" unique_id=1205568769]
+script = ExtResource("1_svy1o")
