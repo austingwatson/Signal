@@ -4,6 +4,7 @@ extends Node2D
 @export var parent: Node2D
 @export var offset := Vector2.ZERO
 @export var detection_component: DetectionComponent
+@export var hurt_box_shape: CollisionShape2D
 @export var player_materials: PlayerMaterials
 @export_file("*.tres") var build_cost_path: String
 var build_cost: BuildCost
@@ -27,6 +28,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		parent.modulate = Color.WHITE
 		detection_component.enable()
+		hurt_box_shape.set_deferred("disabled", false)
 		
 		var cable := preload("res://scenes/effect/power_cable.tscn").instantiate()
 		cable.set_cable_points(global_position, tower.get_parent().get_node("TowerBase").global_position)

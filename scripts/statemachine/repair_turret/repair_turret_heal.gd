@@ -7,20 +7,23 @@ const threshhold := 0.33
 
 
 func enter(data: Dictionary) -> void:
-	turret_animation_component.attacking()
+	var friend: HurtBox = data["friend"]
 	
-	var dir: Vector2 = (data["enemy"].global_position - turret.global_position).normalized()
+	turret_animation_component.attacking()
+	var dir: Vector2 = (friend.global_position - turret.global_position).normalized()
 	turret_animation_component.set_dir(_direction_to_grid(dir))
-	var laser := preload("res://scenes/effect/laser.tscn").instantiate()
-	laser.set_laser_points(turret.global_position, data["enemy"].global_position, 1.0)
-	EntityManager.add_entity(laser)
-	laser.call_deferred("spawn", 0.2)
-	data["enemy"].take_damage(damage.damage)
+	
+	var heal_laser := preload("res://scenes/effect/heal_laser.tscn").instantiate()
+	heal_laser.set_laser_points(turret.global_position, friend.global_position, 1.0)
+	EntityManager.add_entity(heal_laser)
+	heal_laser.call_deferred("spawn", 0.2)
+	
+	friend.heal(damage.damage)
 	
 	await get_tree().create_timer(damage.cooldown / 2).timeout
 	turret_animation_component.not_attacking()
 	await get_tree().create_timer(damage.cooldown / 2).timeout
-	if statemachine.current_state.name == "Attack":
+	if statemachine.current_state.name == "Heal":
 		statemachine.enter_state("Idle")
 	
 

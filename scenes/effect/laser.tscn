@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://7aaa0v8nxgwp"]
+
+[ext_resource type="Script" uid="uid://wp4g8vtlsc5s" path="res://scripts/effect/laser.gd" id="1_1i3kc"]
+
+[node name="Laser" type="Line2D" unique_id=1046975649]
+width = 1.0
+script = ExtResource("1_1i3kc")

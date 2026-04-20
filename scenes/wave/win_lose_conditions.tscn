@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://tgwwiveg58le"]
+
+[ext_resource type="Script" uid="uid://1o13m3valuhd" path="res://scripts/wave/win_lose_conditions.gd" id="1_3st04"]
+
+[node name="WinLoseConditions" type="Node2D" unique_id=749152505]
+script = ExtResource("1_3st04")

@@ -2,13 +2,17 @@ class_name DetectionComponent
 extends Area2D
 
 @export var damage: Damage
+@export var use_attack_range := false
 @export_flags_2d_physics var los_collision_mask := 0
 var hurt_boxes: Array[HurtBox] = []
 var params := PhysicsRayQueryParameters2D.new()
 
 
 func _ready() -> void:
-	$CollisionShape2D.shape.radius = damage.range
+	if use_attack_range:
+		$CollisionShape2D.shape.radius = damage.attack_range
+	else:
+		$CollisionShape2D.shape.radius = damage.detection_range
 	params.collision_mask = los_collision_mask
 
 

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_am7iq")
-max_health = 1
+max_health = 10
 dead_body_timer = 5.0
 metadata/_custom_type_script = "uid://dal3cka5x8gbu"

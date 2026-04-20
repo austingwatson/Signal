@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_72s3m")
 damage = 1
-range = 150.0
+detection_range = 1.0
+attack_range = 1.0
 cooldown = 1.0
 attack_angle = 45.0
 slow_per = 50.0

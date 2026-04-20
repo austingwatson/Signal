@@ -9,8 +9,7 @@ extends State
 func update(_delta: float) -> void:
 	var closest := detection_component.get_closest()
 	if closest != null:
-		character_movement_component.set_direction(Vector2.ZERO)
-		statemachine.enter_state("Attack", {"target": closest})
+		statemachine.enter_state("MoveTo")
 	else:
 		path_finder_component.path_find()
 		set_animation(character_movement_component.direction)

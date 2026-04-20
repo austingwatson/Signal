@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_qhtxg")
 damage = 1
-range = 150.0
+detection_range = 150.0
+attack_range = 150.0
 cooldown = 1.0
 attack_angle = 45.0
 metadata/_custom_type_script = "uid://ctw76fptybv4m"

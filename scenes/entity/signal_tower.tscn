@@ -15,11 +15,16 @@
 [ext_resource type="Script" uid="uid://bsygloyl2g4dg" path="res://scripts/statemachine/signal_tower/signal_tower_destroyed.gd" id="12_7pjg8"]
 [ext_resource type="AudioStream" uid="uid://ch350sjdjwf43" path="res://assets/sounds/interact_positive.wav" id="13_rbpc3"]
 [ext_resource type="AudioStream" uid="uid://bi353olrhwhtq" path="res://assets/sounds/interact_negative.wav" id="14_1xhvv"]
+[ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="16_3q7gg"]
+[ext_resource type="Resource" uid="uid://bat6w7jvs8a82" path="res://resources/health/tower_health.tres" id="17_bd55u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vfw1"]
 radius = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbpc3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8ok"]
+size = Vector2(54, 37)
 
 [node name="SignalTower" type="Node2D" unique_id=1173751079]
 script = ExtResource("1_qh3gv")
@@ -65,15 +70,22 @@ tower = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 timer = 5.0
 
-[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("sprite", "collision_shape") instance=ExtResource("5_gxh6q")]
+[node name="Activated" parent="StateMachine" unique_id=461577864 node_paths=PackedStringArray("tower", "sprite", "collision_shape", "hurt_box_shape") instance=ExtResource("5_gxh6q")]
 script = ExtResource("8_7pjg8")
+tower = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 collision_shape = NodePath("../../PlaceableZone/CollisionShape2D")
+hurt_box_shape = NodePath("../../HurtBox/CollisionShape2D")
 
 [node name="Timer" type="Timer" parent="StateMachine/Activated" unique_id=1366479681]
 
-[node name="Destroyed" type="Node2D" parent="StateMachine" unique_id=1914031296]
+[node name="Destroyed" type="Node2D" parent="StateMachine" unique_id=1914031296 node_paths=PackedStringArray("tower", "sprite", "interact_component_shape", "placeable_zone_shape", "hurt_box_shape")]
 script = ExtResource("12_7pjg8")
+tower = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+interact_component_shape = NodePath("../../InteractableComponent/CollisionShape2D")
+placeable_zone_shape = NodePath("../../PlaceableZone/CollisionShape2D")
+hurt_box_shape = NodePath("../../HurtBox/CollisionShape2D")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="InteractPositiveSound" type="AudioStreamPlayer" parent="." unique_id=850220205]
@@ -95,6 +107,17 @@ disabled = true
 [node name="TowerBase" type="Node2D" parent="." unique_id=499517844]
 position = Vector2(0, 37)
 
+[node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("16_3q7gg")]
+collision_layer = 16
+collision_mask = 6
+health_resource = ExtResource("17_bd55u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1498408532]
+position = Vector2(-2, 28.5)
+shape = SubResource("RectangleShape2D_ob8ok")
+disabled = true
+
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Deactivated" method="_on_interactable_component_interacted"]
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Built" method="_on_interactable_component_interacted"]
 [connection signal="timeout" from="StateMachine/Activated/Timer" to="StateMachine/Activated" method="_on_timer_timeout"]
+[connection signal="dead" from="HurtBox" to="StateMachine/Activated" method="_on_hurt_box_dead"]
