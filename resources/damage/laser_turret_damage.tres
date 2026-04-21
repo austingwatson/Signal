@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_n82le")
-damage = 1
+damage = 2
 detection_range = 150.0
 attack_range = 150.0
 cooldown = 1.0

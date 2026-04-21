@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("1_o7bex")
-detection_range = 50.0
-attack_range = 50.0
-cooldown = 1.0
+damage = 5
+detection_range = 200.0
+attack_range = 200.0
+cooldown = 3.0
 max_hits = 1
 alert_range = 100.0
 alert_timer = 2.0
