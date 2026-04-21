@@ -7,9 +7,11 @@ extends Node2D
 @export var force_placement := false
 var signal_towers: Array[InteractableComponent] = []
 var facing_direction := 1
+var on_cooldown := false
 @onready var sprite := $Sprite2D
 @onready var ping_sound := $PingSound
 @onready var detection_component := $DetectionComponent
+@onready var timer := $Timer
 
 
 func _ready() -> void:
@@ -18,10 +20,7 @@ func _ready() -> void:
 	
 	sprite.texture = textures[0]
 	
-
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	timer.wait_time = damage.cooldown
 
 
 func _physics_process(_delta: float) -> void:
@@ -75,12 +74,18 @@ func stop_ping() -> void:
 	
 
 func shoot() -> void:
+	if on_cooldown:
+		return
+	
 	var closest = detection_component.get_multi_closest(3)
 	for enemy in closest:
 		enemy.take_damage(damage.damage)
 		var lightning := preload("res://scenes/effect/lightning_effect.tscn").instantiate()
 		lightning.set_lightning_points(global_position, enemy.global_position, 3, 6)
 		EntityManager.add_entity(lightning)
+	
+	on_cooldown = true
+	timer.start()
 	
 
 func find_closest_signal_tower() -> InteractableComponent:
@@ -97,9 +102,10 @@ func find_closest_signal_tower() -> InteractableComponent:
 func play_ping_sound(signal_strength) -> void:
 	if signal_strength > 0.0:
 		ping_sound.pitch_scale = lerp(multi_tool_stats.slow_ping, multi_tool_stats.fast_ping, signal_strength)
-		#ping_sound.play()
+		ping_sound.volume_db = 0.0
 	else:
 		ping_sound.pitch_scale = 1.0
+		ping_sound.volume_db = -80.0
 
 
 func _on_ping_range_area_entered(area: Area2D) -> void:
@@ -110,3 +116,7 @@ func _on_ping_range_area_entered(area: Area2D) -> void:
 func _on_ping_range_area_exited(area: Area2D) -> void:
 	if area is InteractableComponent:
 		signal_towers.erase(area)
+
+
+func _on_timer_timeout() -> void:
+	on_cooldown = false

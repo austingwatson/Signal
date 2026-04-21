@@ -52,5 +52,9 @@ collision_layer = 2
 collision_mask = 12
 damage = ExtResource("6_2uwa8")
 
+[node name="Timer" type="Timer" parent="." unique_id=1846865350]
+one_shot = true
+
 [connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
 [connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

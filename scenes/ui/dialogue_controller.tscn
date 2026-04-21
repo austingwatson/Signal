@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://disup7tdeno52"]
+
+[ext_resource type="Script" uid="uid://dx2n2p7bdr0km" path="res://scripts/ui/dialogue_controller.gd" id="1_5oxcf"]
+[ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="2_y7t26"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3nre"]
+atlas = ExtResource("2_y7t26")
+region = Rect2(96, 32, 32, 32)
+
+[node name="DialogueController" type="Control" unique_id=1527027832]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5oxcf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1400226666]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer" unique_id=158182274]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_m3nre")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1164224960]
+layout_mode = 2

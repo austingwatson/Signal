@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Wave" format=3 uid="uid://b70p0boph13xc"]
+
+[ext_resource type="Script" uid="uid://dmuo640pu1y64" path="res://resources/wave/wave.gd" id="1_f35f4"]
+
+[resource]
+script = ExtResource("1_f35f4")
+swarm_bots = 50
+spawn_rate = 0.1
+next_wave_timer = 10.0
+metadata/_custom_type_script = "uid://dmuo640pu1y64"

@@ -13,7 +13,8 @@ func _ready() -> void:
 		if child is State:
 			child.statemachine = self
 			states[child.name] = child
-	enter_state(initial_State.name)
+	current_state = initial_State
+	current_state.enter({})
 	current_state_label.visible = show_state
 	
 
@@ -26,6 +27,9 @@ func _physics_process(delta: float) -> void:
 	
 
 func enter_state(name: String, data: Dictionary = {}) -> void:
+	if current_state.name == name:
+		return
+	
 	current_state = states[name]
 	current_state.enter(data)
 	current_state_label.text = name

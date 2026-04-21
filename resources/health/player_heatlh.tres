@@ -5,4 +5,7 @@
 [resource]
 script = ExtResource("1_0jnr4")
 max_health = 10
+dead_body_timer = 10.0
+invincible_timer = 2.0
+invincible = true
 metadata/_custom_type_script = "uid://dal3cka5x8gbu"

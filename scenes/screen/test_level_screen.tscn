@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c6acfus2mow4h" path="res://scripts/screen/test_level_screen.gd" id="1_2dks2"]
 [ext_resource type="PackedScene" uid="uid://bcacxo1qi3h2n" path="res://scenes/map/tiled_map.tscn" id="1_81dx7"]
+[ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="4_howki"]
 [ext_resource type="PackedScene" uid="uid://dm1vqs8ahjuex" path="res://scenes/map/chunk/test/test_tower_chunk.tscn" id="4_pp5kj"]
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="5_6t8pv"]
 [ext_resource type="PackedScene" uid="uid://2q81idsohmc1" path="res://scenes/ui/sin_wave_ping.tscn" id="5_k1swi"]
 [ext_resource type="PackedScene" uid="uid://tgwwiveg58le" path="res://scenes/wave/win_lose_conditions.tscn" id="6_k1swi"]
+[ext_resource type="PackedScene" uid="uid://b4xqff7evfc77" path="res://scenes/cutscene/start_cutscene.tscn" id="8_howki"]
 
 [node name="TestLevelScreen" type="Node2D" unique_id=1663135438]
 y_sort_enabled = true
@@ -17,6 +19,7 @@ chunk_library = Array[PackedScene]([ExtResource("4_pp5kj")])
 map_size = Vector2i(1, 1)
 towers_amount = 1
 starting_chunk = ExtResource("4_pp5kj")
+map_edge_chunk = ExtResource("4_howki")
 
 [node name="Entities" type="Node2D" parent="." unique_id=1635913234]
 y_sort_enabled = true
@@ -29,3 +32,5 @@ position = Vector2(285, 542)
 [node name="WinLoseConditions" parent="." unique_id=749152505 instance=ExtResource("6_k1swi")]
 towers_to_win = 3
 towers_to_lose = 2
+
+[node name="StartCutscene" parent="." unique_id=1533221063 instance=ExtResource("8_howki")]

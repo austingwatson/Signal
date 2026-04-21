@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="4_owhjy"]
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="5_owhjy"]
 [ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="5_v7w8l"]
+[ext_resource type="Script" uid="uid://cyabpdu4k2ox6" path="res://scripts/statemachine/player/player_hurt.gd" id="8_726y4"]
 [ext_resource type="PackedScene" uid="uid://cscg2jn5o56fc" path="res://scenes/entity/multi_tool.tscn" id="9_18kca"]
+[ext_resource type="Script" uid="uid://bujfusf7af6x" path="res://scripts/statemachine/player/player_knockedout.gd" id="9_psmt1"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="10_8l8co"]
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="11_b81v7"]
 [ext_resource type="PackedScene" uid="uid://dur7fjor7jyr4" path="res://scenes/ui/build_menu.tscn" id="11_eybgf"]
@@ -18,6 +20,14 @@ size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7w8l"]
 radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka65a"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkhew"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eybgf"]
 atlas = ExtResource("10_8l8co")
@@ -34,6 +44,10 @@ region = Rect2(0, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_726y4"]
 atlas = ExtResource("10_8l8co")
 region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvb70"]
+atlas = ExtResource("10_8l8co")
+region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_psmt1"]
 atlas = ExtResource("10_8l8co")
@@ -71,6 +85,22 @@ region = Rect2(96, 64, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ka65a")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkhew")
+}],
+"loop": true,
+"name": &"hurt_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_eybgf")
 }, {
 "duration": 1.0,
@@ -90,6 +120,14 @@ animations = [{
 "loop": true,
 "name": &"idle_up",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvb70")
+}],
+"loop": true,
+"name": &"knockedout",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -160,6 +198,19 @@ movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 multi_tool = NodePath("../../MultiTool")
 
+[node name="Hurt" parent="StateMachine" unique_id=1519746942 node_paths=PackedStringArray("animated_sprite") instance=ExtResource("5_owhjy")]
+script = ExtResource("8_726y4")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Knockedout" type="Node2D" parent="StateMachine" unique_id=1256527264 node_paths=PackedStringArray("animated_sprite", "hurtbox_collision", "hurtbox", "character_movement")]
+script = ExtResource("9_psmt1")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+health = ExtResource("12_b81v7")
+hurtbox_collision = NodePath("../../HurtBox/CollisionShape2D")
+hurtbox = NodePath("../../HurtBox")
+character_movement = NodePath("../../CharacterMovementComponent")
+metadata/_custom_type_script = "uid://cvgrwqpjadro7"
+
 [node name="InteractComponent" type="Area2D" parent="." unique_id=1245282860]
 collision_layer = 2
 collision_mask = 24
@@ -173,9 +224,8 @@ shape = SubResource("CircleShape2D_v7w8l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
 sprite_frames = SubResource("SpriteFrames_ka65a")
-animation = &"move"
+animation = &"hurt"
 autoplay = "idle"
-frame_progress = 0.45200092
 
 [node name="BuildMenu" parent="." unique_id=533637646 node_paths=PackedStringArray("player") instance=ExtResource("11_eybgf")]
 player = NodePath("..")
@@ -189,5 +239,8 @@ health_resource = ExtResource("12_b81v7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1293593765]
 shape = SubResource("RectangleShape2D_qxtqe")
 
+[connection signal="back_alive" from="StateMachine/Knockedout" to="." method="_on_knockedout_back_alive"]
 [connection signal="area_entered" from="InteractComponent" to="." method="_on_interact_component_area_entered"]
 [connection signal="area_exited" from="InteractComponent" to="." method="_on_interact_component_area_exited"]
+[connection signal="dead" from="HurtBox" to="." method="_on_hurt_box_dead"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

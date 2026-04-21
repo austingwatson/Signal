@@ -1,5 +1,8 @@
 extends Node2D
 
+@export var dialogue: Dialogue
+@onready var dialogue_controller: $HUD/DialogueController
+
 
 func _ready() -> void:
 	randomize()
@@ -20,3 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	print(get_tree().get_nodes_in_group("enemy").size())
+
+
+func _on_start_cutscene_cutscene_done() -> void:
+	pass # Replace with function body.

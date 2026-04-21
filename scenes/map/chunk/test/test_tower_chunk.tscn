@@ -29,5 +29,5 @@ tile_map_data = PackedByteArray("AAABAA4AAQAMAAwAAAAGABMAAQAKAAQAAAAIABkAAQAMAAY
 tile_set = ExtResource("2_moac1")
 
 [node name="Spawn" type="TileMapLayer" parent="." index="3" unique_id=307554533]
-tile_map_data = PackedByteArray("AAAOABMAAQATAAsAAAAZAAsAAQAUAAsAAAAHAAMAAQAVAAsAAAA=")
+tile_map_data = PackedByteArray("AAAOABMAAQATAAsAAAAZAAsAAQAUAAsAAAAHAAMAAQAVAAsAAAAGABEAAQALAAcAAAA=")
 tile_set = ExtResource("2_moac1")
