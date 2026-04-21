@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_r8eo4")
-text = "The Earth returns to silence.\""
+text = "The Earth returns to silence."
 delay = 3.0
 metadata/_custom_type_script = "uid://uqb1vkbsn8gt"
