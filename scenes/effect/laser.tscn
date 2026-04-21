@@ -4,4 +4,5 @@
 
 [node name="Laser" type="Line2D" unique_id=1046975649]
 width = 1.0
+default_color = Color(0.85490197, 0.9372549, 0.67058825, 1)
 script = ExtResource("1_1i3kc")

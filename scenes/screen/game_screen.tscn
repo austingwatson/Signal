@@ -11,20 +11,26 @@
 [ext_resource type="PackedScene" uid="uid://cyvw0ck5o7yyv" path="res://scenes/entity/actor/player.tscn" id="4_tgnp3"]
 [ext_resource type="PackedScene" uid="uid://q7pfsgnjcdf0" path="res://scenes/map/chunk/rocky_road_horiz.tscn" id="5_m3y22"]
 [ext_resource type="PackedScene" uid="uid://dfwq5q3l8coag" path="res://scenes/wave/wave_manager.tscn" id="6_0d65i"]
+[ext_resource type="PackedScene" uid="uid://icc5rb2n5rch" path="res://scenes/map/chunk/grass_fields_1.tscn" id="6_e27am"]
 [ext_resource type="PackedScene" uid="uid://dnvvo0lq6rqh2" path="res://scenes/map/chunk/rocky_road_lb.tscn" id="6_m3lhs"]
 [ext_resource type="Script" uid="uid://dmuo640pu1y64" path="res://resources/wave/wave.gd" id="7_fvgpv"]
+[ext_resource type="PackedScene" uid="uid://juk86uu4k340" path="res://scenes/map/chunk/grass_fields_2.tscn" id="7_t4pqj"]
 [ext_resource type="PackedScene" uid="uid://b4g6j6la0uffu" path="res://scenes/map/chunk/rocky_road_lt.tscn" id="7_tm3if"]
 [ext_resource type="Resource" uid="uid://jsd0jokdfw08" path="res://resources/wave/wave1.tres" id="8_1cwq4"]
 [ext_resource type="PackedScene" uid="uid://cdo7p57114pbn" path="res://scenes/map/chunk/rocky_road_tr.tscn" id="8_27fob"]
 [ext_resource type="PackedScene" uid="uid://bm723tkf27csm" path="res://scenes/map/chunk/rocky_road_vert.tscn" id="9_xutjy"]
 [ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="10_4ax22"]
 [ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="11_fbl3k"]
+[ext_resource type="PackedScene" path="res://scenes/map/chunk/urban_1.tscn" id="15_rl1l0"]
 [ext_resource type="PackedScene" uid="uid://tgwwiveg58le" path="res://scenes/wave/win_lose_conditions.tscn" id="17_m3lhs"]
 [ext_resource type="PackedScene" uid="uid://b4xqff7evfc77" path="res://scenes/cutscene/start_cutscene.tscn" id="17_m3y22"]
 [ext_resource type="PackedScene" uid="uid://disup7tdeno52" path="res://scenes/ui/dialogue_controller.tscn" id="19_tm3if"]
 [ext_resource type="Resource" uid="uid://b70p0boph13xc" path="res://resources/wave/wave2.tres" id="20_8yao3"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="20_27fob"]
+[ext_resource type="Resource" uid="uid://ciwvlb7rqelir" path="res://resources/wave/wave3.tres" id="23_t4pqj"]
+[ext_resource type="PackedScene" uid="uid://dgkp1no7x80rb" path="res://scenes/entity/actor/heavy_bot.tscn" id="24_rl1l0"]
 [ext_resource type="PackedScene" uid="uid://cw13fdo73qe86" path="res://scenes/ui/material_display.tscn" id="24_s061a"]
+[ext_resource type="AudioStream" uid="uid://dtcyw13dtistg" path="res://assets/sounds/ambient_track1.wav" id="26_b1ko2"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0d65i"]
 load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
@@ -43,7 +49,7 @@ lose_dialogue = ExtResource("4_8yao3")
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_u3war")]
 debug_flow = false
 debug_cableflow = false
-chunk_library = Array[PackedScene]([ExtResource("3_i7pw6"), ExtResource("4_fbl3k"), ExtResource("5_m3y22"), ExtResource("6_m3lhs"), ExtResource("7_tm3if"), ExtResource("8_27fob"), ExtResource("9_xutjy")])
+chunk_library = Array[PackedScene]([ExtResource("6_e27am"), ExtResource("7_t4pqj"), ExtResource("3_i7pw6"), ExtResource("4_fbl3k"), ExtResource("5_m3y22"), ExtResource("6_m3lhs"), ExtResource("7_tm3if"), ExtResource("8_27fob"), ExtResource("9_xutjy"), ExtResource("15_rl1l0")])
 map_size = Vector2i(5, 5)
 towers_amount = 5
 starting_chunk = ExtResource("10_4ax22")
@@ -54,16 +60,18 @@ y_sort_enabled = true
 
 [node name="Player" parent="Entities" unique_id=6415582 instance=ExtResource("4_tgnp3")]
 
-[node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
-
 [node name="WaveManager" parent="." unique_id=990001788 instance=ExtResource("6_0d65i")]
-waves = Array[ExtResource("7_fvgpv")]([ExtResource("8_1cwq4"), ExtResource("20_8yao3")])
+waves = Array[ExtResource("7_fvgpv")]([ExtResource("8_1cwq4"), ExtResource("20_8yao3"), ExtResource("23_t4pqj")])
+heavy_boy_scene = ExtResource("24_rl1l0")
 min_dist = 600.0
 max_dist = 1000.0
 
 [node name="WinLoseConditions" parent="." unique_id=749152505 instance=ExtResource("17_m3lhs")]
 towers_to_win = 3
 towers_to_lose = 2
+
+[node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
+z_index = 4096
 
 [node name="ScreenEffect" type="CanvasLayer" parent="." unique_id=301058016]
 follow_viewport_scale = 0.001
@@ -76,28 +84,38 @@ scale = Vector2(0.2500165, 0.2500261)
 texture = SubResource("CompressedTexture2D_0d65i")
 metadata/_edit_use_anchors_ = true
 
-[node name="StartCutscene" parent="." unique_id=1068356633 instance=ExtResource("17_m3y22")]
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=164614483]
 
 [node name="DialogueController" parent="HUD" unique_id=1527027832 instance=ExtResource("19_tm3if")]
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.0
-offset_left = 285.0
-offset_top = -142.0
-offset_right = 285.0
-offset_bottom = -142.0
-grow_horizontal = 1
+anchor_right = 0.5
+offset_top = -80.0
+offset_bottom = -80.0
 grow_vertical = 0
 icon_texture = SubResource("AtlasTexture_xutjy")
 
 [node name="MaterialDisplay" parent="HUD" unique_id=286032138 instance=ExtResource("24_s061a")]
-offset_left = 7.0
-offset_top = 432.0
-offset_right = 7.0
-offset_bottom = 432.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_left = 39.0
+offset_top = -87.0
+offset_right = 39.0
+offset_bottom = -87.0
+grow_horizontal = 1
+grow_vertical = 0
 
+[node name="StartCutscene" parent="." unique_id=1068356633 instance=ExtResource("17_m3y22")]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=259586291]
+stream = ExtResource("26_b1ko2")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="music_done" from="WaveManager" to="." method="_on_wave_manager_music_done"]
+[connection signal="wave_changed" from="WaveManager" to="." method="_on_wave_manager_wave_changed"]
 [connection signal="game_lost" from="WinLoseConditions" to="." method="_on_win_lose_conditions_game_lost"]
 [connection signal="game_won" from="WinLoseConditions" to="." method="_on_win_lose_conditions_game_won"]
 [connection signal="cutscene_done" from="StartCutscene" to="." method="_on_start_cutscene_cutscene_done"]

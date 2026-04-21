@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://dco6kfxrnohmd"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_8ihvi"]
+
+[resource]
+script = ExtResource("1_8ihvi")
+text = "I may even need to rebuild up to THREE 
+to form a proper communication array."
+delay = 8.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

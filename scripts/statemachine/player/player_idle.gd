@@ -3,11 +3,13 @@ extends State
 @export var movement_component: CharacterMovementComponent
 @export var animated_sprite: AnimatedSprite2D
 @export var multi_tool: MultiTool
+@export var footstep_sound: AudioStreamPlayer
 
 
 func enter(_data: Dictionary) -> void:
 	movement_component.set_direction(Vector2.ZERO)
 	play_idle_animation()
+	footstep_sound.stop()
 	
 
 func input() -> void:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://b3m8djm0n5fh2"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_2t6t3"]
+
+[resource]
+script = ExtResource("1_2t6t3")
+text = "Perhaps I can salvage some METAL and
+POWER sources to retrofit one of the old human radio towers."
+delay = 8.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

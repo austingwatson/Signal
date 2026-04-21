@@ -1,15 +1,21 @@
 class_name WaveManager
 extends Node2D
 
+signal wave_changed
+signal music_done
+
+
 @export var flow_field: FlowField
 @export var waves: Array[Wave] = []
 @export var swarm_bot_scene: PackedScene
+@export var heavy_boy_scene: PackedScene
 @export var min_dist := 200.0
 @export var max_dist := 400.0
 @export var steps := 32
+@onready var wave_start := $WaveStart
 
 var towers := []
-var current_wave := 0
+var current_wave := -1
 var spawning := false
 
 
@@ -23,21 +29,41 @@ func _ready() -> void:
 func change_towers(amount: int) -> void:
 	current_wave += amount
 	current_wave = clampi(current_wave, 0, waves.size() - 1)
+	
+	if amount >= 0:
+		wave_start.play()
+		wave_changed.emit()
 
 
 func spawn_next_wave() -> void:
 	while true:
-		var wave := waves[current_wave]
-		await spawn_wave(wave)
-		await get_tree().create_timer(wave.next_wave_timer).timeout
+		#print(current_wave)
+		if current_wave < 0:
+			await get_tree().create_timer(1.0).timeout
+		else:
+			var wave := waves[current_wave]
+			if wave.swarm_bots > 0:
+				await spawn_swarm_wave(wave)
+			if wave.heavy_bots > 0:
+				await spawn_heavy_wave(wave)
+			await get_tree().create_timer(wave.next_wave_timer).timeout
 		
 
-func spawn_wave(wave: Wave) -> void:
-	for i in range(wave.swarm_bots):
-		spawn()
+func spawn_swarm_wave(wave: Wave) -> void:
+	for i in range(wave.swarm_bots / wave.swarm_bot_clump):
+		for j in range(wave.swarm_bot_clump):
+			spawn_swarm()
 		await get_tree().create_timer(wave.spawn_rate).timeout
+		
 
-func spawn():
+func spawn_heavy_wave(wave: Wave) -> void:
+	for i in range(wave.heavy_bots / wave.heavy_bot_clump):
+		for j in range(wave.heavy_bot_clump):
+			spawn_heavy()
+		await get_tree().create_timer(wave.spawn_rate).timeout
+		
+
+func spawn_swarm():
 	if towers.size() == 0:
 		return
 	
@@ -46,6 +72,17 @@ func spawn():
 	swarm_bot.global_position = pos
 	swarm_bot.add_to_group("horde")
 	EntityManager.add_enemy(swarm_bot)
+	
+
+func spawn_heavy():
+	if towers.size() == 0:
+		return
+		
+	var pos := get_position_near_tower(towers.pick_random())
+	var heavy_bot := heavy_boy_scene.instantiate()
+	heavy_bot.global_position = pos
+	heavy_bot.add_to_group("horde")
+	EntityManager.add_enemy(heavy_bot)
 	
 
 func get_position_near_tower(tower: Node2D) -> Vector2:
@@ -104,3 +141,7 @@ func _on_activate_tower(tower) -> void:
 func _on_deactivate_tower(tower) -> void:
 	towers.erase(tower)
 	change_towers(-1)
+
+
+func _on_wave_start_finished() -> void:
+	music_done.emit()

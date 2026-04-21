@@ -3,8 +3,15 @@
 [ext_resource type="Script" uid="uid://elcwds21brcp" path="res://scripts/wave/wave_manager.gd" id="1_0cdto"]
 [ext_resource type="Resource" uid="uid://b1vys0mkbh1us" path="res://scripts/map/flow_field.tres" id="2_s7og5"]
 [ext_resource type="PackedScene" uid="uid://2n5i024q8yrb" path="res://scenes/entity/actor/swarm_bot.tscn" id="3_3c2ja"]
+[ext_resource type="AudioStream" uid="uid://c78t5go3avgg2" path="res://assets/sounds/battle_track1.wav" id="4_2v62m"]
 
 [node name="WaveManager" type="Node2D" unique_id=990001788]
 script = ExtResource("1_0cdto")
 flow_field = ExtResource("2_s7og5")
 swarm_bot_scene = ExtResource("3_3c2ja")
+
+[node name="WaveStart" type="AudioStreamPlayer" parent="." unique_id=916511252]
+stream = ExtResource("4_2v62m")
+volume_db = -20.0
+
+[connection signal="finished" from="WaveStart" to="." method="_on_wave_start_finished"]

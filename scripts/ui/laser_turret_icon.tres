@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Icon" format=3 uid="uid://dwbkpu68m5obx"]
 
-[ext_resource type="Texture2D" uid="uid://bxwdskywuufvj" path="res://assets/textures/icon_temp.png" id="1_0jpjy"]
+[ext_resource type="Texture2D" uid="uid://bbssm7tgndx2m" path="res://assets/textures/ui/UI_sheet.png" id="1_0jpjy"]
 [ext_resource type="Script" uid="uid://b2013ibmlhhji" path="res://scripts/ui/icon.gd" id="1_q8l2h"]
 [ext_resource type="PackedScene" uid="uid://bgoyhwqib647g" path="res://scenes/entity/actor/laser_turret.tscn" id="3_ryx8j"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bj54s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryx8j"]
 atlas = ExtResource("1_0jpjy")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 0, 64, 64)
 
 [resource]
 script = ExtResource("1_q8l2h")
 spawn_scene = ExtResource("3_ryx8j")
-icon = SubResource("AtlasTexture_bj54s")
+icon = SubResource("AtlasTexture_ryx8j")
 metadata/_custom_type_script = "uid://b2013ibmlhhji"

@@ -12,6 +12,7 @@ var on_cooldown := false
 @onready var ping_sound := $PingSound
 @onready var detection_component := $DetectionComponent
 @onready var timer := $Timer
+@onready var shoot_sound := $Shoot
 
 
 func _ready() -> void:
@@ -77,15 +78,17 @@ func shoot() -> void:
 	if on_cooldown:
 		return
 	
-	var closest = detection_component.get_multi_closest(3)
+	var closest = detection_component.get_multi_closest(damage.max_hits)
 	for enemy in closest:
 		enemy.take_damage(damage.damage)
 		var lightning := preload("res://scenes/effect/lightning_effect.tscn").instantiate()
 		lightning.set_lightning_points(global_position, enemy.global_position, 3, 6)
 		EntityManager.add_entity(lightning)
 	
-	on_cooldown = true
-	timer.start()
+	if closest.size() > 0:
+		shoot_sound.play()
+		on_cooldown = true
+		timer.start()
 	
 
 func find_closest_signal_tower() -> InteractableComponent:

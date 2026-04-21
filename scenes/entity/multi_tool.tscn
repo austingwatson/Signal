@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cotemo5adff5u" path="res://assets/sounds/multitool_ping.wav" id="4_pr2jc"]
 [ext_resource type="PackedScene" uid="uid://b2dwy2ayilnrx" path="res://scenes/component/detection_component.tscn" id="5_rayeu"]
 [ext_resource type="Resource" uid="uid://l0hx8axhep6i" path="res://resources/damage/multi_tool_damage.tres" id="6_2uwa8"]
+[ext_resource type="AudioStream" uid="uid://bcylv0340bdbi" path="res://assets/sounds/static_fuzz.wav" id="7_2uwa8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urkem"]
 atlas = ExtResource("3_urkem")
@@ -54,6 +55,10 @@ damage = ExtResource("6_2uwa8")
 
 [node name="Timer" type="Timer" parent="." unique_id=1846865350]
 one_shot = true
+
+[node name="Shoot" type="AudioStreamPlayer" parent="." unique_id=1620432026]
+stream = ExtResource("7_2uwa8")
+volume_db = -25.0
 
 [connection signal="area_entered" from="PingRange" to="." method="_on_ping_range_area_entered"]
 [connection signal="area_exited" from="PingRange" to="." method="_on_ping_range_area_exited"]

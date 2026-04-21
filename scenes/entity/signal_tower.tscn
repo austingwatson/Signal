@@ -45,7 +45,6 @@ shape = SubResource("CircleShape2D_8vfw1")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_l5bs5")]
 initial_State = NodePath("Deactivated")
-show_state = true
 
 [node name="Deactivated" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("interactable_component", "sprite", "interact_positive_sound", "interact_negative_sound") instance=ExtResource("5_gxh6q")]
 script = ExtResource("6_76jeg")

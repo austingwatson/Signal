@@ -39,7 +39,6 @@ dead_frame = 10
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("2_722y7")]
 initial_State = NodePath("Idle")
-show_state = true
 
 [node name="Idle" type="Node2D" parent="StateMachine" unique_id=1615230275 node_paths=PackedStringArray("detection_component", "turret_animation_component")]
 script = ExtResource("3_cjh2g")

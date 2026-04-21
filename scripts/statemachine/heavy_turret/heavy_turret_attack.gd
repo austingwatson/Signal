@@ -5,24 +5,37 @@ const threshhold := 0.33
 @export var damage: Damage
 @export var turret_animation_component: TurretAnimationComponent
 @export_flags_2d_physics var possible_hits := 0
+@export var attack_area: AttackArea
+var hits: Array[Area2D] = []
 
 
 func enter(data: Dictionary) -> void:
 	turret_animation_component.attacking()
 	
 	var enemy: HurtBox = data["enemy"]
-	
 	var dir: Vector2 = (enemy.global_position - turret.global_position).normalized()
-	var end := enemy.global_position + dir * damage.attack_range
 	turret_animation_component.set_dir(_direction_to_grid(dir))
 	
-	var hurt_boxes := get_laser_hits(turret.global_position, end)
-	for hurt_box in hurt_boxes:
-		hurt_box.take_damage(damage.damage)
-
+	hits.clear()
+	attack_area.rotation = dir.angle()
+	attack_area.enable()
+	await get_tree().create_timer(0.1).timeout
+	hits.sort_custom(func(a, b):
+		return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	
+	var i := 0
+	var last_hit: Vector2 = enemy.global_position
+	for hit in hits:
+		hit.take_damage(damage.damage)
+		i += 1
+		
+		last_hit = hit.global_position
+		if i >= damage.max_hits:
+			break
+	attack_area.disable()
 	
 	var laser := preload("res://scenes/effect/laser.tscn").instantiate()
-	laser.set_laser_points(turret.global_position, get_end(hurt_boxes, turret.global_position, end), 4.0)
+	laser.set_laser_points(turret.global_position, last_hit, 4.0)
 	EntityManager.add_entity(laser)
 	laser.call_deferred("spawn", 0.8)
 	
@@ -85,3 +98,7 @@ func _direction_to_grid(dir) -> Vector2i:
 		y = sign(dir.y)
 	
 	return Vector2i(x, y)
+
+
+func _on_attack_area_area_entered(area: Area2D) -> void:
+	hits.append(area)

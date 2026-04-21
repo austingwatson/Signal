@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjfgu44ffde0a" path="res://scripts/entity/actor/player.gd" id="1_8l8co"]
 [ext_resource type="PackedScene" uid="uid://h8yuvmn7sgbs" path="res://scenes/component/character_movement_component.tscn" id="2_8l8co"]
+[ext_resource type="Script" uid="uid://mp17aylt6whb" path="res://scripts/entity/actor/camera_2d.gd" id="2_vrjrw"]
 [ext_resource type="Resource" uid="uid://dpdasdrol8771" path="res://resources/movement/player_movement.tres" id="3_pfhf4"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="4_f6cxi"]
 [ext_resource type="Script" uid="uid://dm683srhdyg8f" path="res://scripts/statemachine/player/player_idle.gd" id="4_owhjy"]
@@ -9,11 +10,14 @@
 [ext_resource type="Script" uid="uid://bm6y42oisxte8" path="res://scripts/statemachine/player/player_move.gd" id="5_v7w8l"]
 [ext_resource type="Script" uid="uid://cyabpdu4k2ox6" path="res://scripts/statemachine/player/player_hurt.gd" id="8_726y4"]
 [ext_resource type="PackedScene" uid="uid://cscg2jn5o56fc" path="res://scenes/entity/multi_tool.tscn" id="9_18kca"]
+[ext_resource type="AudioStream" uid="uid://dsmkdlr22i8me" path="res://assets/sounds/alienouch1.wav" id="9_ckmxu"]
 [ext_resource type="Script" uid="uid://bujfusf7af6x" path="res://scripts/statemachine/player/player_knockedout.gd" id="9_psmt1"]
 [ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="10_8l8co"]
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="11_b81v7"]
 [ext_resource type="PackedScene" uid="uid://dur7fjor7jyr4" path="res://scenes/ui/build_menu.tscn" id="11_eybgf"]
 [ext_resource type="Resource" uid="uid://dqturs3rs27p7" path="res://resources/health/player_heatlh.tres" id="12_b81v7"]
+[ext_resource type="AudioStream" uid="uid://c8wd36vxrm56" path="res://assets/sounds/player_footstep.wav" id="15_psmt1"]
+[ext_resource type="AudioStream" uid="uid://d3nmmabf0st6h" path="res://assets/sounds/interact_quiet.wav" id="17_s8o64"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l8co"]
 size = Vector2(16, 16)
@@ -172,6 +176,7 @@ collision_layer = 2
 script = ExtResource("1_8l8co")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=776672925]
+script = ExtResource("2_vrjrw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1362468347]
 position = Vector2(0, 8)
@@ -184,31 +189,37 @@ movement_resource = ExtResource("3_pfhf4")
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("4_f6cxi")]
 initial_State = NodePath("Idle")
 
-[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
+[node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("movement_component", "animated_sprite", "multi_tool", "footstep_sound") instance=ExtResource("5_owhjy")]
 script = ExtResource("4_owhjy")
 movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 multi_tool = NodePath("../../MultiTool")
+footstep_sound = NodePath("../../Footstep")
 
-[node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player", "movement_component", "animated_sprite", "multi_tool") instance=ExtResource("5_owhjy")]
+[node name="Move" parent="StateMachine" unique_id=160497168 node_paths=PackedStringArray("player", "movement_component", "animated_sprite", "multi_tool", "footstep_sound") instance=ExtResource("5_owhjy")]
 visible = false
 script = ExtResource("5_v7w8l")
 player = NodePath("../..")
 movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 multi_tool = NodePath("../../MultiTool")
+footstep_sound = NodePath("../../Footstep")
 
 [node name="Hurt" parent="StateMachine" unique_id=1519746942 node_paths=PackedStringArray("animated_sprite") instance=ExtResource("5_owhjy")]
 script = ExtResource("8_726y4")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Knockedout" type="Node2D" parent="StateMachine" unique_id=1256527264 node_paths=PackedStringArray("animated_sprite", "hurtbox_collision", "hurtbox", "character_movement")]
+[node name="Ouch" type="AudioStreamPlayer" parent="StateMachine/Hurt" unique_id=1731395866]
+stream = ExtResource("9_ckmxu")
+
+[node name="Knockedout" type="Node2D" parent="StateMachine" unique_id=1256527264 node_paths=PackedStringArray("animated_sprite", "hurtbox_collision", "hurtbox", "character_movement", "footstep_sound")]
 script = ExtResource("9_psmt1")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 health = ExtResource("12_b81v7")
 hurtbox_collision = NodePath("../../HurtBox/CollisionShape2D")
 hurtbox = NodePath("../../HurtBox")
 character_movement = NodePath("../../CharacterMovementComponent")
+footstep_sound = NodePath("../../Footstep")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="InteractComponent" type="Area2D" parent="." unique_id=1245282860]
@@ -238,6 +249,14 @@ health_resource = ExtResource("12_b81v7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1293593765]
 shape = SubResource("RectangleShape2D_qxtqe")
+
+[node name="Footstep" type="AudioStreamPlayer" parent="." unique_id=1387822365]
+stream = ExtResource("15_psmt1")
+volume_db = -80.0
+
+[node name="InteractQuiet" type="AudioStreamPlayer" parent="." unique_id=1132766003]
+stream = ExtResource("17_s8o64")
+volume_db = -10.0
 
 [connection signal="back_alive" from="StateMachine/Knockedout" to="." method="_on_knockedout_back_alive"]
 [connection signal="area_entered" from="InteractComponent" to="." method="_on_interact_component_area_entered"]

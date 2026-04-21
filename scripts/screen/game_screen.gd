@@ -16,8 +16,16 @@ func _on_start_cutscene_cutscene_done() -> void:
 
 
 func _on_win_lose_conditions_game_lost() -> void:
-	dialogue_controller.start(win_dialogue)
+	dialogue_controller.start(lose_dialogue)
 
 
 func _on_win_lose_conditions_game_won() -> void:
-	dialogue_controller.start(lose_dialogue)
+	dialogue_controller.start(win_dialogue)
+
+
+func _on_wave_manager_music_done() -> void:
+	$BackgroundMusic.play()
+
+
+func _on_wave_manager_wave_changed() -> void:
+	$BackgroundMusic.stop()

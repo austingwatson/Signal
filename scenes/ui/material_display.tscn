@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://badm7og8dh61p" path="res://scripts/ui/material_display.gd" id="1_jb7im"]
 [ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="2_ao7mo"]
-[ext_resource type="Texture2D" uid="uid://dbw680h8t7ifl" path="res://assets/textures/environment/pickup_metal.png" id="2_rcy5q"]
-[ext_resource type="Texture2D" uid="uid://co2dtgcwfq7y3" path="res://assets/textures/environment/pickup_powercell.png" id="3_ao7mo"]
+[ext_resource type="Texture2D" uid="uid://bbssm7tgndx2m" path="res://assets/textures/ui/UI_sheet.png" id="3_rcy5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao7mo"]
+atlas = ExtResource("3_rcy5q")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12lb3"]
+atlas = ExtResource("3_rcy5q")
+region = Rect2(32, 64, 32, 32)
 
 [node name="MaterialDisplay" type="Control" unique_id=286032138]
 layout_mode = 3
@@ -18,9 +25,15 @@ player_materials = ExtResource("2_ao7mo")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=865232307]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -34.0
+offset_right = 23.0
+offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -29,7 +42,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/Metal" unique_id=1767575314]
 layout_mode = 2
-texture = ExtResource("2_rcy5q")
+texture = SubResource("AtlasTexture_ao7mo")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/Metal" unique_id=1433288778]
@@ -41,7 +54,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/PowerCell" unique_id=1044867948]
 layout_mode = 2
-texture = ExtResource("3_ao7mo")
+texture = SubResource("AtlasTexture_12lb3")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/PowerCell" unique_id=1137578604]

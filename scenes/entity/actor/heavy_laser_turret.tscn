@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="8_84hm4"]
 [ext_resource type="Script" uid="uid://clbbxjosqq2o" path="res://scripts/statemachine/laser_turret/laser_turret_dead.gd" id="9_grfdu"]
 [ext_resource type="Resource" uid="uid://csi7yuf4hy5h" path="res://resources/health/heavy_turret_health.tres" id="9_psapn"]
+[ext_resource type="PackedScene" uid="uid://clbk42607h4tc" path="res://scenes/component/attack_area.tscn" id="12_4nj1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcyk1"]
 size = Vector2(20, 14)
@@ -39,7 +40,6 @@ build_cost_path = "uid://c4we0udbicjhy"
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("6_hv0hd")]
 initial_State = NodePath("Idle")
-show_state = true
 
 [node name="Idle" type="Node2D" parent="StateMachine" unique_id=121886053 node_paths=PackedStringArray("detection_component", "turret_animation_component")]
 script = ExtResource("7_xcyk1")
@@ -47,12 +47,13 @@ detection_component = NodePath("../../DetectionComponent")
 turret_animation_component = NodePath("../../TurretAnimationComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
-[node name="Attack" type="Node2D" parent="StateMachine" unique_id=664888140 node_paths=PackedStringArray("turret", "turret_animation_component")]
+[node name="Attack" type="Node2D" parent="StateMachine" unique_id=664888140 node_paths=PackedStringArray("turret", "turret_animation_component", "attack_area")]
 script = ExtResource("8_4nj1s")
 turret = NodePath("../..")
 damage = ExtResource("2_dg0qe")
 turret_animation_component = NodePath("../../TurretAnimationComponent")
 possible_hits = 4
+attack_area = NodePath("../../AttackArea")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="Dead" type="Node2D" parent="StateMachine" unique_id=1828262897 node_paths=PackedStringArray("turret_animation_component")]
@@ -69,3 +70,10 @@ health_resource = ExtResource("9_psapn")
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_xcyk1")
 disabled = true
+
+[node name="AttackArea" parent="." unique_id=390030335 instance=ExtResource("12_4nj1s")]
+collision_layer = 2
+collision_mask = 4
+damage = ExtResource("2_dg0qe")
+
+[connection signal="area_entered" from="AttackArea" to="StateMachine/Attack" method="_on_attack_area_area_entered"]

@@ -56,6 +56,15 @@ func get_multi_closest(amount: int) -> Array[HurtBox]:
 	
 	return closest
 	
+	
+func get_all_in_los() -> Array[HurtBox]:
+	var array: Array[HurtBox] = []
+	
+	for hurt_box in hurt_boxes:
+		if has_line_of_sight(hurt_box):
+			array.append(hurt_box)
+	
+	return array
 
 func has_line_of_sight(enemy) -> bool:
 	var space := get_world_2d().direct_space_state

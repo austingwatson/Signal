@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_exdc1")
-signal_range = 2000.0
+signal_range = 3000.0
 angle_worth = 0.3
 distance_worth = 1.0
 slow_ping = 0.5

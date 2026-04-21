@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var dialogue: Dialogue
-@onready var dialogue_controller: $HUD/DialogueController
 
 
 func _ready() -> void:

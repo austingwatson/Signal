@@ -2,7 +2,17 @@
 
 [ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_eyms3"]
 [ext_resource type="Script" uid="uid://r1cwg5if522d" path="res://resources/dialogue/dialogue.gd" id="2_7hikj"]
+[ext_resource type="Resource" uid="uid://cghlc54cfuavp" path="res://resources/dialogue/start/start1.tres" id="2_rgmk4"]
+[ext_resource type="Resource" uid="uid://da11p6ib1ssxd" path="res://resources/dialogue/start/start2.tres" id="3_visj0"]
+[ext_resource type="Resource" uid="uid://de4b5uieg50ij" path="res://resources/dialogue/start/start3.tres" id="4_3jxnl"]
+[ext_resource type="Resource" uid="uid://djamx0ciq1k5g" path="res://resources/dialogue/start/start4.tres" id="5_2w27b"]
+[ext_resource type="Resource" uid="uid://bs1u6oj1u3tgp" path="res://resources/dialogue/start/start5.tres" id="6_xv5i2"]
+[ext_resource type="Resource" uid="uid://bjw7ps7bi2f2i" path="res://resources/dialogue/start/start6.tres" id="7_f2kvm"]
+[ext_resource type="Resource" uid="uid://b3m8djm0n5fh2" path="res://resources/dialogue/start/start7.tres" id="8_oc7hb"]
+[ext_resource type="Resource" uid="uid://chxlubbebch2w" path="res://resources/dialogue/start/start8.tres" id="9_cmu24"]
+[ext_resource type="Resource" uid="uid://dco6kfxrnohmd" path="res://resources/dialogue/start/start9.tres" id="10_8r3k6"]
 
 [resource]
 script = ExtResource("2_7hikj")
+lines = Array[ExtResource("1_eyms3")]([ExtResource("2_rgmk4"), ExtResource("3_visj0"), ExtResource("4_3jxnl"), ExtResource("5_2w27b"), ExtResource("6_xv5i2"), ExtResource("7_f2kvm"), ExtResource("8_oc7hb"), ExtResource("9_cmu24"), ExtResource("10_8r3k6")])
 metadata/_custom_type_script = "uid://r1cwg5if522d"

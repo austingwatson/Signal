@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://bwjr8tadcvmjh"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_qy48o"]
+
+[resource]
+script = ExtResource("1_qy48o")
+text = "The MOTHERSHIP received your SIGNAL."
+delay = 3.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

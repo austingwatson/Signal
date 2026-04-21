@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://c4ht1ll3ubrsd"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_m4grw"]
+
+[resource]
+script = ExtResource("1_m4grw")
+text = "The Earth returns to silence.\""
+delay = 3.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

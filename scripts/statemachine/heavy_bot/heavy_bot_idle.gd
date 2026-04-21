@@ -32,4 +32,5 @@ func update(_delta) -> void:
 
 func _on_timer_timeout() -> void:
 	timer.stop()
+	print("from idle to sleep")
 	statemachine.enter_state("Sleep")

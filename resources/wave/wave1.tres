@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_tqepp")
 swarm_bots = 20
-spawn_rate = 0.1
-next_wave_timer = 20.0
+swarm_bot_clump = 1
+spawn_rate = 0.5
+next_wave_timer = 10.0
 metadata/_custom_type_script = "uid://dmuo640pu1y64"

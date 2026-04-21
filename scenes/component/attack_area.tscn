@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://clbk42607h4tc"]
+
+[ext_resource type="Script" uid="uid://d21imwimhywq4" path="res://scripts/entity/actor/attack_area.gd" id="1_r2h7h"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_grfdu"]
+resource_local_to_scene = true
+b = Vector2(0, 0)
+
+[node name="AttackArea" type="Area2D" unique_id=390030335]
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+script = ExtResource("1_r2h7h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=266961311]
+shape = SubResource("SegmentShape2D_grfdu")
+disabled = true

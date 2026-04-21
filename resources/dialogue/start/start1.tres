@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://cghlc54cfuavp"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_obldn"]
+
+[resource]
+script = ExtResource("1_obldn")
+text = "What a landing!"
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

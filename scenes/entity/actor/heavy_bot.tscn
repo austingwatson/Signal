@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dguj2fvkupnb2" path="res://scenes/component/path_finder_component.tscn" id="3_k40if"]
 [ext_resource type="PackedScene" uid="uid://cpqpr8ump3drn" path="res://scenes/component/horde_component.tscn" id="4_fkwfw"]
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="5_vom2v"]
-[ext_resource type="Script" uid="uid://dal3cka5x8gbu" path="res://resources/health/health_resource.gd" id="6_2h6v1"]
 [ext_resource type="Texture2D" uid="uid://4yoiii0s8x5g" path="res://assets/textures/actors/heavy_bot_sheet.png" id="6_4gcjn"]
 [ext_resource type="PackedScene" uid="uid://dgy1y2sif2ssm" path="res://scenes/statemachine/state_machine.tscn" id="8_f1gqk"]
 [ext_resource type="PackedScene" uid="uid://cn7sofji6atcy" path="res://scenes/statemachine/state.tscn" id="9_i2lvh"]
@@ -20,13 +19,10 @@
 [ext_resource type="Script" uid="uid://bfk2d5xbb8h5" path="res://scripts/statemachine/swarm_bot/swarm_bot_move_to.gd" id="15_2vfci"]
 [ext_resource type="Script" uid="uid://bjrw5se0tyj3r" path="res://scripts/statemachine/heavy_bot/heavy_bot_attack.gd" id="16_2ke8v"]
 [ext_resource type="Script" uid="uid://dkg3o6kabxkfj" path="res://scripts/statemachine/swarm_bot/swarm_bot_dead.gd" id="16_2vfci"]
+[ext_resource type="PackedScene" uid="uid://clbk42607h4tc" path="res://scenes/component/attack_area.tscn" id="20_2ke8v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkwfw"]
 size = Vector2(16, 16)
-
-[sub_resource type="Resource" id="Resource_8spug"]
-script = ExtResource("6_2h6v1")
-metadata/_custom_type_script = "uid://dal3cka5x8gbu"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vawy7"]
 size = Vector2(28, 17)
@@ -203,7 +199,7 @@ path_finder_component = NodePath("../PathFinderComponent")
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("5_vom2v")]
 collision_layer = 4
 collision_mask = 2
-health_resource = SubResource("Resource_8spug")
+health_resource = ExtResource("13_8spug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1123524034]
 position = Vector2(0, 7.5)
@@ -215,18 +211,19 @@ animation = &"alert"
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_f1gqk")]
 initial_State = NodePath("Sleep")
-show_state = true
 
-[node name="Sleep" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("animated_sprite", "alert_detection") instance=ExtResource("9_i2lvh")]
+[node name="Sleep" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("heavy_bot", "animated_sprite", "alert_detection") instance=ExtResource("9_i2lvh")]
 script = ExtResource("10_8spug")
+heavy_bot = NodePath("../..")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 alert_detection = NodePath("../../AlertDetectionComponent")
 
-[node name="Alerted" parent="StateMachine" unique_id=2128346207 node_paths=PackedStringArray("animated_sprite", "detection_component") instance=ExtResource("9_i2lvh")]
+[node name="Alerted" parent="StateMachine" unique_id=2128346207 node_paths=PackedStringArray("animated_sprite", "detection_component", "alert_detection") instance=ExtResource("9_i2lvh")]
 script = ExtResource("11_vawy7")
 damage = ExtResource("11_f1gqk")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 detection_component = NodePath("../../DetectionComponent")
+alert_detection = NodePath("../../AlertDetectionComponent")
 
 [node name="Timer" type="Timer" parent="StateMachine/Alerted" unique_id=689836861]
 
@@ -254,11 +251,12 @@ a_detection_component = NodePath("../../ADetectionComponent")
 character_movement_component = NodePath("../../CharacterMovementComponent")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Attack" parent="StateMachine" unique_id=976291104 node_paths=PackedStringArray("turret") instance=ExtResource("9_i2lvh")]
+[node name="Attack" parent="StateMachine" unique_id=976291104 node_paths=PackedStringArray("turret", "attack_area") instance=ExtResource("9_i2lvh")]
 script = ExtResource("16_2ke8v")
 turret = NodePath("../..")
 damage = ExtResource("11_f1gqk")
 possible_hits = 18
+attack_area = NodePath("../../AttackArea")
 
 [node name="Dead" parent="StateMachine" unique_id=1359355811 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("9_i2lvh")]
 script = ExtResource("16_2vfci")
@@ -289,5 +287,11 @@ state_machine = NodePath("../StateMachine")
 animated_sprite = NodePath("../AnimatedSprite2D")
 collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComponent"), NodePath("../AlertDetectionComponent"), NodePath("../ADetectionComponent")]
 
+[node name="AttackArea" parent="." unique_id=390030335 instance=ExtResource("20_2ke8v")]
+collision_layer = 4
+collision_mask = 18
+damage = ExtResource("11_f1gqk")
+
 [connection signal="timeout" from="StateMachine/Alerted/Timer" to="StateMachine/Alerted" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
+[connection signal="area_entered" from="AttackArea" to="StateMachine/Attack" method="_on_attack_area_area_entered"]

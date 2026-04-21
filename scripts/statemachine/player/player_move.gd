@@ -4,11 +4,13 @@ extends State
 @export var movement_component: CharacterMovementComponent
 @export var animated_sprite: AnimatedSprite2D
 @export var multi_tool: MultiTool
+@export var footstep_sound: AudioStreamPlayer
 
 
 func enter(data: Dictionary) -> void:
 	movement_component.set_direction(data["direction"])
 	play_move_animation(data["direction"])
+	footstep_sound.play()
 	
 
 func input() -> void:

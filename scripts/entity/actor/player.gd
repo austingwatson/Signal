@@ -19,6 +19,10 @@ func _unhandled_input(_event: InputEvent) -> void:
 		for interactable in interactables:
 			if is_instance_valid(interactable):
 				interactable.interact()
+	elif Input.is_action_just_pressed("shoot"):
+		$InteractQuiet.play()
+	elif Input.is_action_just_pressed("ping"):
+		$InteractQuiet.play()
 				
 	if Input.is_action_pressed("shoot"):
 		multi_tool.shoot()

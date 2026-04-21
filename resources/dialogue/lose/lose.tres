@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_d206o"]
 [ext_resource type="Script" uid="uid://r1cwg5if522d" path="res://resources/dialogue/dialogue.gd" id="2_d4oow"]
+[ext_resource type="Resource" uid="uid://2q1xhyojnf4a" path="res://resources/dialogue/lose/lose1.tres" id="2_hs5m0"]
+[ext_resource type="Resource" uid="uid://d3nqhkq5wch56" path="res://resources/dialogue/lose/lose2.tres" id="3_0su4u"]
 
 [resource]
 script = ExtResource("2_d4oow")
+lines = Array[ExtResource("1_d206o")]([ExtResource("2_hs5m0"), ExtResource("3_0su4u")])
 metadata/_custom_type_script = "uid://r1cwg5if522d"

@@ -22,6 +22,7 @@
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccesr"]
+resource_local_to_scene = true
 size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jw7cw"]
@@ -199,7 +200,6 @@ shape = SubResource("RectangleShape2D_ccesr")
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_xnh8f")]
 initial_State = NodePath("Idle")
-show_state = true
 
 [node name="Idle" parent="StateMachine" unique_id=394219668 node_paths=PackedStringArray("detection_component", "path_finder_component", "character_movement_component", "animated_sprite") instance=ExtResource("9_qsfr4")]
 script = ExtResource("9_pb6w1")

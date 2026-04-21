@@ -7,9 +7,11 @@ signal back_alive
 @export var hurtbox_collision: CollisionShape2D
 @export var hurtbox: HurtBox
 @export var character_movement: CharacterMovementComponent
+@export var footstep_sound: AudioStreamPlayer
 
 
 func enter(_data: Dictionary) -> void:
+	footstep_sound.stop()
 	character_movement.set_direction(Vector2.ZERO)
 	hurtbox_collision.set_deferred("disabled", true)
 	animated_sprite.play("knockedout")
