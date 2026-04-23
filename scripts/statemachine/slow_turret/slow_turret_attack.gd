@@ -13,8 +13,8 @@ func enter(data: Dictionary) -> void:
 	var dir: Vector2 = (enemy.global_position - turret.global_position).normalized()
 	turret_animation_component.set_dir(_direction_to_grid(dir))
 	
-	var laser := preload("res://scenes/effect/laser.tscn").instantiate()
-	laser.set_laser_points(turret.global_position, enemy.global_position, 1.0)
+	var laser := preload("res://scenes/effect/slow_laser.tscn").instantiate()
+	laser.set_laser_points(turret.global_position, enemy.global_position, 2.0)
 	EntityManager.add_entity(laser)
 	laser.call_deferred("spawn", 0.2)
 	

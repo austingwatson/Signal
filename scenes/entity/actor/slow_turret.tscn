@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bjgobvpsv5vgh" path="res://scripts/statemachine/slow_turret/slow_turret_attack.gd" id="8_4sc4p"]
 [ext_resource type="PackedScene" uid="uid://bsftc16fbc4ol" path="res://scenes/component/turret_dead_component.tscn" id="8_kfdff"]
 [ext_resource type="Script" uid="uid://clbbxjosqq2o" path="res://scripts/statemachine/laser_turret/laser_turret_dead.gd" id="9_hyvor"]
-[ext_resource type="Resource" uid="uid://njnnxp3428mr" path="res://resources/health/repair_turret_health.tres" id="9_kfdff"]
+[ext_resource type="Resource" uid="uid://c88h7vp227pcr" path="res://resources/health/slow_turret_health.tres" id="11_16v5t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q4l00"]
 size = Vector2(20, 14)
@@ -60,7 +60,9 @@ turret_animation_component = NodePath("../../TurretAnimationComponent")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("7_woyd4")]
-health_resource = ExtResource("9_kfdff")
+collision_layer = 2
+collision_mask = 4
+health_resource = ExtResource("11_16v5t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=637781068]
 position = Vector2(0, 9)
