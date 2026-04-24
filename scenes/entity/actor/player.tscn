@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://dqturs3rs27p7" path="res://resources/health/player_heatlh.tres" id="12_b81v7"]
 [ext_resource type="AudioStream" uid="uid://c8wd36vxrm56" path="res://assets/sounds/player_footstep.wav" id="15_psmt1"]
 [ext_resource type="AudioStream" uid="uid://d3nmmabf0st6h" path="res://assets/sounds/interact_quiet.wav" id="17_s8o64"]
+[ext_resource type="AudioStream" uid="uid://bmx2tjabgni65" path="res://assets/sounds/ouch1.wav" id="18_mfv3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l8co"]
 size = Vector2(16, 16)
@@ -255,8 +256,13 @@ stream = ExtResource("15_psmt1")
 volume_db = -80.0
 
 [node name="InteractQuiet" type="AudioStreamPlayer" parent="." unique_id=1132766003]
+stream = ExtResource("18_mfv3l")
+volume_db = 0.1
+pitch_scale = 1.1
+
+[node name="Loot" type="AudioStreamPlayer" parent="." unique_id=1330820325]
 stream = ExtResource("17_s8o64")
-volume_db = -10.0
+volume_db = 0.981
 
 [connection signal="back_alive" from="StateMachine/Knockedout" to="." method="_on_knockedout_back_alive"]
 [connection signal="area_entered" from="InteractComponent" to="." method="_on_interact_component_area_entered"]

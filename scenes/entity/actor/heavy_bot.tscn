@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -132,7 +132,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_up",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -149,7 +149,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -207,7 +207,8 @@ shape = SubResource("RectangleShape2D_vawy7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1367702145]
 sprite_frames = SubResource("SpriteFrames_8f6d4")
-animation = &"alert"
+animation = &"move_up"
+frame_progress = 0.7456324
 
 [node name="StateMachine" parent="." unique_id=560415475 node_paths=PackedStringArray("initial_State") instance=ExtResource("8_f1gqk")]
 initial_State = NodePath("Sleep")

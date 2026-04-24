@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_lxy51")
-metal_cost = 4
+metal_cost = 8
 power_cell_cost = 2
 metadata/_custom_type_script = "uid://b1mv6uia32n0y"

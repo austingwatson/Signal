@@ -7,3 +7,4 @@ extends Node2D
 func _on_interactable_component_interacted() -> void:
 	GlobalSignals.call_added_metal(material_amount.amount)
 	queue_free()
+	

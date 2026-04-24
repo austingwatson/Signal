@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://cr4sxtd0hau52" path="res://resources/material_amount/metal_pickup.tres" id="2_oqk5w"]
 [ext_resource type="Texture2D" uid="uid://dbw680h8t7ifl" path="res://assets/textures/environment/pickup_metal.png" id="3_n51b8"]
 [ext_resource type="PackedScene" uid="uid://c0inr8haicd4a" path="res://scenes/component/pickup_component.tscn" id="4_n51b8"]
-[ext_resource type="Resource" uid="uid://bky81s1p8i0tb" path="res://resources/material_amount/player_materials.tres" id="5_l7sca"]
 
 [node name="MetalPickup" type="Node2D" unique_id=224305544]
 script = ExtResource("1_khn5x")
@@ -15,5 +14,4 @@ texture = ExtResource("3_n51b8")
 
 [node name="PickupComponent" parent="." unique_id=594924536 node_paths=PackedStringArray("parent") instance=ExtResource("4_n51b8")]
 parent = NodePath("..")
-player_materials = ExtResource("5_l7sca")
 material_amount = ExtResource("2_oqk5w")
