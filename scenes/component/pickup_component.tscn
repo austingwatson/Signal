@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c0inr8haicd4a"]
 
 [ext_resource type="Script" uid="uid://bp2144tax1c8r" path="res://scripts/component/pickup_component.gd" id="1_6vdtd"]
+[ext_resource type="AudioStream" uid="uid://d3nmmabf0st6h" path="res://assets/sounds/interact_quiet.wav" id="2_65omr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65omr"]
 size = Vector2(16, 16)
@@ -15,4 +16,8 @@ script = ExtResource("1_6vdtd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1589094530]
 shape = SubResource("RectangleShape2D_65omr")
 
+[node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=1229956171]
+stream = ExtResource("2_65omr")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="finished" from="PickupSound" to="." method="_on_pickup_sound_finished"]
