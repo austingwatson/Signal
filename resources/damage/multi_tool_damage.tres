@@ -6,7 +6,7 @@
 script = ExtResource("1_evc7q")
 damage = 1
 detection_range = 48.0
-attack_range = 44.0
+attack_range = 48.0
 cooldown = 0.6
 attack_angle = 45.0
 max_hits = 4

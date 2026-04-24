@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_0oi1x")
 damage = 8
-detection_range = 208.0
-attack_range = 192.0
+detection_range = 176.0
+attack_range = 160.0
 cooldown = 3.0
 attack_angle = 180.0
 max_hits = 8
