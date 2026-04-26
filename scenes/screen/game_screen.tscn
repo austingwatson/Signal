@@ -21,23 +21,23 @@
 [ext_resource type="PackedScene" uid="uid://bm723tkf27csm" path="res://scenes/map/chunk/rocky_road_vert.tscn" id="9_xutjy"]
 [ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="10_4ax22"]
 [ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="11_fbl3k"]
-[ext_resource type="PackedScene" path="res://scenes/map/chunk/urban_1.tscn" id="15_rl1l0"]
+[ext_resource type="PackedScene" uid="uid://dk117bbba05nv" path="res://scenes/map/chunk/urban_1.tscn" id="15_rl1l0"]
 [ext_resource type="PackedScene" uid="uid://tgwwiveg58le" path="res://scenes/wave/win_lose_conditions.tscn" id="17_m3lhs"]
 [ext_resource type="PackedScene" uid="uid://b4xqff7evfc77" path="res://scenes/cutscene/start_cutscene.tscn" id="17_m3y22"]
 [ext_resource type="PackedScene" uid="uid://disup7tdeno52" path="res://scenes/ui/dialogue_controller.tscn" id="19_tm3if"]
 [ext_resource type="Resource" uid="uid://b70p0boph13xc" path="res://resources/wave/wave2.tres" id="20_8yao3"]
-[ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="20_27fob"]
 [ext_resource type="Resource" uid="uid://ciwvlb7rqelir" path="res://resources/wave/wave3.tres" id="23_t4pqj"]
 [ext_resource type="PackedScene" uid="uid://dgkp1no7x80rb" path="res://scenes/entity/actor/heavy_bot.tscn" id="24_rl1l0"]
 [ext_resource type="PackedScene" uid="uid://cw13fdo73qe86" path="res://scenes/ui/material_display.tscn" id="24_s061a"]
 [ext_resource type="AudioStream" uid="uid://dtcyw13dtistg" path="res://assets/sounds/ambient_track1.wav" id="26_b1ko2"]
+[ext_resource type="Texture2D" uid="uid://dxl5imdenw4cm" path="res://assets/textures/ui/zigna_portrait_sheet.png" id="28_rl1l0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0d65i"]
 load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xutjy"]
-atlas = ExtResource("20_27fob")
-region = Rect2(96, 32, 32, 32)
+atlas = ExtResource("28_rl1l0")
+region = Rect2(0, 0, 128, 128)
 
 [node name="GameScreen" type="Node2D" unique_id=571726642]
 y_sort_enabled = true
@@ -72,6 +72,8 @@ towers_to_lose = 2
 
 [node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
 z_index = 4096
+position = Vector2(520, -64)
+wave_color = Color(0.85490197, 0.9372549, 0.67058825, 1)
 
 [node name="ScreenEffect" type="CanvasLayer" parent="." unique_id=301058016]
 follow_viewport_scale = 0.001

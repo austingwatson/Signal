@@ -149,7 +149,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -166,7 +166,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxtqe"]
@@ -236,8 +236,9 @@ shape = SubResource("CircleShape2D_v7w8l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
 sprite_frames = SubResource("SpriteFrames_ka65a")
-animation = &"hurt"
+animation = &"move_up"
 autoplay = "idle"
+frame_progress = 0.5674859
 
 [node name="BuildMenu" parent="." unique_id=533637646 node_paths=PackedStringArray("player") instance=ExtResource("11_eybgf")]
 player = NodePath("..")

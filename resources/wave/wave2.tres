@@ -6,8 +6,8 @@
 script = ExtResource("1_f35f4")
 swarm_bots = 50
 swarm_bot_clump = 5
-heavy_bots = 2
-heavy_bot_clump = 1
+heavy_bots = 6
+heavy_bot_clump = 2
 spawn_rate = 0.5
 next_wave_timer = 10.0
 metadata/_custom_type_script = "uid://dmuo640pu1y64"

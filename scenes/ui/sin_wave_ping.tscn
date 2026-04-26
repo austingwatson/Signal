@@ -6,5 +6,4 @@
 z_index = 100
 script = ExtResource("1_vchuu")
 thickness = 2.0
-width = 150.0
-height = 50.0
+wave_color = Color(0.4392157, 0.7372549, 0.5764706, 1)

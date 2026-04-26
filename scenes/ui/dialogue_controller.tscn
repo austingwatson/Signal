@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://disup7tdeno52"]
 
 [ext_resource type="Script" uid="uid://dx2n2p7bdr0km" path="res://scripts/ui/dialogue_controller.gd" id="1_5oxcf"]
-[ext_resource type="Texture2D" uid="uid://6sc3o0yc2ndw" path="res://assets/textures/actors/player_sheet.png" id="2_y7t26"]
+[ext_resource type="Texture2D" uid="uid://dxl5imdenw4cm" path="res://assets/textures/ui/zigna_portrait_sheet.png" id="2_y7t26"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3nre"]
 atlas = ExtResource("2_y7t26")
-region = Rect2(96, 32, 32, 32)
+region = Rect2(0, 0, 128, 128)
 
 [node name="DialogueController" type="Control" unique_id=1527027832]
 layout_mode = 3
@@ -21,6 +21,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 
