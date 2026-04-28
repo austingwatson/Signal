@@ -13,7 +13,7 @@ var on_cooldown := false
 @onready var detection_component := $DetectionComponent
 @onready var timer := $Timer
 @onready var shoot_sound := $Shoot
-
+@onready var tool_sparks := $ToolSparks
 
 func _ready() -> void:
 	var ping_range: CircleShape2D = $PingRange/CollisionShape2D.shape
@@ -77,6 +77,8 @@ func stop_ping() -> void:
 func shoot() -> void:
 	if on_cooldown:
 		return
+	
+	## tool_sparks.emitting(true)  Not sure how to make sparks emit on mouse click
 	
 	var closest = detection_component.get_multi_closest(damage.max_hits)
 	for enemy in closest:

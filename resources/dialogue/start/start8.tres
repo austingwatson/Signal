@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_lcmti")
 text = "It'll need to be powerful for the signal to
-reach then MOTHERSHIP."
+reach the MOTHERSHIP."
 delay = 6.0
 metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

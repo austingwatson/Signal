@@ -13,8 +13,8 @@
 [ext_resource type="Resource" uid="uid://b4cf2uvi61l38" path="res://resources/build_cost/tower_build_cost.tres" id="8_ttv65"]
 [ext_resource type="Script" uid="uid://cvvjmd111w8gg" path="res://scripts/statemachine/signal_tower/signal_tower_built.gd" id="9_7pjg8"]
 [ext_resource type="Script" uid="uid://bsygloyl2g4dg" path="res://scripts/statemachine/signal_tower/signal_tower_destroyed.gd" id="12_7pjg8"]
-[ext_resource type="AudioStream" uid="uid://ch350sjdjwf43" path="res://assets/sounds/interact_positive.wav" id="13_rbpc3"]
 [ext_resource type="AudioStream" uid="uid://bi353olrhwhtq" path="res://assets/sounds/interact_negative.wav" id="14_1xhvv"]
+[ext_resource type="AudioStream" uid="uid://bdt2glklc2tgu" path="res://assets/sounds/computer_access.wav" id="14_3q7gg"]
 [ext_resource type="PackedScene" uid="uid://qxbq6ytpy4kb" path="res://scenes/component/hurt_box.tscn" id="16_3q7gg"]
 [ext_resource type="Resource" uid="uid://bat6w7jvs8a82" path="res://resources/health/tower_health.tres" id="17_bd55u"]
 
@@ -88,7 +88,9 @@ hurt_box_shape = NodePath("../../HurtBox/CollisionShape2D")
 metadata/_custom_type_script = "uid://cvgrwqpjadro7"
 
 [node name="InteractPositiveSound" type="AudioStreamPlayer" parent="." unique_id=850220205]
-stream = ExtResource("13_rbpc3")
+stream = ExtResource("14_3q7gg")
+volume_db = -8.0
+pitch_scale = 0.8
 
 [node name="InteractNegativeSound" type="AudioStreamPlayer" parent="." unique_id=142639550]
 stream = ExtResource("14_1xhvv")

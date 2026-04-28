@@ -5,6 +5,8 @@ signal dialogue_finished
 @export var icon_texture: Texture2D
 @onready var icon := $HBoxContainer/Icon
 @onready var label := $HBoxContainer/Label
+@onready var alienchatter := $AlienChatter
+@onready var talkinghead := $TalkingHead
 
 var dialogue: Dialogue
 var index := 0

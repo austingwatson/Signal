@@ -2,10 +2,49 @@
 
 [ext_resource type="Script" uid="uid://dx2n2p7bdr0km" path="res://scripts/ui/dialogue_controller.gd" id="1_5oxcf"]
 [ext_resource type="Texture2D" uid="uid://dxl5imdenw4cm" path="res://assets/textures/ui/zigna_portrait_sheet.png" id="2_y7t26"]
+[ext_resource type="AudioStream" uid="uid://byl0oxto0t1vx" path="res://assets/sounds/alien_talking.wav" id="3_m3nre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3nre"]
 atlas = ExtResource("2_y7t26")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="Animation" id="Animation_y7t26"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/Icon:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 128, 128)]
+}
+
+[sub_resource type="Animation" id="Animation_m3nre"]
+resource_name = "talking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/Icon:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 128, 128), Rect2(128, 0, 128, 128)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8lt8m"]
+_data = {
+&"RESET": SubResource("Animation_y7t26"),
+&"talking": SubResource("Animation_m3nre")
+}
 
 [node name="DialogueController" type="Control" unique_id=1527027832]
 layout_mode = 3
@@ -34,3 +73,10 @@ stretch_mode = 3
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1164224960]
 layout_mode = 2
+
+[node name="TalkingHead" type="AnimationPlayer" parent="." unique_id=1021194814]
+libraries/ = SubResource("AnimationLibrary_8lt8m")
+autoplay = &"talking"
+
+[node name="AlienChatter" type="AudioStreamPlayer" parent="." unique_id=1214674239]
+stream = ExtResource("3_m3nre")

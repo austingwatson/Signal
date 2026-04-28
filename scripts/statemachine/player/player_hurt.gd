@@ -3,6 +3,7 @@ extends State
 @export var animated_sprite: AnimatedSprite2D
 var ups := ["idle_up", "move_up"]
 @onready var ouch := $Ouch
+@onready var ouchblood := $OuchBlood
 
 
 func enter(_data: Dictionary) -> void:
@@ -12,6 +13,7 @@ func enter(_data: Dictionary) -> void:
 		animated_sprite.play("hurt")
 		
 	ouch.play()
+	## ouchblood.emitting(true) ##this breaks game on damage. How to play the particle emitter?
 	
-	await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(0.1).timeout
 	statemachine.enter_state("Idle")
