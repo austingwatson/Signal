@@ -13,6 +13,7 @@ func enter(_data: Dictionary) -> void:
 		animated_sprite.play("hurt")
 		
 	ouch.play()
+	ouchblood.emitting = true
 	## ouchblood.emitting(true) ##this breaks game on damage. How to play the particle emitter?
 	
 	await get_tree().create_timer(0.1).timeout

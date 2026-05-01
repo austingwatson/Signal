@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cw13fdo73qe86" path="res://scenes/ui/material_display.tscn" id="24_s061a"]
 [ext_resource type="AudioStream" uid="uid://dtcyw13dtistg" path="res://assets/sounds/ambient_track1.wav" id="26_b1ko2"]
 [ext_resource type="Texture2D" uid="uid://dxl5imdenw4cm" path="res://assets/textures/ui/zigna_portrait_sheet.png" id="28_rl1l0"]
+[ext_resource type="PackedScene" uid="uid://bpdpawy6glcax" path="res://scenes/ui/player_health_bar.tscn" id="30_1edqm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0d65i"]
 load_path = "res://.godot/imported/Vignette.png-348c50529f5c7e4ab8d3513cb6c56cc5.ctex"
@@ -70,11 +71,6 @@ max_dist = 1000.0
 towers_to_win = 3
 towers_to_lose = 2
 
-[node name="SinWavePing" parent="." unique_id=217556263 instance=ExtResource("3_wt73b")]
-z_index = 4096
-position = Vector2(520, -64)
-wave_color = Color(0.85490197, 0.9372549, 0.67058825, 1)
-
 [node name="ScreenEffect" type="CanvasLayer" parent="." unique_id=301058016]
 follow_viewport_scale = 0.001
 
@@ -88,6 +84,13 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=164614483]
 
+[node name="PlayerHealthBar" parent="HUD" unique_id=535020024 instance=ExtResource("30_1edqm")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="DialogueController" parent="HUD" unique_id=1527027832 instance=ExtResource("19_tm3if")]
 anchors_preset = 7
 anchor_left = 0.5
@@ -98,18 +101,37 @@ offset_bottom = -80.0
 grow_vertical = 0
 icon_texture = SubResource("AtlasTexture_xutjy")
 
-[node name="MaterialDisplay" parent="HUD" unique_id=286032138 instance=ExtResource("24_s061a")]
-anchors_preset = 2
-anchor_top = 1.0
+[node name="SinWavePing" parent="HUD" unique_id=217556263 instance=ExtResource("3_wt73b")]
+z_index = 4096
+custom_minimum_size = Vector2(100, 50)
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
 anchor_right = 0.0
-offset_left = 39.0
-offset_top = -87.0
-offset_right = 39.0
-offset_bottom = -87.0
+anchor_bottom = 0.0
+offset_left = 5.0
+offset_top = 460.0
+offset_right = 105.0
+offset_bottom = 510.0
 grow_horizontal = 1
-grow_vertical = 0
+grow_vertical = 1
+wave_color = Color(0.85490197, 0.9372549, 0.67058825, 1)
+wave_width = 200.0
+wave_height = 80.0
+
+[node name="MaterialDisplay" parent="HUD" unique_id=286032138 instance=ExtResource("24_s061a")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 5.0
+offset_top = 430.0
+offset_right = 5.0
+offset_bottom = 430.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="StartCutscene" parent="." unique_id=1068356633 instance=ExtResource("17_m3y22")]
+visible = false
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=259586291]
 stream = ExtResource("26_b1ko2")

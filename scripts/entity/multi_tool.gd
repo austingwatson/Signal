@@ -78,7 +78,7 @@ func shoot() -> void:
 	if on_cooldown:
 		return
 	
-	## tool_sparks.emitting(true)  Not sure how to make sparks emit on mouse click
+	tool_sparks.emitting = true
 	
 	var closest = detection_component.get_multi_closest(damage.max_hits)
 	for enemy in closest:

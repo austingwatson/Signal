@@ -7,6 +7,7 @@ signal deactivate_tower(tower)
 signal flow_field_done
 signal ping_changed(distance: float, angle: float)
 signal loading_done
+signal player_health_changed(health: int, max_health: int)
 
 
 func call_added_metal(amount: int) -> void:
@@ -35,3 +36,7 @@ func call_ping_changed(distance: float, angle: float) -> void:
 
 func call_loading_done() -> void:
 	loading_done.emit()
+	
+
+func call_player_health_changed(health: int, max_health: int) -> void:
+	player_health_changed.emit(health, max_health)

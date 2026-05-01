@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bpdpawy6glcax"]
+
+[ext_resource type="Script" uid="uid://b06cc582vu0y4" path="res://scripts/ui/player_health_bar.gd" id="1_2cyvc"]
+[ext_resource type="Texture2D" uid="uid://bbssm7tgndx2m" path="res://assets/textures/ui/UI_sheet.png" id="2_v27xb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stqlu"]
+atlas = ExtResource("2_v27xb")
+region = Rect2(0, 209, 175, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32sne"]
+atlas = ExtResource("2_v27xb")
+region = Rect2(22, 216, 100, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rry2w"]
+atlas = ExtResource("2_v27xb")
+region = Rect2(22, 264, 100, 10)
+
+[node name="PlayerHealthBar" type="Control" unique_id=535020024]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2cyvc")
+
+[node name="Background" type="TextureRect" parent="." unique_id=960824093]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_stqlu")
+stretch_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1468405446]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 7.0
+offset_right = 122.0
+offset_bottom = 17.0
+value = 100.0
+rounded = true
+texture_under = SubResource("AtlasTexture_32sne")
+texture_progress = SubResource("AtlasTexture_rry2w")

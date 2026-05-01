@@ -45,6 +45,7 @@ func _on_interact_component_area_exited(area: Area2D) -> void:
 
 
 func _on_hurt_box_hurt(health: int) -> void:
+	GlobalSignals.call_player_health_changed(health, health_resource.max_health)
 	statemachine.enter_state("Hurt")
 
 

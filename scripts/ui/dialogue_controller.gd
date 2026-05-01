@@ -32,6 +32,8 @@ func show_line() -> void:
 	var line = dialogue.lines[index]
 	label.text = line.text
 	
+	alienchatter.play()
+	
 	auto_advance(line.delay)
 	
 
