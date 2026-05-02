@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://c0eo1prk6fyf8" path="res://scenes/map/chunk/crash_chunk.tscn" id="10_4ax22"]
 [ext_resource type="PackedScene" uid="uid://b6idijho8rabl" path="res://scenes/map/chunk/map_edge_blocked.tscn" id="11_fbl3k"]
 [ext_resource type="PackedScene" uid="uid://dk117bbba05nv" path="res://scenes/map/chunk/urban_1.tscn" id="15_rl1l0"]
+[ext_resource type="PackedScene" uid="uid://c3nicy2bqmv17" path="res://scenes/map/chunk/rocky_road_junct_up.tscn" id="16_yaloj"]
+[ext_resource type="PackedScene" uid="uid://s2jylk2h2r72" path="res://scenes/map/chunk/bunker_1.tscn" id="17_010j7"]
 [ext_resource type="PackedScene" uid="uid://tgwwiveg58le" path="res://scenes/wave/win_lose_conditions.tscn" id="17_m3lhs"]
 [ext_resource type="PackedScene" uid="uid://b4xqff7evfc77" path="res://scenes/cutscene/start_cutscene.tscn" id="17_m3y22"]
 [ext_resource type="PackedScene" uid="uid://disup7tdeno52" path="res://scenes/ui/dialogue_controller.tscn" id="19_tm3if"]
@@ -50,7 +52,7 @@ lose_dialogue = ExtResource("4_8yao3")
 [node name="TiledMap" parent="." unique_id=859205898 instance=ExtResource("1_u3war")]
 debug_flow = false
 debug_cableflow = false
-chunk_library = Array[PackedScene]([ExtResource("6_e27am"), ExtResource("7_t4pqj"), ExtResource("3_i7pw6"), ExtResource("4_fbl3k"), ExtResource("5_m3y22"), ExtResource("6_m3lhs"), ExtResource("7_tm3if"), ExtResource("8_27fob"), ExtResource("9_xutjy"), ExtResource("15_rl1l0")])
+chunk_library = Array[PackedScene]([ExtResource("6_e27am"), ExtResource("7_t4pqj"), ExtResource("3_i7pw6"), ExtResource("4_fbl3k"), ExtResource("5_m3y22"), ExtResource("6_m3lhs"), ExtResource("7_tm3if"), ExtResource("8_27fob"), ExtResource("9_xutjy"), ExtResource("15_rl1l0"), ExtResource("16_yaloj"), ExtResource("17_010j7")])
 map_size = Vector2i(5, 5)
 towers_amount = 5
 starting_chunk = ExtResource("10_4ax22")
@@ -131,7 +133,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="StartCutscene" parent="." unique_id=1068356633 instance=ExtResource("17_m3y22")]
-visible = false
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=259586291]
 stream = ExtResource("26_b1ko2")

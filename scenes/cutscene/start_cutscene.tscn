@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dkm1u0726lg1p" path="res://scripts/cutscene/start_cutscene.gd" id="1_cogqj"]
 [ext_resource type="Texture2D" uid="uid://ct63k1uh2j5vg" path="res://assets/textures/ui/starry_night.png" id="2_otkua"]
 [ext_resource type="Texture2D" uid="uid://dstcfvbp0s8vh" path="res://assets/textures/ui/flying_saucer.png" id="3_7tl7l"]
+[ext_resource type="Texture2D" uid="uid://bnnkfegsnyart" path="res://assets/textures/effects/effect_sheet.png" id="3_pdhup"]
 
 [sub_resource type="Animation" id="Animation_7tl7l"]
 length = 0.001
@@ -83,6 +84,24 @@ _data = {
 &"loading": SubResource("Animation_otkua")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_je8uc"]
+atlas = ExtResource("3_pdhup")
+region = Rect2(160, 320, 32, 32)
+
+[sub_resource type="Curve" id="Curve_ncw7u"]
+_limits = [0.0, 200.0, 0.0, 200.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(4.2780743, 4.494385), 0.0, 0.0, 0, 0, Vector2(5.3475933, 78.65169), 0.0, 0.0, 0, 0, Vector2(56.684486, 200), -1.0085396, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_6qmce"]
+_limits = [0.0, 3.0, 0.0, 3.0]
+_data = [Vector2(0, 0.84269667), 0.0, 0.0, 0, 0, Vector2(0.40106952, 0.9775281), 0.0, 0.0, 0, 0, Vector2(1.0748664, 3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_b0dx4"]
+offsets = PackedFloat32Array(0.39751554, 0.46583852, 0.8198758, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.21960784, 0.27450982, 0.42352942, 1, 0.21960784, 0.27450982, 0.42352942, 1, 0.4392157, 0.7372549, 0.5764706, 0)
+
 [node name="StartCutscene" type="CanvasLayer" unique_id=1533221063]
 script = ExtResource("1_cogqj")
 
@@ -107,5 +126,30 @@ position = Vector2(366, 196)
 rotation = 0.1850049
 texture = ExtResource("3_7tl7l")
 centered = false
+
+[node name="ThrusterTrail" type="CPUParticles2D" parent="AnimationPlayer/SpaceShip" unique_id=147531682]
+show_behind_parent = true
+position = Vector2(140.29584, 26.64711)
+scale = Vector2(0.99999994, 0.99999994)
+amount = 120
+texture = SubResource("AtlasTexture_je8uc")
+lifetime = 1.75
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 220.0
+initial_velocity_max = 220.0
+orbit_velocity_min = -0.04
+orbit_velocity_max = 0.04
+radial_accel_min = -50.0
+radial_accel_max = 50.0
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+damping_max = 200.0
+damping_curve = SubResource("Curve_ncw7u")
+scale_amount_curve = SubResource("Curve_6qmce")
+color_ramp = SubResource("Gradient_b0dx4")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

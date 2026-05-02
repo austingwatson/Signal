@@ -26,12 +26,16 @@ size = Vector2(16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ybvf"]
 atlas = ExtResource("11_1sbqw")
-region = Rect2(128, 384, 32, 32)
+region = Rect2(0, 384, 32, 32)
 
 [sub_resource type="Curve" id="Curve_v2vx8"]
 _limits = [0.0, 100.0, 0.0, 1.0]
-_data = [Vector2(0.13903743, 0), 0.0, 0.0, 0, 0, Vector2(0.16577539, 100), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.18716577, 0), 0.0, 0.0, 0, 0, Vector2(0.19251338, 100), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_1sbqw"]
+offsets = PackedFloat32Array(0.4347826, 0.8447205, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7w8l"]
 radius = 16.0
@@ -225,23 +229,23 @@ stream = ExtResource("9_ckmxu")
 
 [node name="OuchBlood" type="CPUParticles2D" parent="StateMachine/Hurt" unique_id=1754545349]
 emitting = false
-amount = 16
+amount = 12
 texture = SubResource("AtlasTexture_6ybvf")
-lifetime = 8.0
+lifetime = 1.5
 one_shot = true
-explosiveness = 0.9
+explosiveness = 1.0
 lifetime_randomness = 0.15
-local_coords = true
 emission_shape = 1
 emission_sphere_radius = 4.0
 direction = Vector2(0, -1)
 spread = 120.0
-gravity = Vector2(0, 60)
-initial_velocity_min = 30.0
-initial_velocity_max = 32.0
+gravity = Vector2(0, 260)
+initial_velocity_min = 10.0
+initial_velocity_max = 80.0
 damping_min = 10.0
 damping_max = 60.0
 damping_curve = SubResource("Curve_v2vx8")
+color_ramp = SubResource("Gradient_1sbqw")
 
 [node name="Knockedout" type="Node2D" parent="StateMachine" unique_id=1256527264 node_paths=PackedStringArray("animated_sprite", "hurtbox_collision", "hurtbox", "character_movement", "footstep_sound")]
 script = ExtResource("9_psmt1")

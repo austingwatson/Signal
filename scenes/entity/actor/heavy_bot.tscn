@@ -20,6 +20,8 @@
 [ext_resource type="Script" uid="uid://bjrw5se0tyj3r" path="res://scripts/statemachine/heavy_bot/heavy_bot_attack.gd" id="16_2ke8v"]
 [ext_resource type="Script" uid="uid://dkg3o6kabxkfj" path="res://scripts/statemachine/swarm_bot/swarm_bot_dead.gd" id="16_2vfci"]
 [ext_resource type="PackedScene" uid="uid://clbk42607h4tc" path="res://scenes/component/attack_area.tscn" id="20_2ke8v"]
+[ext_resource type="AudioStream" uid="uid://bi353olrhwhtq" path="res://assets/sounds/interact_negative.wav" id="21_c1a7m"]
+[ext_resource type="AudioStream" uid="uid://coeu578r5rpoa" path="res://assets/sounds/boom.wav" id="22_25rm6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkwfw"]
 size = Vector2(16, 16)
@@ -292,6 +294,15 @@ collisions = [NodePath(".."), NodePath("../HurtBox"), NodePath("../DetectionComp
 collision_layer = 4
 collision_mask = 18
 damage = ExtResource("11_f1gqk")
+
+[node name="AlertBeep" type="AudioStreamPlayer2D" parent="." unique_id=57805199]
+stream = ExtResource("21_c1a7m")
+volume_db = -20.0
+pitch_scale = 3.0
+
+[node name="DeathBoom" type="AudioStreamPlayer2D" parent="." unique_id=1757364918]
+stream = ExtResource("22_25rm6")
+volume_db = -10.0
 
 [connection signal="timeout" from="StateMachine/Alerted/Timer" to="StateMachine/Alerted" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]
