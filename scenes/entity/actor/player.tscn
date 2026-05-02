@@ -20,9 +20,10 @@
 [ext_resource type="AudioStream" uid="uid://c8wd36vxrm56" path="res://assets/sounds/player_footstep.wav" id="15_psmt1"]
 [ext_resource type="AudioStream" uid="uid://d3nmmabf0st6h" path="res://assets/sounds/interact_quiet.wav" id="17_s8o64"]
 [ext_resource type="AudioStream" uid="uid://bmx2tjabgni65" path="res://assets/sounds/ouch1.wav" id="18_mfv3l"]
+[ext_resource type="AudioStream" uid="uid://ddjfli61dhlpc" path="res://assets/sounds/rummage2.wav" id="21_xwbx1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l8co"]
-size = Vector2(16, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwbx1"]
+radius = 12.093216
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ybvf"]
 atlas = ExtResource("11_1sbqw")
@@ -184,7 +185,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxtqe"]
-size = Vector2(16, 28)
+size = Vector2(10.5, 26)
 
 [node name="Player" type="CharacterBody2D" unique_id=6415582 groups=["player"]]
 collision_layer = 2
@@ -195,8 +196,10 @@ health_resource = ExtResource("12_b81v7")
 script = ExtResource("2_vrjrw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1362468347]
-position = Vector2(0, 8)
-shape = SubResource("RectangleShape2D_8l8co")
+position = Vector2(7.1054274e-15, 0)
+rotation = 3.1415927
+scale = Vector2(0.4814632, -0.4070114)
+shape = SubResource("CircleShape2D_xwbx1")
 
 [node name="CharacterMovementComponent" parent="." unique_id=371240637 node_paths=PackedStringArray("character") instance=ExtResource("2_8l8co")]
 character = NodePath("..")
@@ -264,11 +267,15 @@ input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractComponent" unique_id=1285492473]
+position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_v7w8l")
 
 [node name="MultiTool" parent="." unique_id=1102108494 instance=ExtResource("9_18kca")]
+position = Vector2(0, -8)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1131539903]
+y_sort_enabled = true
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_ka65a")
 animation = &"hurt"
 autoplay = "idle"
@@ -278,11 +285,13 @@ player = NodePath("..")
 line_color = Color(1, 1, 1, 0.11764706)
 
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("11_b81v7")]
+position = Vector2(0, -8)
 collision_layer = 2
 collision_mask = 12
 health_resource = ExtResource("12_b81v7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1293593765]
+position = Vector2(-1.25, 2)
 shape = SubResource("RectangleShape2D_qxtqe")
 
 [node name="Footstep" type="AudioStreamPlayer" parent="." unique_id=1387822365]
@@ -297,6 +306,9 @@ pitch_scale = 1.1
 [node name="Loot" type="AudioStreamPlayer" parent="." unique_id=1330820325]
 stream = ExtResource("17_s8o64")
 volume_db = 0.981
+
+[node name="Scavenge" type="AudioStreamPlayer" parent="." unique_id=1118613402]
+stream = ExtResource("21_xwbx1")
 
 [connection signal="back_alive" from="StateMachine/Knockedout" to="." method="_on_knockedout_back_alive"]
 [connection signal="area_entered" from="InteractComponent" to="." method="_on_interact_component_area_entered"]

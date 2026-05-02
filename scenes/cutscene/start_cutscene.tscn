@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ct63k1uh2j5vg" path="res://assets/textures/ui/starry_night.png" id="2_otkua"]
 [ext_resource type="Texture2D" uid="uid://dstcfvbp0s8vh" path="res://assets/textures/ui/flying_saucer.png" id="3_7tl7l"]
 [ext_resource type="Texture2D" uid="uid://bnnkfegsnyart" path="res://assets/textures/effects/effect_sheet.png" id="3_pdhup"]
+[ext_resource type="AudioStream" uid="uid://coeu578r5rpoa" path="res://assets/sounds/boom.wav" id="5_je8uc"]
+[ext_resource type="AudioStream" uid="uid://bi353olrhwhtq" path="res://assets/sounds/interact_negative.wav" id="6_ncw7u"]
 
 [sub_resource type="Animation" id="Animation_7tl7l"]
 length = 0.001
@@ -31,10 +33,34 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.1850049]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/CrashBoom:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/BadBeeps:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_cogqj"]
 resource_name = "crash"
-length = 5.0
+length = 6.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,10 +68,10 @@ tracks/0/path = NodePath("AnimationPlayer/SpaceShip:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2, 4.9666667),
+"times": PackedFloat32Array(0, 2, 5.0333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(372, 163), Vector2(376, 207), Vector2(685, 593.99994)]
+"values": [Vector2(372, 163), Vector2(376, 207), Vector2(685, 620)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,10 +80,34 @@ tracks/1/path = NodePath("AnimationPlayer/SpaceShip:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9, 2.26, 3.0666666),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.9, 2.26, 3.0666666, 5.0333333, 5.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.14835298641951802, 0.31939524, -0.3717551306747924]
+"values": [0.0, -0.14835298641951802, 0.31939524, -0.3717551306747924, -0.3717551306747924, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/CrashBoom:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(5.366667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/BadBeeps:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1.0333333, 2, 2.2, 2.4333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true, true]
 }
 
 [sub_resource type="Animation" id="Animation_otkua"]
@@ -151,5 +201,14 @@ damping_max = 200.0
 damping_curve = SubResource("Curve_ncw7u")
 scale_amount_curve = SubResource("Curve_6qmce")
 color_ramp = SubResource("Gradient_b0dx4")
+
+[node name="CrashBoom" type="AudioStreamPlayer" parent="AnimationPlayer" unique_id=1113729690]
+stream = ExtResource("5_je8uc")
+pitch_scale = 0.75
+
+[node name="BadBeeps" type="AudioStreamPlayer" parent="AnimationPlayer" unique_id=1624261259]
+stream = ExtResource("6_ncw7u")
+volume_db = -12.0
+pitch_scale = 4.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -302,7 +302,7 @@ pitch_scale = 3.0
 
 [node name="DeathBoom" type="AudioStreamPlayer2D" parent="." unique_id=1757364918]
 stream = ExtResource("22_25rm6")
-volume_db = -10.0
+volume_db = -9.0
 
 [connection signal="timeout" from="StateMachine/Alerted/Timer" to="StateMachine/Alerted" method="_on_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

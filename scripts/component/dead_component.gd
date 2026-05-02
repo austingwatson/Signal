@@ -7,7 +7,7 @@ extends Node2D
 @export var state_machine: StateMachine
 @export var animated_sprite: AnimatedSprite2D
 @export var collisions: Array[Node] = []
-
+@export var death_boom: AudioStreamPlayer2D
 
 func _ready() -> void:
 	hurt_box.dead.connect(_on_dead)

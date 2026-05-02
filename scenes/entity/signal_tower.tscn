@@ -24,13 +24,19 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_rbpc3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8ok"]
-size = Vector2(54, 37)
+size = Vector2(51, 37)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3q7gg"]
+radius = 7.0
+height = 42.0
 
 [node name="SignalTower" type="Node2D" unique_id=1173751079]
 script = ExtResource("1_qh3gv")
 multi_tool_stats = ExtResource("2_1xhvv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=472686034]
+y_sort_enabled = true
+position = Vector2(0, -32)
 texture = ExtResource("2_gxh6q")
 hframes = 5
 vframes = 2
@@ -106,7 +112,7 @@ shape = SubResource("CircleShape2D_rbpc3")
 disabled = true
 
 [node name="TowerBase" type="Node2D" parent="." unique_id=499517844]
-position = Vector2(0, 37)
+position = Vector2(0, 5)
 
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("16_3q7gg")]
 collision_layer = 16
@@ -114,9 +120,16 @@ collision_mask = 6
 health_resource = ExtResource("17_bd55u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1498408532]
-position = Vector2(-2, 28.5)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_ob8ok")
 disabled = true
+
+[node name="CollisionBase" type="StaticBody2D" parent="." unique_id=722137470]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBase" unique_id=19347887]
+position = Vector2(0, 2)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3q7gg")
 
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Deactivated" method="_on_interactable_component_interacted"]
 [connection signal="interacted" from="InteractableComponent" to="StateMachine/Built" method="_on_interactable_component_interacted"]

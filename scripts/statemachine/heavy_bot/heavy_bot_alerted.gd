@@ -5,11 +5,13 @@ extends State
 @export var detection_component: DetectionComponent
 @export var alert_detection: DetectionComponent
 @onready var timer := $Timer
+#@onready var alert_sound := $AlertBeep
 var alert: HurtBox = null
 
 
 func enter(_data: Dictionary) -> void:
 	animated_sprite.play("alert")
+	#alert_sound.play()
 	timer.start(damage.alert_timer)
 	
 
