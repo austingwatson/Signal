@@ -79,3 +79,4 @@ autoplay = &"talking"
 
 [node name="AlienChatter" type="AudioStreamPlayer" parent="." unique_id=1214674239]
 stream = ExtResource("3_m3nre")
+max_polyphony = 2

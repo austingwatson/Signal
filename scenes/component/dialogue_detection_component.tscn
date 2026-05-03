@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d3omhxh2yty5a"]
+
+[ext_resource type="Script" uid="uid://ftkbv0cp13gx" path="res://scenes/component/dialogue_detection_component.gd" id="1_o8gn8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ibu2s"]
+size = Vector2(102, 102)
+
+[node name="DialogueDetection" type="Area2D" unique_id=1831524690]
+script = ExtResource("1_o8gn8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1250193119]
+shape = SubResource("RectangleShape2D_ibu2s")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

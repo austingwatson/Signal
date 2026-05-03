@@ -18,8 +18,8 @@
 [ext_resource type="Script" uid="uid://dkg3o6kabxkfj" path="res://scripts/statemachine/swarm_bot/swarm_bot_dead.gd" id="14_k8sly"]
 [ext_resource type="PackedScene" uid="uid://6vghp7vjlut" path="res://scenes/component/dead_component.tscn" id="15_jw7cw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_go354"]
-size = Vector2(8, 8)
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8sly"]
+radius = 3.0413814
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ccesr"]
 resource_local_to_scene = true
@@ -188,7 +188,8 @@ entity = NodePath("..")
 path_finder_component = NodePath("../PathFinderComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=409628201]
-shape = SubResource("RectangleShape2D_go354")
+position = Vector2(0, 2.5)
+shape = SubResource("CircleShape2D_k8sly")
 
 [node name="HurtBox" parent="." unique_id=938710698 instance=ExtResource("6_y3n0m")]
 collision_layer = 4

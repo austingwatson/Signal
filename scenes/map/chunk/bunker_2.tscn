@@ -7,7 +7,7 @@
 exits = {
 "down": true,
 "left": true,
-"right": false,
+"right": true,
 "up": true
 }
 ground = NodePath("Ground")

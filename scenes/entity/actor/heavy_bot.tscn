@@ -24,7 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://coeu578r5rpoa" path="res://assets/sounds/boom.wav" id="22_25rm6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkwfw"]
-size = Vector2(16, 16)
+size = Vector2(16, 9)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vawy7"]
 size = Vector2(28, 17)
@@ -188,7 +188,7 @@ character = NodePath("..")
 movement_resource = ExtResource("2_k40if")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1260529873]
-position = Vector2(0.5, 5)
+position = Vector2(0.5, 6.5)
 shape = SubResource("RectangleShape2D_fkwfw")
 
 [node name="PathFinderComponent" parent="." unique_id=1643619407 node_paths=PackedStringArray("character_movement_component") instance=ExtResource("3_k40if")]

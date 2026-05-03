@@ -22,6 +22,8 @@ func _on_win_lose_conditions_game_lost() -> void:
 func _on_win_lose_conditions_game_won() -> void:
 	dialogue_controller.start(win_dialogue)
 
+##func _on_dialogue_trigger():
+	##dialogue_controller.start(test.tres)
 
 func _on_wave_manager_music_done() -> void:
 	$BackgroundMusic.play()
