@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://c4j0kixrtwdmn"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_jy0b8"]
+
+[resource]
+script = ExtResource("1_jy0b8")
+text = "[SentinelSystemAleph]
+Contact. Contact. Contact.
+All sites compromised.
+"
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

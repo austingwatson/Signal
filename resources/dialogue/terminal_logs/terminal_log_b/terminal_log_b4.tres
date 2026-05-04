@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://rvpp6du6ld8q"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_egxo1"]
+
+[resource]
+script = ExtResource("1_egxo1")
+text = "Log0048: 
+I'm telling my squad to keep away from the patrol bots. Their friend/foe tags will expire without the codes from Command."
+delay = 5.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

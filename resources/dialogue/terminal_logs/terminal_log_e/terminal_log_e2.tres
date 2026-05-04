@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://clxnjtxjnusor"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_rqdie"]
+
+[resource]
+script = ExtResource("1_rqdie")
+text = "The others think we can wait this out, but it's been days. SentinelSystems have site denial measures... If it thinks ours is lost, it will deploy them."
+delay = 4.0
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

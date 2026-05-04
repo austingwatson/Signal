@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://ba5rjt76htv0b"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_qmu5m"]
+
+[resource]
+script = ExtResource("1_qmu5m")
+text = "Unit 074901B:[record excerpt]
+Patrolling route F19.
+Command contact lost."
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

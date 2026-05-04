@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://cvifhcrf5255n"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_mu8xc"]
+
+[resource]
+script = ExtResource("1_mu8xc")
+text = "We've lost all satellite contact. "
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

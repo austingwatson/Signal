@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://doicislklixbu"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_inmct"]
+
+[resource]
+script = ExtResource("1_inmct")
+text = "Unit 074901B:[record excerpt]
+Moving to enage.
+Contact.
+Moving to engage."
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

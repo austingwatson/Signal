@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://ctbs3jhg4pmka"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_nyaty"]
+
+[resource]
+script = ExtResource("1_nyaty")
+text = "My God, the war's gone hot. Those bastards did it at last."
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"

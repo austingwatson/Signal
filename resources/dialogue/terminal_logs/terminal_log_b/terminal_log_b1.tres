@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DialogueLine" format=3 uid="uid://btjurk3bqwic8"]
+
+[ext_resource type="Script" uid="uid://uqb1vkbsn8gt" path="res://resources/dialogue/dialogue_line.gd" id="1_abl0u"]
+
+[resource]
+script = ExtResource("1_abl0u")
+text = "Log0047:
+Command's master signal went dead twelve hours ago."
+metadata/_custom_type_script = "uid://uqb1vkbsn8gt"
