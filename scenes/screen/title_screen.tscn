@@ -1,27 +1,114 @@
 [gd_scene format=3 uid="uid://coi2tixolfw0x"]
 
 [ext_resource type="Script" uid="uid://d10aicmrfapxa" path="res://scripts/screen/title_screen.gd" id="1_fgkus"]
+[ext_resource type="Texture2D" uid="uid://ct63k1uh2j5vg" path="res://assets/textures/ui/starry_night.png" id="2_p2ibg"]
+[ext_resource type="Texture2D" uid="uid://dstcfvbp0s8vh" path="res://assets/textures/ui/flying_saucer.png" id="3_de870"]
+[ext_resource type="Texture2D" uid="uid://bnnkfegsnyart" path="res://assets/textures/effects/effect_sheet.png" id="4_hjx87"]
+[ext_resource type="Texture2D" uid="uid://dlkoy8emonnw0" path="res://assets/textures/ui/title_panel.png" id="5_de870"]
+[ext_resource type="Texture2D" uid="uid://bbssm7tgndx2m" path="res://assets/textures/ui/UI_sheet.png" id="6_hjx87"]
+[ext_resource type="FontFile" uid="uid://bhkhwkb7p0q1a" path="res://assets/textures/ui/born2bsporty-fs/born2bsporty-fs.otf" id="7_7o3kt"]
+[ext_resource type="AudioStream" uid="uid://ch350sjdjwf43" path="res://assets/sounds/interact_positive.wav" id="8_6p1yi"]
+[ext_resource type="AudioStream" uid="uid://d3nmmabf0st6h" path="res://assets/sounds/interact_quiet.wav" id="9_ypbn6"]
+[ext_resource type="AudioStream" uid="uid://dtcyw13dtistg" path="res://assets/sounds/ambient_track1.wav" id="10_ypbn6"]
+
+[sub_resource type="Animation" id="Animation_7o3kt"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/SpaceShip:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(366, 210)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/SpaceShip:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qgsdh"]
+resource_name = "loading"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/SpaceShip:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(372, 220), Vector2(372, 240)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6p1yi"]
+_data = {
+&"RESET": SubResource("Animation_7o3kt"),
+&"loading": SubResource("Animation_qgsdh")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypbn6"]
+atlas = ExtResource("4_hjx87")
+region = Rect2(160, 320, 32, 32)
+
+[sub_resource type="Curve" id="Curve_p5i2w"]
+_limits = [0.0, 200.0, 0.0, 200.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(4.2780743, 4.494385), 0.0, 0.0, 0, 0, Vector2(5.3475933, 78.65169), 0.0, 0.0, 0, 0, Vector2(56.684486, 200), -1.0085396, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_ggsy3"]
+_limits = [0.0, 3.0, 0.0, 3.0]
+_data = [Vector2(0, 0.84269667), 0.0, 0.0, 0, 0, Vector2(0.40106952, 0.9775281), 0.0, 0.0, 0, 0, Vector2(1.0748664, 3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_b1nlo"]
+offsets = PackedFloat32Array(0.39751554, 0.46583852, 0.8198758, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.21960784, 0.27450982, 0.42352942, 1, 0.21960784, 0.27450982, 0.42352942, 1, 0.4392157, 0.7372549, 0.5764706, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o3kt"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 112, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgsdh"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 240, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p1yi"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 48, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5i2w"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 112, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggsy3"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 240, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1nlo"]
+atlas = ExtResource("6_hjx87")
+region = Rect2(752, 48, 144, 64)
 
 [node name="TitleScreen" type="Node" unique_id=47444516]
 script = ExtResource("1_fgkus")
 
-[node name="PlayButton" type="Button" parent="." unique_id=1452961831]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -15.5
-offset_right = 20.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-button_mask = 3
-text = "Play"
-
 [node name="TestLevelButton" type="Button" parent="." unique_id=1251379221]
+visible = false
 offset_left = 155.0
 offset_top = 154.0
 offset_right = 240.0
@@ -29,13 +116,118 @@ offset_bottom = 185.0
 text = "Test Level
 "
 
-[node name="OwenTestButton" type="Button" parent="." unique_id=1364709899]
-offset_left = 664.0
-offset_top = 93.0
-offset_right = 798.0
-offset_bottom = 124.0
-text = "Owen Test Level"
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1625409497]
+repeat_size = Vector2(960, 0)
+autoscroll = Vector2(200, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1231931061]
+position = Vector2(480, 270)
+texture = ExtResource("2_p2ibg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2107161597]
+libraries/ = SubResource("AnimationLibrary_6p1yi")
+autoplay = &"loading"
+
+[node name="SpaceShip" type="Sprite2D" parent="AnimationPlayer" unique_id=1884901486]
+position = Vector2(366, 210)
+texture = ExtResource("3_de870")
+centered = false
+
+[node name="ThrusterTrail" type="CPUParticles2D" parent="AnimationPlayer/SpaceShip" unique_id=408973085]
+show_behind_parent = true
+position = Vector2(140.29584, 26.64711)
+scale = Vector2(0.99999994, 0.99999994)
+amount = 120
+texture = SubResource("AtlasTexture_ypbn6")
+lifetime = 1.75
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 220.0
+initial_velocity_max = 220.0
+orbit_velocity_min = -0.04
+orbit_velocity_max = 0.04
+radial_accel_min = -50.0
+radial_accel_max = 50.0
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+damping_max = 200.0
+damping_curve = SubResource("Curve_p5i2w")
+scale_amount_curve = SubResource("Curve_ggsy3")
+color_ramp = SubResource("Gradient_b1nlo")
+
+[node name="TitlePanel" type="Sprite2D" parent="." unique_id=1794072086]
+position = Vector2(480, 135)
+texture = ExtResource("5_de870")
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=1799235327]
+layout_direction = 2
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -149.0
+offset_right = 72.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 0.0
+
+[node name="Guide" type="TextureButton" parent="Menu" unique_id=1717119262]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_7o3kt")
+texture_pressed = SubResource("AtlasTexture_qgsdh")
+texture_hover = SubResource("AtlasTexture_6p1yi")
+
+[node name="Label" type="Label" parent="Menu/Guide" unique_id=1256137313]
+modulate = Color(0.9764706, 0.972549, 0.7372549, 1)
+layout_mode = 0
+offset_left = 22.0
+offset_top = -5.0
+offset_right = 162.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("7_7o3kt")
+theme_override_font_sizes/font_size = 54
+text = "Guide"
+
+[node name="Play" type="TextureButton" parent="Menu" unique_id=665228895]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_p5i2w")
+texture_pressed = SubResource("AtlasTexture_ggsy3")
+texture_hover = SubResource("AtlasTexture_b1nlo")
+
+[node name="Label" type="Label" parent="Menu/Play" unique_id=1958887835]
+modulate = Color(0.9764706, 0.972549, 0.7372549, 1)
+layout_mode = 0
+offset_left = 31.0
+offset_top = -7.0
+offset_right = 115.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("7_7o3kt")
+theme_override_font_sizes/font_size = 54
+text = "Play
+"
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="." unique_id=926578567]
+stream = ExtResource("8_6p1yi")
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="." unique_id=618472295]
+stream = ExtResource("9_ypbn6")
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=448857351]
+stream = ExtResource("10_ypbn6")
+volume_db = -10.0
+autoplay = true
+
 [connection signal="pressed" from="TestLevelButton" to="." method="_on_test_level_button_pressed"]
-[connection signal="pressed" from="OwenTestButton" to="." method="_on_owen_test_button_pressed"]
+[connection signal="mouse_entered" from="Menu/Guide" to="." method="_on_guide_mouse_entered"]
+[connection signal="pressed" from="Menu/Guide" to="." method="_on_guide_pressed"]
+[connection signal="mouse_entered" from="Menu/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="Menu/Play" to="." method="_on_play_pressed"]

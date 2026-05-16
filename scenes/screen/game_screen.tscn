@@ -138,7 +138,7 @@ grow_vertical = 1
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=259586291]
 stream = ExtResource("26_b1ko2")
-volume_db = -20.0
+volume_db = -18.0
 autoplay = true
 
 [connection signal="music_done" from="WaveManager" to="." method="_on_wave_manager_music_done"]
